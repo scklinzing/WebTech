@@ -2,9 +2,61 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Sign Up</title>
 </head>
+<header>
+	<img src="image/rat-chat-banner-728x187.gif" alt="[Rat Chat Image]" width="728" height="187">
+</header>
 <body>
+
+<p>Sign up to Rat Chat to start posting!</p>
+
+<!-- You should have at least one drop-down menu using select and a datalist. -->
+<!-- Group elements with fieldset and legend elements as appropriate -->
+
+<form id="signup-form" action="">
+  E-mail:
+  <input type="email" name="email" tabindex="1"><br>
+  
+  Password:
+  <input type="password" name="pass1" tabindex="2"><br>
+  
+  Re-Enter Password:
+  <input type="password" name="pass2" tabindex="3"><br>
+  
+  Do you own any rats currently?
+  <input type="radio" id="ratsYes" name="ownRats" tabindex="4"> Yes
+  <input type="radio" id="ratsNo" name="ownRats" tabindex="5" checked> No<br>
+  
+  If yes, how many? Please enter a number.
+  <input type="number" name="numRats" min="0" value="0" tabindex="6"><br>
+  
+  Telephone:
+  <input type="tel" name="phone" tabindex="7"><br>
+  
+  Add your homepage:
+  <input type="url" name="homepage" tabindex="7"><br>
+  
+  Select your favorite color:
+  <input type="color" name="favcolor" tabindex="8"><br>
+  
+  Birthday month:
+  <input type="month" name="bdaymonth" tabindex="9"><br>
+  
+  Select a profile picture:
+  <input type="file" name="profile-pic" accept="image/*" tabindex="10"><br>
+  
+  Make sure that you have read our <a href="">User Agreement</a>
+  <input type="checkbox" name="user-agree-check" tabindex="11"><br>
+  
+  <input type="button" onclick="register()" value="Submit" tabindex="12">
+</form>
+
+<script>
+function register() {
+    document.getElementById("signup-form").submit();
+}
+</script>
 
 </body>
 </html>
