@@ -2,23 +2,48 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nosh Survey</title>
+<title>NOSH Survey</title>
 </head>
 <body>
 	<h1>NOSH Survey</h1>
-	<p>We'd love to hear your ideas about improving about URL NOSH.</p>
+	<p>We'd love to hear your ideas about improving URL NOSH</p>
+	<section>
+		<form action="http://www.webstepbook.com/params.php">
+			<fieldset>
+				<legend>Member information</legend>
+				Nosh name: <input name="firtname" placeholder="Your nickname"
+					autofocus required><br> Nosh member type:<br> <input
+					type="radio" name="memberclass" value="Reader" required>Reader<br>
+				<input type="radio" name="memberclass" value="Nosher">Nosher<br>
+				<input type="radio" name="memberclass" value="Moderator">Moderator<br>
+			</fieldset>
+			<p>
+				List your interests:<br> <input type="checkbox"
+					name="interests" value="art">Art<br> <input
+					type="checkbox" name="interests" value="music">Music<br>
+				<input type="checkbox" name="interests" value="film">Film<br>
+				<input type="checkbox" name="interests" value="anime">Anime
+				and related items<br>
+			</p>
+			<p>
+				Favorite website:<br> <input type="text" name="favorite"
+					list="favorites">
+				<datalist id="favorites">
+					<option value="npr">National Public Radio</option>
+					<option value="google">Google search</option>
+					<option value="nyt">New York Times</option>
+				</datalist>
+			</p>
+			<p>
+				Give us you suggestions for improving URL Nosh:<br>
+				<textarea name="coments" placeholder="Your comments go here" rows="20" cols="60"></textarea>
+			</p>
+			<p>
+				Pick your special date: <input type="date" name="specialdate" required />
+			</p>
 
-	<fieldset>	
-		<legend>Member Information</legend>
-		Nosh Name: <input name="firstname" placeholder="Your nickname" autofocus="on"><br>
-		
-		Nosh Member Type:<br>
-		<input type="radio" name="memberclass" value="Reader">Reader<br>
-		<input type="radio" name="memberclass" value="Nosher">Nosher<br>
-		<input type="radio" name="memberclass" value="Moderator">Moderator<br>
-	</fieldset>
-
-	<input type"submit" name="Submit Me">
-	
+			<input type="submit" name="Submit me">
+		</form>
+	</section>
 </body>
 </html>
