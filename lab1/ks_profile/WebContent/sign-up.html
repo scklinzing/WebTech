@@ -5,58 +5,83 @@
 <title>Sign Up</title>
 </head>
 <header>
-	<img src="image/rat-chat-banner-728x187.gif" alt="[Rat Chat Image]" width="728" height="187">
+	<img src="image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
+		width="728" height="187">
 </header>
 <body>
+	<p>Sign up to Rat Chat to start posting!</p>
 
-<p>Sign up to Rat Chat to start posting!</p>
-
-<!-- You should have at least one drop-down menu using select and a datalist. -->
-<!-- Group elements with fieldset and legend elements as appropriate -->
-
-<form id="signup-form" action="">
-  E-mail:
-  <input type="email" name="email" placeholder="joe@email.com" tabindex="1"><br>
-  
-  Password:
-  <input type="password" name="pass1" tabindex="2"><br>
-  
-  Re-Enter Password:
-  <input type="password" name="pass2" tabindex="3"><br>
-  
-  Do you own any rats currently?
-  <input type="radio" id="ratsYes" name="ownRats" tabindex="4"> Yes
-  <input type="radio" id="ratsNo" name="ownRats" tabindex="5" checked> No<br>
-  
-  If yes, how many? Please enter a number.
-  <input type="number" name="numRats" min="0" value="0" tabindex="6"><br>
-  
-  Telephone:
-  <input type="tel" name="phone" tabindex="7"><br>
-  
-  Add your homepage:
-  <input type="url" name="homepage" tabindex="7"><br>
-  
-  Select your favorite color:
-  <input type="color" name="favcolor" tabindex="8"><br>
-  
-  Birthday month:
-  <input type="month" name="bdaymonth" tabindex="9"><br>
-  
-  Select a profile picture:
-  <input type="file" name="profile-pic" accept="image/*" tabindex="10"><br>
-  
-  Make sure that you have read our <a href="">User Agreement</a>
-  <input type="checkbox" name="user-agree-check" tabindex="11"><br>
-  
-  <input type="button" onclick="register()" value="Submit" tabindex="12">
-</form>
-
-<script>
-function register() {
-    document.getElementById("signup-form").submit();
-}
-</script>
-
+	<!-- Input Member Data -->
+	<section>
+		<form id="signup-form" action="http://www.webstepbook.com/params.php">
+			<fieldset>
+				<legend>Member information</legend>
+				<p>
+					RatChat Username: <input name="firtname"
+						placeholder="Your nickname" autofocus required tabindex="1">
+				</p>
+				<p>
+					E-mail: <input type="email" name="email"
+						placeholder="joe@email.com" required tabindex="2">
+				</p>
+				<p>
+					Password: <input type="password" name="pass1" required tabindex="3">
+				</p>
+				<p>
+					Re-Enter Password: <input type="password" name="pass2" required tabindex="4">
+				</p>
+				<p>
+					Telephone: <input type="tel" name="phone"
+						placeholder="000-000-0000" required tabindex="5">
+				</p>
+				<p>
+					Favorite website:<br> <input type="text" name="favorite"
+						list="favorites" required tabindex="6">
+					<datalist id="favorites">
+						<option value="npr">National Public Radio</option>
+						<option value="google">Google search</option>
+						<option value="nyt">New York Times</option>
+					</datalist>
+				</p>
+				<p>
+					Select your favorite color: <input type="color" name="favcolor"
+						required tabindex="7">
+				</p>
+				<p>
+					Birthday month and year: <input type="month" name="bdaymonth"
+						required tabindex="8">
+				</p>
+				<p>
+					Select a profile picture: <input type="file" name="profile-pic"
+						accept="image/*" required tabindex="9">
+				</p>
+			</fieldset><br>
+			<fieldset>
+				<legend>Rat Information</legend>	
+				<p>
+					What brings you to Rat Chat?<br>
+					<input type="radio" id="ownRats" name="whyRatChat" tabindex="10"> I own rats.<br>
+					<input type="radio" id="getRats" name="whyRatChat" tabindex="11"> I am looking into getting a rat.<br>
+					<input type="radio" id="otherRats" name="whyRatChat" tabindex="12" checked required> Other<br>
+				</p>
+				<p>
+					Do you own any rats currently?<br>
+					<input type="radio" id="ratsYes" name="ownRats" tabindex="13"> Yes<br>
+					<input type="radio" id="ratsNo" name="ownRats" tabindex="14" checked required> No<br>
+				</p>
+				<p>
+					If yes, how many? Please enter a number. <input type="number"
+						name="numRats" min="0" value="0" required tabindex="15">
+				</p>
+			</fieldset>
+			<p>
+				Make sure that you have read our <a href="">User Agreement</a> <input
+					type="checkbox" name="user-agree-check" required tabindex="16">
+			</p>
+			<p>
+				<input type="submit" name="Submit me" tabindex="17">
+			</p>
+		</form>
+	</section>
 </body>
 </html>
