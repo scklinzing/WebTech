@@ -3,16 +3,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>NOSH Survey</title>
+<meta name="keywords" content="URL NOSH, Members, survey">
+<meta name="description" content="Survey of URL NOSH member interests">
 </head>
 <body>
 	<h1>NOSH Survey</h1>
 	<p>We'd love to hear your ideas about improving URL NOSH</p>
 	<section>
-		<!-- <form action="http://www.webstepbook.com/params.php">  -->
 		<form action="echoform1.php">
 			<fieldset>
 				<legend>Member information</legend>
-				Nosh name: <input name="firtname" placeholder="Your nickname"
+				Nosh name: <input name="firstname" placeholder="Your nickname"
 					autofocus required><br> Nosh member type:<br> <input
 					type="radio" name="memberclass" value="Reader" required>Reader<br>
 				<input type="radio" name="memberclass" value="Nosher">Nosher<br>
@@ -20,10 +21,10 @@
 			</fieldset>
 			<p>
 				List your interests:<br> <input type="checkbox"
-					name="interests" value="art">Art<br> <input
-					type="checkbox" name="interests" value="music">Music<br>
-				<input type="checkbox" name="interests" value="film">Film<br>
-				<input type="checkbox" name="interests" value="anime">Anime
+					name="interests[]" value="art">Art<br> <input
+					type="checkbox" name="interests[]" value="music">Music<br>
+				<input type="checkbox" name="interests[]" value="film">Film<br>
+				<input type="checkbox" name="interests[]" value="anime">Anime
 				and related items<br>
 			</p>
 			<p>
@@ -37,12 +38,13 @@
 			</p>
 			<p>
 				Give us you suggestions for improving URL Nosh:<br>
-				<textarea name="coments" placeholder="Your comments go here" rows="20" cols="60"></textarea>
+				<textarea name="coments" placeholder="Your comments go here"
+					rows="20" cols="60"></textarea>
 			</p>
 			<p>
-				Pick your special date: <input type="date" name="specialdate" required />
+				Pick your special date: <input type="date" name="specialdate"
+					required />
 			</p>
-
 			<input type="submit" name="Submit me">
 		</form>
 	</section>
