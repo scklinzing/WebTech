@@ -5,6 +5,6 @@ echo "<h2>It should create a valid object when all input is provided</h2>";
 $validTest = array (
 		"firstname" => "Shelley",
 );
-$s1 = new signUpData ( $validTest );
+$s1 = new SignUpData ( $validTest );
 $s1->printSurvey ();
 ?>
