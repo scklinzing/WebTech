@@ -1,4 +1,5 @@
-<?php 
+<?php
+class SignUpData {
 	private $firstName;
 	public function __construct($formInput) {
 		$this->initialize ( $formInput );
@@ -11,7 +12,8 @@
 		echo "First name: $this->firstName<br>";
 	}
 	private function initialize($formInput) {
-	if (isset ( $formInput ['firstname'] ))
+		if (isset ( $formInput ['firstname'] ))
 			$this->firstName = $formInput ['firstname'];
 	}
+}
 ?>
