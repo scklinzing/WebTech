@@ -1,15 +1,26 @@
-<?php 
-include("../utilities.php");
-
-echo "Testing getValidArray<br>";
-
-echo "It should return an empty array when input array is empty.<br>";
-
-$myReturn = getValidArray([], []);
-
-if (empty($myREturn)) {
-	echo "It returned an empty array.<br>";
+<?php
+include ("../utilities.php");
+echo "<h1>Testing getValidArray</h1>";
+echo "<h2>It should return an empty array when input array is empty</h2>";
+$myReturn = getValidArray ( [ ], [ ] );
+if (empty ( $myReturn )) {
+	echo "It returned an empty array<br>";
 } else {
-	echo "It's not working.<br>";
+	echo "Empty array test failed<br>";
 }
+echo "<h2>It should return only items that agree in case</h2>";
+$validValues = array (
+		"art",
+		"music",
+		"film",
+		"anime" 
+);
+$test = array (
+		"art",
+		"ART",
+		"Balony",
+		"music" 
+);
+$testValid = getValidArray ( $test, $validValues );
+printList ( $testValid, "The list should have art and music in it" );
 ?>

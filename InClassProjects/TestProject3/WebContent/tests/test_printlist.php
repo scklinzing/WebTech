@@ -1,7 +1,6 @@
 <?php
-echo "Tests for printList<br>";
-include("../utilities.php");
-
-echo "It should work when the list is empty.<br>";
-printList([], "Empty array");
+echo "<h1>Tests for printList</h1>";
+include ("../utilities.php");
+echo "<h2>It should work when the list is empty</h2>";
+printList ( [ ], "Empty array<br>" );
 ?>
