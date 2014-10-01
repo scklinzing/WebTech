@@ -18,7 +18,7 @@ class Database {
 				self::$db = new PDO ( self::$dsn, self::$username,
 						self::$password, self::$options );
 			} catch ( PDOException $e ) {
-				echo $e->getMEssage ();
+				echo $e->getMessage ();
 			}
 		}
 		echo "Got it";
