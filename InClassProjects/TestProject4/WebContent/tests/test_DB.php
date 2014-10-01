@@ -14,9 +14,9 @@
 	$statement = $db->prepare($query);
 	/* execute the statement */
 	$statement->execute();
+	
 	/* fetch everything from the statement (this will be an array) */
 	$commentRows = $statement->fetchAll();
 	/* print r comment rows */
 	print_r($commentRows);
-	
 ?>
