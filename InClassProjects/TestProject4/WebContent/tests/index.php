@@ -10,16 +10,20 @@
 	<p>In lab 4 we will introduce unit testing and integration testing. For
 		now we will develop tests that can easily be converted into unit
 		tests.</p>
-
-	<h3>Functions</h3>
+	<h3>Utility Functions</h3>
 	<ul>
 		<li><a href="test_printList.php">Tests for printList</a></li>
 		<li><a href="test_getValidArray.php">Tests for getValidArray</a></li>
 	</ul>
-
-	<h3>Classes</h3>
+	<h3>Model Classes</h3>
 	<ul>
 		<li><a href="test_CommentData.php">Tests for CommentData</a></li>
+		<li><a href="test_Database.php">Tests for Database</a></li>
+		<li><a href="test_CommentDB.php">Tests for CommentDB</a></li>
+	</ul>
+	<h3>Views</h3>
+	<ul>
+		<li><a href="test_showComments.php">Tests for show comments view</a></li>
 	</ul>
 </body>
 </html>
