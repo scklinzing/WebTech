@@ -2,6 +2,8 @@
 /**
  * This class does complete input validation.
  * This will not be a requirement for Lab2.
+ * Responsibility: Holds data for comment and performs validation
+ * Constructor expects an associative array with field values for initialization
  */
 class CommentData {
 	private $firstName;
