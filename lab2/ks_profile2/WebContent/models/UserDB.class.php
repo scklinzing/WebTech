@@ -7,7 +7,7 @@ class UserDB {
 		$users = array ();
 		try {
 			$db = Database::getDB ();
-			$query = 'SELECT * FROM user';
+			$query = 'SELECT * FROM User';
 			$statement = $db->prepare ( $query );
 			$statement->execute ();
 			$userRows = $statement->fetchAll ();
@@ -20,7 +20,7 @@ class UserDB {
 			$statement->closeCursor ();
 			return $users;
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching comments $e->getMessage()</p>";
+			echo "<p>Error fetching users $e->getMessage()</p>";
 		}
 		return $users;
 	}

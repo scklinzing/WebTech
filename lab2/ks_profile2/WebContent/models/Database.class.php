@@ -3,8 +3,12 @@
 class Database {
 	private static $db;
 	private static $dsn = 'mysql:host=localhost;dbname=ks_data';
+	/*
 	private static $username = 'cs4413student';
 	private static $password = 'cs4413###database';
+	*/
+	private static $username = 'root';
+	private static $password = '';
 	private static $options = array (
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
 	);

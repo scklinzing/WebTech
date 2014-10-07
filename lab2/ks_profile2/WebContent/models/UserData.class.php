@@ -6,6 +6,7 @@
  * Constructor expects an associative array with field values for initialization
  */
 class UserData {
+	/* user variables */
 	private $username;
 	private $email;
 	private $password;
@@ -15,9 +16,11 @@ class UserData {
 	private $bday;
 	private $reason;
 	private $ratsOwned;
+	/* constructor */
 	public function __construct($formInput) {
 		$this->initialize ( $formInput );
 	}
+	/* get functions for UserData */
 	public function getUsername() {
 		return $this->username;
 	}
@@ -45,6 +48,7 @@ class UserData {
 	public function getRatsOwned() {
 		return $this->ratsOwned;
 	}
+	/* be able to print out the user data */
 	public function printUser() {
 		echo "<h1>Rat Chat Sign Up</h1>";
 		echo "Username: $this->username<br>";

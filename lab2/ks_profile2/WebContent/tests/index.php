@@ -10,14 +10,19 @@
 	<p>In lab 4 we will introduce unit testing and integration testing. For
 		now we will develop tests that can easily be converted into unit
 		tests.</p>
-	<h3>Functions</h3>
+	<h3>Random Testing</h3>
 	<ul>
-		<li><a href="">Empty Test Link</a></li>
+		<li><a href="testDB.php">Test DB</a></li>
 	</ul>
 	<h3>Model Classes</h3>
 	<ul>
 		<li><a href="test_Database.php">Tests for Database Class</a></li>
 		<li><a href="test_UserData.php">Tests for UserData Class</a></li>
+		<li><a href="test_UserDB.php">Tests for UserDB Class</a></li>
+	</ul>
+	<h3>Views</h3>
+	<ul>
+		<li><a href="test_showUsers.php">Tests for show users view</a></li>
 	</ul>
 </body>
 </html>
