@@ -25,5 +25,12 @@
 	<ul>
 		<li><a href="test_showComments.php">Tests for show comments view</a></li>
 	</ul>
+	<h3>Temporary test code</h3>
+	<ul>
+		<li><a href="trySelectAll.php">Test database query to select all</a></li>
+		<li><a href="tryInsert.php">Test database query to insert</a></li>
+		<li><a href="trySelect.php">Test database query to select a particular
+				user</a></li>
+	</ul>
 </body>
 </html>

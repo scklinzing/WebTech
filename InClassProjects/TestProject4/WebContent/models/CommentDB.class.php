@@ -22,5 +22,19 @@ class CommentDB {
 		}
 		return $comments;
 	}
+	public static function addComment($myComment) {
+		try {
+			$db = Database::getDB ();
+			$query = "INSERT INTO Comments (firstName, evaluationUrl, comment)
+				VALUES(:firstName, :evaluationUrl, :comment)";
+			$statement = $db->prepare ( $query );
+			$statement->execute ($myComment);
+			
+			return "I did it";
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error adding comments $e->getMessage()</p>";
+		}
+		return $comments;
+	}
 }
 ?>
