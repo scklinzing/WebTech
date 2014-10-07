@@ -14,13 +14,10 @@
 	<ul>
 		<li><a href="">Empty Test Link</a></li>
 	</ul>
-	<h3>Classes</h3>
-	<ul>
-		<li><a href="test_SignUpData.php">Tests for SignUpData</a></li>
-	</ul>
 	<h3>Model Classes</h3>
 	<ul>
-		<li><a href="test_Database.php">Tests for Database</a></li>
+		<li><a href="test_Database.php">Tests for Database Class</a></li>
+		<li><a href="test_UserData.php">Tests for UserData Class</a></li>
 	</ul>
 </body>
 </html>
