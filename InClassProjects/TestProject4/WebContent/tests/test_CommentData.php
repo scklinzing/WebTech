@@ -1,14 +1,17 @@
 <?php
-include ("../models/CommentData.class.php");
-echo "<h1>Tests for CommentData class";
-
+include_once ("../models/CommentData.class.php");
+echo "<h1>Tests for CommentData class</h1>";
 echo "<h2>It should create a valid object when all input is provided</h2>";
-
 $validTest = array (
 		"firstName" => "Kay",
 		"evaluationUrl" => "http://npr.org",
-		"comment" => "Interesting site" 
+		"comment" => "Interesting site",
+		"memberClass" => "nosher" 
 );
 $s1 = new CommentData ( $validTest );
 $s1->printComment ();
+echo "<h2>It should extract the parameters that went in</h2>";
+$props = $s1->getParameters ();
+print_r ( $props );
+echo "<br>";
 ?>

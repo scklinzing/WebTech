@@ -1,3 +1,4 @@
+
 <?php
 // Responsibility: maintains open DB connection (singleton)
 class Database {
@@ -10,14 +11,14 @@ class Database {
 	);
 	public static function getDB() {
 		if (! isset ( self::$db )) {
-			echo "opening<br>"; // temporary debugging message
+			// echo "opening<br>"; // temporary debugging message
 			try {
 				self::$db = new PDO ( self::$dsn, self::$username, self::$password, self::$options );
 			} catch ( PDOException $e ) {
 				echo $e->getMessage (); // not final error handling
 			}
 		}
-		echo "Got it"; // temporary debugging message
+		// echo "Got it"; // temporary debugging message
 		return self::$db;
 	}
 }

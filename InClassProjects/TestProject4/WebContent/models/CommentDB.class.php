@@ -1,40 +1,58 @@
 <?php
-// Responsibility: Handles all queries pertaining to comment
-class CommentDB {
-	public static function fetchAll() {
-		$comments = array ();
-		try {
-			$db = Database::getDB ();
-			$query = 'SELECT * FROM Comments';
-			$statement = $db->prepare ( $query );
-			$statement->execute ();
-			$commentRows = $statement->fetchAll ();
-			foreach ( $commentRows as $commentRow ) {
-				print_r ( $commentRow ); // Just temporary
-				echo "<br>"; // Just temporary
-				$comment = new CommentData ( $commentRow );
-				array_push ( $comments, $comment );
-			}
-			$statement->closeCursor ();
-			return $comments;
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching comments $e->getMessage()</p>";
-		}
-		return $comments;
+// Responsibility: Holds data for comment and performs validation
+// Constructor expects an associative array with field values for initialization
+class CommentData {
+	private $commentId;
+	private $firstName;
+	private $evaluationUrl;
+	private $comment;
+	private $memberClass;
+	public function __construct($formInput) {
+		$this->initialize ( $formInput );
 	}
-	public static function addComment($myComment) {
-		try {
-			$db = Database::getDB ();
-			$query = "INSERT INTO Comments (firstName, evaluationUrl, comment)
-				VALUES(:firstName, :evaluationUrl, :comment)";
-			$statement = $db->prepare ( $query );
-			$statement->execute ($myComment);
-			
-			return "I did it";
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error adding comments $e->getMessage()</p>";
-		}
-		return $comments;
+	public function getComment() {
+		return $this->comment;
+	}
+	public function getCommentId() {
+		return $this->commentId;
+	}
+	public function getEvaluationUrl() {
+		return $this->evaluationUrl;
+	}
+	public function getFirstName() {
+		return $this->firstName;
+	}
+	public function getMemberClass() {
+		return $this->memberClass;
+	}
+	public function getParameters() {
+		$paramArray = array (
+				"commentId" => $this->commentId,
+				"firstName" => $this->firstName,
+				"evaluationUrl" => $this->evaluationUrl,
+				"comment" => $this->comment 
+		);
+		return $paramArray;
+	}
+	public function printComment() {
+		echo "<h1>URL Nosh Member Survey</h1>";
+		echo "Comment Id: $this->commentId<br>";
+		echo "First name: $this->firstName<br>";
+		echo "Evaluation url: $this->evaluationUrl<br>";
+		echo "Comment: $this->comment<br>";
+		echo "Member class: $this->memberClass<br>";
+	}
+	private function initialize($formInput) {
+		if (isset ( $formInput ['commentId'] ))
+			$this->commentId = $formInput ['commentId'];
+		if (isset ( $formInput ['firstName'] ))
+			$this->firstName = $formInput ['firstName'];
+		if (isset ( $formInput ['evaluationUrl'] ))
+			$this->evaluationUrl = $formInput ['evaluationUrl'];
+		if (isset ( $formInput ['comment'] ))
+			$this->comment = $formInput ['comment'];
+		if (isset ( $formInput ['memberClass'] ))
+			$this->memberClass = $formInput ['memberClass'];
 	}
 }
 ?>
