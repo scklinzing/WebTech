@@ -6,5 +6,7 @@ function showComments($commentList) {
 	foreach ( $commentList as $comment ) {
 		$comment->printComment ();
 	}
+	echo "Testing";
+	echo '<h3><a href="../index.php">Back to home</a>';
 }
 ?>
