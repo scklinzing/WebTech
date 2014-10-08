@@ -1,58 +1,77 @@
 <?php
-// Responsibility: Holds data for comment and performs validation
-// Constructor expects an associative array with field values for initialization
-class CommentData {
-	private $commentId;
-	private $firstName;
-	private $evaluationUrl;
-	private $comment;
-	private $memberClass;
-	public function __construct($formInput) {
-		$this->initialize ( $formInput );
+// Responsibility: Handles all queries pertaining to comment
+class CommentDB {
+	public static function fetchAll() {
+		$comments = array ();
+		try {
+			$db = Database::getDB ();
+			$query = 'SELECT * FROM comments';
+			$statement = $db->prepare ( $query );
+			$statement->execute ();
+			$comments = CommentDB::getCommentArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error fetching comments " . $e->getMessage () . "</p>";
+		}
+		return $comments;
 	}
-	public function getComment() {
-		return $this->comment;
+	public static function addComment($myComment) {
+		// Inserts the comment contained in a CommentData object into DB
+		$returnId = 0;
+		try {
+			$db = Database::getDB ();
+			$query = "INSERT INTO comments (firstName, evaluationUrl, comment)
+VALUES(:firstName, :evaluationUrl, :comment)";
+			$statement = $db->prepare ( $query );
+			$statement->execute ( $myComment );
+			$statement->closeCursor ();
+			$returnId = $db->lastInsertId ( "commentId" );
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error adding comment " . $e->getMessage () . "</p>";
+		}
+		return $returnId;
 	}
-	public function getCommentId() {
-		return $this->commentId;
+	public static function getCommentsByFirstName($firstName) {
+		// Returns an array of comment objects
+		$comments = array ();
+		try {
+			$db = Database::getDB ();
+			$query = "SELECT * FROM comments WHERE firstName = :firstName";
+			$statement = $db->prepare ( $query );
+			$statement->bindParam ( ":firstName", $firstName ); // Only binds at execute time
+			$statement->execute ();
+			$comments = CommentDB::getCommentArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error retrieving comments by first name " . $e->getMessage () . "</p>";
+		}
+		return $comments;
 	}
-	public function getEvaluationUrl() {
-		return $this->evaluationUrl;
+	public static function getCommentById($commentId) {
+		// Returns a comment object or null;
+		$comment = null;
+		try {
+			$db = Database::getDB ();
+			$query = "SELECT * FROM comments WHERE commentId = :commentId";
+			$statement = $db->prepare ( $query );
+			$statement->bindParam ( ":commentId", $commentId ); // Only binds at execute time
+			$statement->execute ();
+			$result = $statement->fetch ( PDO::FETCH_ASSOC );
+			if (! empty ( $result ))
+				$comment = new CommentData ( $result );
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error retrieving comments by commentId " . $e->getMessage () . "</p>";
+		}
+		return $comment;
 	}
-	public function getFirstName() {
-		return $this->firstName;
-	}
-	public function getMemberClass() {
-		return $this->memberClass;
-	}
-	public function getParameters() {
-		$paramArray = array (
-				"commentId" => $this->commentId,
-				"firstName" => $this->firstName,
-				"evaluationUrl" => $this->evaluationUrl,
-				"comment" => $this->comment 
-		);
-		return $paramArray;
-	}
-	public function printComment() {
-		echo "<h1>URL Nosh Member Survey</h1>";
-		echo "Comment Id: $this->commentId<br>";
-		echo "First name: $this->firstName<br>";
-		echo "Evaluation url: $this->evaluationUrl<br>";
-		echo "Comment: $this->comment<br>";
-		echo "Member class: $this->memberClass<br>";
-	}
-	private function initialize($formInput) {
-		if (isset ( $formInput ['commentId'] ))
-			$this->commentId = $formInput ['commentId'];
-		if (isset ( $formInput ['firstName'] ))
-			$this->firstName = $formInput ['firstName'];
-		if (isset ( $formInput ['evaluationUrl'] ))
-			$this->evaluationUrl = $formInput ['evaluationUrl'];
-		if (isset ( $formInput ['comment'] ))
-			$this->comment = $formInput ['comment'];
-		if (isset ( $formInput ['memberClass'] ))
-			$this->memberClass = $formInput ['memberClass'];
+	public static function getCommentArray($rowSet) {
+		$comments = array ();
+		foreach ( $rowSet as $commentRow ) {
+			$comment = new CommentData ( $commentRow );
+			array_push ( $comments, $comment );
+		}
+		return $comments;
 	}
 }
 ?>
