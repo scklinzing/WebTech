@@ -17,6 +17,45 @@ class UserDB {
 		}
 		return $users;
 	}
+	/* get info about a specific user */
+	public static function getUser($userID) {
+		// Returns a user object or null;
+		$user = null;
+		try {
+			$db = Database::getDB ();
+			$query = "SELECT * FROM users WHERE userID = :userID";
+			$statement = $db->prepare ( $query );
+			$statement->bindParam ( ":userId", $userId ); // Only binds at execute time
+			$statement->execute ();
+			$result = $statement->fetch ( PDO::FETCH_ASSOC );
+			if (! empty ( $result ))
+				$user = new UserData ( $result );
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error retrieving users by userId " . $e->getMessage () . "</p>";
+		}
+		return $user;
+		
+		
+		
+		
+		
+		/* $user = array ();
+		try {
+			$db = Database::getDB ();
+			$query = "SELECT * FROM Users WHERE userID = " + $userID;
+			$statement = $db->prepare ( $query );
+			$statement->execute ();
+			$user = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error fetching user by userID (UserDB.class.php)" . $e->getMessage () . "</p>";
+		}
+		return $user; */
+		
+		
+		
+	}
 	/* add a user to the database */
 	public static function addUser($newUser) {
 		// Inserts the user contained in a UserData object into DB
