@@ -65,8 +65,7 @@ class UserData {
 	}
 	/* be able to print out the user data */
 	public function printUser() {
-		echo "<h1>Rat Chat Sign Up</h1>";
-		echo "Username: $this->username<br>";
+		echo "<h3>$this->username</h3><br>";
 		echo "Email: $this->email<br>";
 		echo "Password: $this->password<br>";
 		echo "Phone Number: $this->phoneNum<br>";

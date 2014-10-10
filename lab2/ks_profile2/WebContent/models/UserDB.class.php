@@ -13,7 +13,7 @@ class UserDB {
 			$users = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching users " . $e->getMessage () . "</p>";
+			echo "<p>Error fetching users (UserDB.class.php)" . $e->getMessage () . "</p>";
 		}
 		return $users;
 	}
@@ -33,7 +33,7 @@ class UserDB {
 			$statement->closeCursor ();
 			$returnId = $db->lastInsertId ( "userID" );
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error adding user " . $e->getMessage () . "</p>";
+			echo "<p>Error adding user in function addUser (UserDB.class.php)" . $e->getMessage () . "</p>";
 		}
 		return $returnId;
 	}
