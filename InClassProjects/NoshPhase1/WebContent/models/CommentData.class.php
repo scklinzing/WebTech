@@ -5,6 +5,8 @@ class CommentData {
 	private $commentId;
 	private $evaluationUrl;
 	private $comment;
+	private $memberClassName;
+	private $commentTagList;
 	
 	public function __construct($formInput) {
 		$this->initialize($formInput);
@@ -36,6 +38,8 @@ class CommentData {
 		echo "Comment Id: $this->commentId<br>";
 		echo "Evaluation url: $this->evaluationUrl<br>";
 		echo "Comment: $this->comment<br>";
+		echo "Member Class: $this->MemberClassName<br>";
+		print_r($this->commentTagList); // temporary
 	}
 	
 	private function initialize($formInput) {
@@ -46,7 +50,11 @@ class CommentData {
 		if (isset($formInput['evaluationUrl']))
 			$this -> evaluationUrl = $formInput['evaluationUrl'];
 		if (isset($formInput['comment']))
-			$this->comment = $formInput['comment'];	
+			$this->comment = $formInput['comment'];
+		if (isset($formInput['memberClassName']))
+			$this->memberClassName = $formInput['memberClassName'];
+		if (isset($formInput['commentTagList']))
+			$this->commentTagList = $formInput['commentTagList'];
 	}
 }
 ?>
