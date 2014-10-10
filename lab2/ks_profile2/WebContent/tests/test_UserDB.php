@@ -16,8 +16,8 @@ $testUser = array ( // create new user
 		"pass2" => "password", // password
 		"phoneNum" => "8492748920",
 		"website" => "www.yahpp.com",
-		"favcolor" => "green", // color
-		"bday" => "021990",
+		"favcolor" => "#000000", // color
+		"bday" => "1990-10",
 		"whyRatChat" => "2", // reason
 		"ratsOwned" => "0", // ratsOwned
 );

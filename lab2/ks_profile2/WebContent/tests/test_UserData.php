@@ -13,8 +13,8 @@ $validTest = array (
 		"pass2" => "password", // password
 		"phoneNum" => "8780203940",
 		"website" => "www.google.com",
-		"favcolor" => "black", // color
-		"bday" => "071992",
+		"favcolor" => "#000000", // color
+		"bday" => "1992-07",
 		"whyRatChat" => "1", // reason
 		"ratsOwned" => "3", // ratsOwned
 );
