@@ -7,13 +7,14 @@
 
 <body>
 	<header>
-		<img src="image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
+		<img src="../image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
 			width="728" height="187">
 	</header>
 	<!-- Input Member Data -->
 	<section>
 	<h2>Sign up to Rat Chat to start posting!</h2>
-		<form id="signup-form" action="echoform1.php">
+		<!-- <form id="signup-form" action="echoform1.php">-->
+		<form action="../controllers/postUserController.php" method="Post">
 			<fieldset>
 				<legend>Member information</legend>
 				<p>
@@ -60,30 +61,23 @@
 			<fieldset>
 				<legend>Rat Information</legend>
 				<p>
-					What brings you to Rat Chat?<br> <input type="radio"
-						id="ownRats" name="whyRatChat" tabindex="10"> I own rats.<br>
-					<input type="radio" id="getRats" name="whyRatChat" tabindex="11">
-					I am looking into getting a rat.<br> <input type="radio"
-						id="otherRats" name="whyRatChat" tabindex="12" checked required>
+					What brings you to Rat Chat?<br>
+					<input type="radio"	id="ownRats" name="whyRatChat" value="1" tabindex="10"> I own rats.<br>
+					<input type="radio" id="getRats" name="whyRatChat" value="2" tabindex="11"> I am looking into getting a rat.<br>
+					<input type="radio" id="otherRats" name="whyRatChat" value="0" tabindex="12" checked required>
 					Other<br>
 				</p>
 				<p>
-					Do you own any rats currently?<br> <input type="radio"
-						id="ratsYes" name="ownRats" tabindex="13"> Yes<br> <input
-						type="radio" id="ratsNo" name="ownRats" tabindex="14" checked
-						required> No<br>
-				</p>
-				<p>
-					If yes, how many? Please enter a number. <input type="number"
-						name="ratsOwned" min="0" value="0" required tabindex="15">
+					How many rats do you currently own? Please enter a number. <input type="number"
+						name="ratsOwned" min="0" value="0" required tabindex="13">
 				</p>
 			</fieldset>
 			<p>
 				Make sure that you have read our <a href="">User Agreement</a> <input
-					type="checkbox" name="user-agree-check" required tabindex="16">
+					type="checkbox" name="user-agree-check" required tabindex="14">
 			</p>
 			<p>
-				<input type="submit" name="Submit me" tabindex="17">
+				<input type="submit" name="Submit me" tabindex="15">
 			</p>
 		</form>
 	</section>

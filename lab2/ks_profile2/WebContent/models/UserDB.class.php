@@ -7,24 +7,20 @@ class UserDB {
 		$users = array ();
 		try {
 			$db = Database::getDB ();
-			$query = 'SELECT * FROM User';
+			$query = 'SELECT * FROM user';
 			$statement = $db->prepare ( $query );
 			$statement->execute ();
-			$userRows = $statement->fetchAll ();
-			foreach ( $userRows as $userRow ) {
-				print_r ( $userRow ); // Just temporary
-				echo "<br>"; // Just temporary
-				$user = new UserData ( $userRow );
-				array_push ( $users, $users );
-			}
+			$users = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
 			$statement->closeCursor ();
-			return $users;
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching users $e->getMessage()</p>";
+			echo "<p>Error fetching users " . $e->getMessage () . "</p>";
 		}
 		return $users;
 	}
+	/* add a user to the database */
 	public static function addUser($newUser) {
+		// Inserts the user contained in a UserData object into DB
+		$returnId = 0;
 		try {
 			$db = Database::getDB ();
 			/**
@@ -33,11 +29,20 @@ class UserDB {
 			$query = "INSERT INTO user (username, email, password, phoneNum, website, color, bday, reason, ratsOwned)
 				VALUES(:username, :email, :pass2, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
 			$statement = $db->prepare ( $query );
-			$statement->execute ($newUser);
-			
-			return "I did it";
+			$statement->execute ( $newUser );
+			$statement->closeCursor ();
+			$returnId = $db->lastInsertId ( "userID" );
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error adding new user $e->getMessage()</p>";
+			echo "<p>Error adding user " . $e->getMessage () . "</p>";
+		}
+		return $returnId;
+	}
+	/* get an array of users */
+	public static function getUserArray($rowSet) {
+		$users = array ();
+		foreach ( $rowSet as $userRow ) {
+			$user = new UserData ( $userRow );
+			array_push ( $users, $user );
 		}
 		return $users;
 	}

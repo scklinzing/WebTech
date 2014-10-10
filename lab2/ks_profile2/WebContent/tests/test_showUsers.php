@@ -1,6 +1,8 @@
 <?php
 include_once ("../views/showUsers.php");
 include_once ("../models/UserData.class.php");
+include_once ("../models/UserDB.class.php");
+include_once ("../models/Database.class.php");
 echo "<h1>Tests for showUsers class</h1><hr>";
 echo "<hr><h2>It should output when a valid list is provided</h2><hr>";
 $validTest1 = array (
@@ -31,6 +33,7 @@ $userList = array (
 		$s1,
 		$s2 
 );
+$userList = UserDB::fetchAll();
 showUsers ( $userList );
 echo "<hr><hr><br>";
 ?>
