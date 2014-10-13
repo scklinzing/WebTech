@@ -35,26 +35,6 @@ class UserDB {
 			echo "<p>Error retrieving users by userId " . $e->getMessage () . "</p>";
 		}
 		return $user;
-		
-		
-		
-		
-		
-		/* $user = array ();
-		try {
-			$db = Database::getDB ();
-			$query = "SELECT * FROM Users WHERE userID = " + $userID;
-			$statement = $db->prepare ( $query );
-			$statement->execute ();
-			$user = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
-			$statement->closeCursor ();
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching user by userID (UserDB.class.php)" . $e->getMessage () . "</p>";
-		}
-		return $user; */
-		
-		
-		
 	}
 	/* add a user to the database */
 	public static function addUser($newUser) {
