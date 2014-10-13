@@ -2,7 +2,7 @@
 // Responsibility: maintains open DB connection (singleton)
 class Database {
 	private static $db;
-	private static $dsn = 'mysql:host=localhost;dbname=urlnoshdbphase1';
+	private static $dsn = 'mysql:host=localhost;dbname=urlnoshdbphase2';
 	private static $username = 'root';
 	private static $password = '';
 	private static $options = array (

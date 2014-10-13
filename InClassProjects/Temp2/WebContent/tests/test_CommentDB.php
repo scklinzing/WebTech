@@ -5,7 +5,7 @@ include_once("../models/CommentData.class.php");
 
 echo "<h1>Tests for CommentDB class";
 $testComment = array("evaluationUrl" => "http://yahoo1.com",
-		              "comment" => "Not here");
+		              "comment" => "Not here", "memberClassName" => "nosher");
 
 $testComments = array($testComment, $testComment);
 

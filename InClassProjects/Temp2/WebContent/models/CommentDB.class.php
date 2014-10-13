@@ -2,10 +2,14 @@
 // Responsibility: Handles all queries pertaining to comment
 class CommentDB {
 	public static function fetchAll() {
+		//$query = 'SELECT * FROM comments';
+		$query = "SELECT comments.commentId, comments.evaluationUrl, comments.comment,
+					         memberClasses.memberClassName
+					FROM comments LEFT JOIN memberClasses
+					    ON comments.memberClassId=memberClasses.memberClassId";
 		$comments = array();
 		try {
 			$db = Database::getDB ();
-			$query = 'SELECT * FROM comments';
 			$statement = $db->prepare($query);
 			$statement->execute ();
 			$comments = CommentDB::getCommentArray($statement->fetchAll(PDO::FETCH_ASSOC));
@@ -37,12 +41,22 @@ class CommentDB {
 		return $returnId;
 	}
 	
+	/**
+	 * this is identical to fetchAll except that it has a "where" clause
+	 * @param unknown $commentId
+	 * @return Ambigous <NULL, CommentData>
+	 */
 	public static function getCommentById($commentId) {
 		// Returns a comment object or null;
 		$comment = null;
+		//$query = "SELECT * FROM comments WHERE commentId = :commentId";
+		$query = "SELECT comments.commentId, comments.evaluationUrl, comments.comment,
+					         memberClasses.memberClassName
+					FROM comments LEFT JOIN memberClasses
+					    ON comments.memberClassId=memberClasses.memberClassId
+					WHERE commentId = :commentId";
 		try {
 			$db = Database::getDB ();
-			$query = "SELECT * FROM comments WHERE commentId = :commentId";
 			$statement = $db->prepare($query);
 			$statement->bindParam(":commentId", $commentId); // Only binds at execute time
 			$statement->execute();
