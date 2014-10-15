@@ -62,9 +62,9 @@
 				<legend>Rat Information</legend>
 				<p>
 					What brings you to Rat Chat?<br>
-					<input type="radio"	id="ownRats" name="whyRatChat" value="1" tabindex="10"> I own rats.<br>
-					<input type="radio" id="getRats" name="whyRatChat" value="2" tabindex="11"> I am looking into getting a rat.<br>
-					<input type="radio" id="otherRats" name="whyRatChat" value="0" tabindex="12" checked required>
+					<input type="radio" name="whyRatChat" value="1" tabindex="10" required> I own rats.<br>
+					<input type="radio" name="whyRatChat" value="2" tabindex="11"> I am looking into getting a rat.<br>
+					<input type="radio" name="whyRatChat" value="0" tabindex="12">
 					Other<br>
 				</p>
 				<p>

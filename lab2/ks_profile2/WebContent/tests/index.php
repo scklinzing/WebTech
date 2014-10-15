@@ -25,5 +25,10 @@
 		<li><a href="test_showUser.php">Tests for show user view</a></li>
 		<li><a href="test_showUsers.php">Tests for show users view</a></li>
 	</ul>
+	<h3>Controllers</h3>
+	<ul>
+		<li><a href="test_usersController.php">Test of users controller</a></li>
+		<li><a href="test_postUserController.php">Test of postUser controller</a></li>
+	</ul>
 </body>
 </html>

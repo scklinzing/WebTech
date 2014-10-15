@@ -73,6 +73,7 @@ class UserData {
 		echo "Color: $this->color<br>";
 		echo "Birthday Month and Year: $this->bday<br>";
 		echo "Reason on Rat Chat: ";
+		echo "<br>DEBUGING: Reason number = $this->reason<br>";
 		switch($this->reason) {
 			case 1:
 				echo "I own rats.<br>";
@@ -102,14 +103,8 @@ class UserData {
 			$this->color = $formInput ['favcolor'];
 		if (isset ( $formInput ['bday'] ))
 			$this->bday = $formInput ['bday'];
-		if (isset ( $formInput ['whyRatChat'] )) {
-			if ($formInput ['whyRatChat'] == 1)
-				$this->reason = 1;
-			if ($formInput ['whyRatChat'] == 2)
-				$this->reason = 2;
-			if ($formInput ['whyRatChat'] == 0)
-				$this->reason = 0;
-		}
+		if (isset ( $formInput ['whyRatChat'] ))
+			$this->reason = $formInput ['whyRatChat'];
 		if (isset ( $formInput ['ratsOwned'] ))
 			$this->ratsOwned = $formInput ['ratsOwned'];
 	}

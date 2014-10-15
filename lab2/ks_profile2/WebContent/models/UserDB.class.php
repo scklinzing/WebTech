@@ -19,11 +19,12 @@ class UserDB {
 	}
 	/* get info about a specific user */
 	public static function getUser($username) {
+		$username = strval ( $username );
+		$query = "SELECT * FROM user WHERE username = :username";
 		// Returns a user object or null;
 		$user = null;
 		try {
 			$db = Database::getDB ();
-			$query = "SELECT * FROM user WHERE username = :username";
 			$statement = $db->prepare ( $query );
 			$statement->bindParam ( ":username", $username ); // Only binds at execute time
 			$statement->execute ();
@@ -39,16 +40,36 @@ class UserDB {
 	/* add a user to the database */
 	public static function addUser($newUser) {
 		// Inserts the user contained in a UserData object into DB
+		/**
+		 * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
+		 */
+		$query = "INSERT INTO user (username, email, password, phoneNum, website, color, bday, reason, ratsOwned)
+				VALUES(:username, :email, :pass2, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
 		$returnId = 0;
 		try {
-			$db = Database::getDB ();
-			/**
-			 * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
-			 */
-			$query = "INSERT INTO user (username, email, password, phoneNum, website, color, bday, reason, ratsOwned)
-				VALUES(:username, :email, :pass2, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
+			$db = Database::getDB();
+			$username = $newUser->getUsername();
+			$email = $newUser->getEmail();
+			$password = $newUser->getPassword();
+			$phoneNum = $newUser->getPhoneNum();
+			$website = $newUser->getWebsite();
+			$color = $newUser->getColor();
+			$bday = $newUser->getBDay();
+			$reason = $newUser->getReason();
+			$ratsOwned = $newUser->getRatsOwned();
+			
 			$statement = $db->prepare ( $query );
-			$statement->execute ( $newUser );
+			$statement->bindValue ( ":username", $username );
+			$statement->bindValue ( ":email", $email );
+			$statement->bindValue ( ":pass2", $password );
+			$statement->bindValue ( ":phone", $phoneNum );
+			$statement->bindValue ( ":website", $website );
+			$statement->bindValue ( ":favcolor", $color );
+			$statement->bindValue ( ":bday", $bday );
+			$statement->bindValue ( ":whyRatChat", $reason );
+			$statement->bindValue ( ":numRats", $ratsOwned );
+			
+			$statement->execute ();
 			$statement->closeCursor ();
 			$returnId = $db->lastInsertId ( "userID" );
 		} catch ( PDOException $e ) { // Not permanent error handling
