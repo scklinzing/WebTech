@@ -2,10 +2,15 @@
 // Responsibility: Handles all queries pertaining to comment
 class CommentDB {
 	public static function fetchAll() {
-		$query = "SELECT comments.commentId, comments.evaluationUrl, comments.comment,
-					         memberClasses.memberClassName
-					FROM comments LEFT JOIN memberClasses
-					    ON comments.memberClassId=memberClasses.memberClassId";
+				$query = "SELECT comments.commentId, comments.evaluationUrl, comments.comment,
+					         memberClasses.memberClassName, commentTags.commentTagName
+					FROM comments 
+				       LEFT JOIN memberClasses
+					      ON comments.memberClassId=memberClasses.memberClassId
+					   LEFT JOIN commentTagMap
+	 	                  ON comments.commentId = commentTagMap.commentId
+			           LEFT JOIN commentTags
+			              ON commentTagMap.commentTagId = commentTags.commentTagId";
 		$comments = array();
 		try {
 			$db = Database::getDB ();		
