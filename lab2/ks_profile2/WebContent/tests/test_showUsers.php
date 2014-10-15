@@ -33,6 +33,7 @@ $userList = array (
 		$s1,
 		$s2 
 );
+/* fetch the user information from the database instead */
 $userList = UserDB::fetchAll();
 showUsers ( $userList );
 echo "<hr><hr><br>";

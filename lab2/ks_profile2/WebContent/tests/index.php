@@ -22,6 +22,7 @@
 	</ul>
 	<h3>Views</h3>
 	<ul>
+		<li><a href="test_showUser.php">Tests for show user view</a></li>
 		<li><a href="test_showUsers.php">Tests for show users view</a></li>
 	</ul>
 </body>

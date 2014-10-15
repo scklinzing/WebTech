@@ -18,21 +18,21 @@ class UserDB {
 		return $users;
 	}
 	/* get info about a specific user */
-	public static function getUser($userID) {
+	public static function getUser($username) {
 		// Returns a user object or null;
 		$user = null;
 		try {
 			$db = Database::getDB ();
-			$query = "SELECT * FROM users WHERE userID = :userID";
+			$query = "SELECT * FROM user WHERE username = :username";
 			$statement = $db->prepare ( $query );
-			$statement->bindParam ( ":userId", $userId ); // Only binds at execute time
+			$statement->bindParam ( ":username", $username ); // Only binds at execute time
 			$statement->execute ();
 			$result = $statement->fetch ( PDO::FETCH_ASSOC );
 			if (! empty ( $result ))
 				$user = new UserData ( $result );
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error retrieving users by userId " . $e->getMessage () . "</p>";
+			echo "<p>Error retrieving users by username " . $e->getMessage () . "</p>";
 		}
 		return $user;
 	}
