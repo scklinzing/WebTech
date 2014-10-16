@@ -29,7 +29,7 @@
 					Password: <input type="password" name="pass1" required tabindex="3">
 				</p>
 				<p>
-					Re-Enter Password: <input type="password" name="pass2" required
+					Re-Enter Password: <input type="password" name="password" required
 						tabindex="4">
 				</p>
 				<p>
@@ -70,14 +70,19 @@
 					How many rats do you currently own? Please enter a number. <input type="number"
 						name="ratsOwned" min="0" value="0" required tabindex="13">
 				</p>
+				<p>
+					What type of information are you interested in?<br>
+					<input type="checkbox" name="commentTagList[]" value ="layout">Site layout 
+					<input type="checkbox" name="commentTagList[]" value ="colors">Color scheme 
+					<input type="checkbox" name="commentTagList[]" value ="semantics">Semantic organization 
+					<input type="checkbox" name="commentTagList[]" value ="content">Content 
+				</p>
 			</fieldset>
 			<p>
 				Make sure that you have read our <a href="">User Agreement</a> <input
 					type="checkbox" name="user-agree-check" required tabindex="14">
 			</p>
-			<p>
-				<input type="submit" name="Submit me" tabindex="15">
-			</p>
+			<p><input type = "submit" name = "submit" value="Submit" tabindex="15"></p>
 		</form>
 	</section>
 </body>

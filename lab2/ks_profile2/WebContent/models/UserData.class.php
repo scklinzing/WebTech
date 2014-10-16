@@ -73,7 +73,6 @@ class UserData {
 		echo "Color: $this->favcolor<br>";
 		echo "Birthday Month and Year: $this->bday<br>";
 		echo "Reason on Rat Chat: ";
-		echo "<br>DEBUGING: Reason number = $this->whyRatChat<br>";
 		switch($this->whyRatChat) {
 			case 1:
 				echo "I own rats.<br>";
@@ -82,21 +81,22 @@ class UserData {
 				echo "I am looking into owning rats.<br>";
 				break;
 			default:
-				echo "Other whyRatChat.<br>";
+				echo "Other reason.<br>";
 				break;
 		}	
 		echo "Rats Owned: $this->ratsOwned<br>";
 	}
 	/* initialize all the variables */
 	private function initialize($formInput) {
-		echo "<br>Initial<br>";
-		print_r($formInput);
+		// debugging statements
+		//echo "<br>Initial<br>";
+		//print_r($formInput);
 		if (isset ( $formInput ['username'] ))
 			$this->username = $formInput ['username'];
 		if (isset ( $formInput ['email'] ))
 			$this->email = $formInput ['email'];
-		if (isset ( $formInput ['pass2'] ))
-			$this->password = $formInput ['pass2'];
+		if (isset ( $formInput ['password'] ))
+			$this->password = $formInput ['password'];
 		if (isset ( $formInput ['phoneNum'] ))
 			$this->phoneNum = $formInput ['phoneNum'];
 		if (isset ( $formInput ['website'] ))
