@@ -1,6 +1,6 @@
 <?php
 /**
- * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
+ * username, email, password, phoneNum, website, color, bday, whyRatChat, ratsOwned
  * 
  * Responsibility: Holds data for user and performs validation
  * Constructor expects an associative array with field values for initialization
@@ -12,9 +12,9 @@ class UserData {
 	private $password;
 	private $phoneNum;
 	private $website;
-	private $color;
+	private $favcolor;
 	private $bday;
-	private $reason;
+	private $whyRatChat;
 	private $ratsOwned;
 	/* constructor */
 	public function __construct($formInput) {
@@ -36,14 +36,14 @@ class UserData {
 	public function getWebsite() {
 		return $this->website;
 	}
-	public function getColor() {
-		return $this->color;
+	public function getFavColor() {
+		return $this->favcolor;
 	}
 	public function getBDay() {
 		return $this->bday;
 	}
-	public function getReason() {
-		return $this->reason;
+	public function getWhyRatChat() {
+		return $this->whyRatChat;
 	}
 	public function getRatsOwned() {
 		return $this->ratsOwned;
@@ -56,9 +56,9 @@ class UserData {
 				"password" => $this->password,
 				"phoneNum" => $this->phoneNum,
 				"website" => $this->website,
-				"color" => $this->color,
+				"favcolor" => $this->favcolor,
 				"bday" => $this->bday,
-				"reason" => $this->reason,
+				"whyRatChat" => $this->whyRatChat,
 				"ratsOwned" => $this->ratsOwned
 		);
 		return $paramArray;
@@ -70,11 +70,11 @@ class UserData {
 		echo "Password: $this->password<br>";
 		echo "Phone Number: $this->phoneNum<br>";
 		echo "Website: $this->website<br>";
-		echo "Color: $this->color<br>";
+		echo "Color: $this->favcolor<br>";
 		echo "Birthday Month and Year: $this->bday<br>";
 		echo "Reason on Rat Chat: ";
-		echo "<br>DEBUGING: Reason number = $this->reason<br>";
-		switch($this->reason) {
+		echo "<br>DEBUGING: Reason number = $this->whyRatChat<br>";
+		switch($this->whyRatChat) {
 			case 1:
 				echo "I own rats.<br>";
 				break;
@@ -82,13 +82,15 @@ class UserData {
 				echo "I am looking into owning rats.<br>";
 				break;
 			default:
-				echo "Other reason.<br>";
+				echo "Other whyRatChat.<br>";
 				break;
 		}	
 		echo "Rats Owned: $this->ratsOwned<br>";
 	}
 	/* initialize all the variables */
 	private function initialize($formInput) {
+		echo "<br>Initial<br>";
+		print_r($formInput);
 		if (isset ( $formInput ['username'] ))
 			$this->username = $formInput ['username'];
 		if (isset ( $formInput ['email'] ))
@@ -100,11 +102,11 @@ class UserData {
 		if (isset ( $formInput ['website'] ))
 			$this->website = $formInput ['website'];
 		if (isset ( $formInput ['favcolor'] ))
-			$this->color = $formInput ['favcolor'];
+			$this->favcolor = $formInput ['favcolor'];
 		if (isset ( $formInput ['bday'] ))
 			$this->bday = $formInput ['bday'];
 		if (isset ( $formInput ['whyRatChat'] ))
-			$this->reason = $formInput ['whyRatChat'];
+			$this->whyRatChat = $formInput ['whyRatChat'];
 		if (isset ( $formInput ['ratsOwned'] ))
 			$this->ratsOwned = $formInput ['ratsOwned'];
 	}

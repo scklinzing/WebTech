@@ -64,8 +64,7 @@
 					What brings you to Rat Chat?<br>
 					<input type="radio" name="whyRatChat" value="1" tabindex="10" required> I own rats.<br>
 					<input type="radio" name="whyRatChat" value="2" tabindex="11"> I am looking into getting a rat.<br>
-					<input type="radio" name="whyRatChat" value="0" tabindex="12">
-					Other<br>
+					<input type="radio" name="whyRatChat" value="3" tabindex="12"> Other<br>
 				</p>
 				<p>
 					How many rats do you currently own? Please enter a number. <input type="number"

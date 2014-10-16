@@ -29,6 +29,7 @@ class UserDB {
 			$statement->bindParam ( ":username", $username ); // Only binds at execute time
 			$statement->execute ();
 			$result = $statement->fetch ( PDO::FETCH_ASSOC );
+			print_r($result);
 			if (! empty ( $result ))
 				$user = new UserData ( $result );
 			$statement->closeCursor ();
