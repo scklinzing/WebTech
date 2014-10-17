@@ -174,6 +174,31 @@ class UserDB {
 			echo "<p>Error adding interest list data for user in writeInterestList() ".$e->getMessage()."</p>";
 		}
 	}
+	
+	/* get last n users */
+	public static function getLastNUsers($n) {
+		$query = "SELECT user.userID, username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned,
+			                 GROUP_CONCAT(interestList.interestListName SEPARATOR ';') as interestlist
+				      FROM user
+			                 LEFT JOIN interestListMap
+	 	                        ON user.userID = interestListMap.userID
+			                 LEFT JOIN interestList
+			                    ON interestListMap.interestListID = interestList.interestListID
+			          GROUP BY user.userID
+		              ORDER BY user.userDateJoined DESC LIMIT " .strval($n);
+	
+		$comments = array();
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare($query);
+			$statement->execute ();
+			$users = UserDB::getUserArray($statement->fetchAll(PDO::FETCH_ASSOC));
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error getting last n users in getLastNUsers() ".$e->getMessage()."</p>";
+		}
+		return $users;
+	}
 
 	/* get an array of users */
 	public static function getUserArray($rowSets) {
