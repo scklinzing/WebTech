@@ -1,5 +1,6 @@
 <?php
 include_once ("../models/UserDB.class.php");
+include_once ("../models/InterestListDB.class.php");
 include_once ("../models/Database.class.php");
 include_once ("../models/UserData.class.php");
 echo "<h1>Tests for UserDB class";
@@ -15,7 +16,7 @@ $testUser = array ( // create new user
 		"email" => "mary.jane@mail.com",
 		"password" => "password", // password
 		"phoneNum" => "8492748920",
-		"website" => "www.yahpp.com",
+		"website" => "www.yahoo.com",
 		"favcolor" => "#000000", // color
 		"bday" => "1990-10",
 		"whyRatChat" => "1", // reason

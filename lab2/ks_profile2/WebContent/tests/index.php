@@ -19,6 +19,7 @@
 		<li><a href="test_Database.php">Tests for Database Class</a></li>
 		<li><a href="test_UserData.php">Tests for UserData Class</a></li>
 		<li><a href="test_UserDB.php">Tests for UserDB Class</a></li>
+		<li><a href="test_InterestListDB.php">Tests for InterestListDB Class</a></li>
 	</ul>
 	<h3>Views</h3>
 	<ul>

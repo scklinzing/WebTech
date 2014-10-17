@@ -1,5 +1,5 @@
 <?php
-// Responsibility: Implements a list of available interests
+// Responsibility: Implements a list of available tags
 class InterestListDB {
 
 	public static function getMap($keyName, $valueName) {
@@ -15,7 +15,7 @@ class InterestListDB {
 			$interestList = InterestListDB::getArray($rowsets, $keyName, $valueName);
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error getting map of $keyName to $valueName in getMap() ". $e->getMessage()."</p>";
+			echo "<p>Error getting map of $keyName to $valueName ". $e->getMessage()."</p>";
 		}
 		return $interestList;
 	}
@@ -37,7 +37,7 @@ class InterestListDB {
 			$statement->closeCursor();
 
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error getting name from $id in getNameById()".$e->getMessage()."</p>";
+			echo "<p>Error getting name from $id ".$e->getMessage()."</p>";
 		}
 		return $name;
 	}
@@ -60,7 +60,7 @@ class InterestListDB {
 			$statement->closeCursor();
 
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error getting ID from $name in getIdByName()".$e->getMessage()."</p>";
+			echo "<p>Error getting ID from $name ".$e->getMessage()."</p>";
 		}
 		return $id;
 	}

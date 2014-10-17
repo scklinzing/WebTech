@@ -109,12 +109,6 @@ class UserDB {
 		return $tags;
 	}
 	
-	
-	
-	
-	
-	
-	
 	/* add a user to the database */
 	public static function addUser($newUser) {
 		// Inserts the user contained in a UserData object into DB

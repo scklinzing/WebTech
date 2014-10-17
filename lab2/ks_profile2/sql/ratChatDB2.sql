@@ -5,7 +5,7 @@ USE ks_data;
 DROP TABLE if EXISTS user;
 CREATE TABLE user (
         userID		       	 int primary key auto_increment,
-        username         	 varchar(40) not null,
+        username         	 varchar(40) not null UNIQUE,
         email    		  	 varchar(100) not null,
         password             varchar(40) not null,
         phoneNum			 int(10) not null,
