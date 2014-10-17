@@ -39,6 +39,7 @@ INSERT INTO memberClasses VALUES
 
 INSERT INTO comments (evaluationUrl, comment, memberClassId)
         VALUES ('http://www.npr.org/blogs/thetwo-way/2014/09/27/351986593/hiker-catches-volcanos-eruption-on-video-and-is-overtaken-by-ash', 'Shows the incredible power of nature', 1);
+        
 INSERT INTO comments (evaluationUrl, comment, memberClassId)
         VALUES ('http://validator.w3.org/', 'Why doesn\t the W3C semantic validator allow file upload?', 1);
 
@@ -47,7 +48,6 @@ INSERT INTO comments (evaluationUrl, comment, memberClassId)
 		
 INSERT INTO comments (evaluationUrl, comment, memberClassId)
         VALUES ('http://www.cbc.ca/news/technology/bash-bug-aka-shellshock-has-no-easy-fix-1.2779383', 'The Bash shellshock has no easy fix', 2);
-
 
 INSERT INTO commentTagMap (commentTagId, commentId) VALUES
        (1, 1), (1, 4), (1, 3), (2, 1), (2, 4), (4, 3);
