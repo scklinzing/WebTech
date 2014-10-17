@@ -72,10 +72,12 @@
 				</p>
 				<p>
 					What type of information are you interested in?<br>
-					<input type="checkbox" name="commentTagList[]" value ="layout">Site layout 
-					<input type="checkbox" name="commentTagList[]" value ="colors">Color scheme 
-					<input type="checkbox" name="commentTagList[]" value ="semantics">Semantic organization 
-					<input type="checkbox" name="commentTagList[]" value ="content">Content 
+					<!-- varieties, housing, food, toys, care -->
+					<input type="checkbox" name="interestList[]" value ="ratVarieties">Rat Varieties  
+					<input type="checkbox" name="interestList[]" value ="ratHousing">Housing 
+					<input type="checkbox" name="interestList[]" value ="ratFood">Food 
+					<input type="checkbox" name="interestList[]" value ="ratToys">Toys
+					<input type="checkbox" name="interestList[]" value ="ratCare">Rat Care/Health 
 				</p>
 			</fieldset>
 			<p>

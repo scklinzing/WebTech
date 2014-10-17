@@ -7,7 +7,8 @@ include_once ("../models/UserData.class.php");
 include_once ("../models/UserDB.class.php");
 include_once ("../models/Database.class.php");
 function showUser($username) {
-	$user = UserDB::getUser ( $username );
+	$userID = UserDB::getUserID($username);
+	$user = UserDB::getUserByID ( $userID );
 	$user->printUser ();
 	echo "<hr><br>";
 }

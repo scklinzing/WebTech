@@ -17,7 +17,13 @@ $validTest = array (
 		"bday" => "1992-07",
 		"whyRatChat" => "1", // reason
 		"ratsOwned" => "3", // ratsOwned
+		"interestList" => array("ratVarieties", "ratFood")
 );
 $s1 = new UserData ( $validTest );
 $s1->printUser ();
+
+echo "<h2>It should extract the parameters that went in</h2>";
+$props = $s1->getParameters();
+print_r($props);
+echo "<br>";
 ?>

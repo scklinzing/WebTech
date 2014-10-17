@@ -9,25 +9,27 @@ echo "<hr><h3>Testing with hard-coded data</h3><br>";
 $validTest1 = array (
 		"username" => "LadyBug",
 		"email" => "lady-bug@mail.com",
-		"pass2" => "password", // password
+		"password" => "password", // password
 		"phoneNum" => "8443819620",
 		"website" => "www.facebook.com",
 		"favcolor" => "#000000", // color
 		"bday" => "1980-11",
 		"whyRatChat" => "2", // reason
 		"ratsOwned" => "0", // ratsOwned
+		"interestList" => array("ratVarieties")
 );
 $s1 = new UserData ( $validTest1 );
 $validTest2 = array (
 		"username" => "Scarecrow",
 		"email" => "scarecrow@mail.com",
-		"pass2" => "password", // password
+		"password" => "password", // password
 		"phoneNum" => "3844591220",
 		"website" => "www.twitter.com",
 		"favcolor" => "#000000", // color
 		"bday" => "1994-09",
 		"whyRatChat" => "1", // reason
 		"ratsOwned" => "2", // ratsOwned
+		"interestList" => array("ratVarieties", "ratToys", "ratCare")
 );
 $s2 = new UserData ( $validTest2 );
 $userList = array (

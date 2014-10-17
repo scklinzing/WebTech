@@ -1,12 +1,14 @@
 <?php
 /**
- * username, email, password, phoneNum, website, color, bday, whyRatChat, ratsOwned
+ * username, email, password, phoneNum, website, color, bday, whyRatChat, ratsOwned, interestList
  * 
  * Responsibility: Holds data for user and performs validation
  * Constructor expects an associative array with field values for initialization
  */
 class UserData {
+	
 	/* user variables */
+	private $userID;
 	private $username;
 	private $email;
 	private $password;
@@ -16,13 +18,19 @@ class UserData {
 	private $bday;
 	private $whyRatChat;
 	private $ratsOwned;
+	private $interestList;
+	
 	/* constructor */
 	public function __construct($formInput) {
 		$this->initialize ( $formInput );
 	}
-	/* get functions for UserData */
+	
+	/* get and set functions for UserData */
 	public function getUsername() {
 		return $this->username;
+	}
+	public function getUserID() {
+		return $this->userID;
 	}
 	public function getEmail() {
 		return $this->email;
@@ -48,10 +56,18 @@ class UserData {
 	public function getRatsOwned() {
 		return $this->ratsOwned;
 	}
+	public function getInterestList() {
+		return $this->interestList;
+	}
+	public function setInterestList($list) {
+		$this->interestList = $list;
+	}
+	
 	/* be able to grab the parameters */
 	public function getParameters() {
 		$paramArray = array (
 				"username" => $this->username,
+				"userID" => $this->userID,
 				"email" => $this->email,
 				"password" => $this->password,
 				"phoneNum" => $this->phoneNum,
@@ -59,13 +75,16 @@ class UserData {
 				"favcolor" => $this->favcolor,
 				"bday" => $this->bday,
 				"whyRatChat" => $this->whyRatChat,
-				"ratsOwned" => $this->ratsOwned
+				"ratsOwned" => $this->ratsOwned,
+				"interestList" => $this->interestList
 		);
 		return $paramArray;
 	}
+	
 	/* be able to print out the user data */
 	public function printUser() {
 		echo "<h3>$this->username</h3><br>";
+		echo "userID: $this->userID<br>";
 		echo "Email: $this->email<br>";
 		echo "Password: $this->password<br>";
 		echo "Phone Number: $this->phoneNum<br>";
@@ -85,12 +104,20 @@ class UserData {
 				break;
 		}	
 		echo "Rats Owned: $this->ratsOwned<br>";
+		echo "Interest List: [ ";
+			for ($k = 0; $k < count($this->interestList); $k++)
+				echo $this->interestList[$k]." ";
+		echo "]<br>";
 	}
 	/* initialize all the variables */
 	private function initialize($formInput) {
 		// debugging statements
 		//echo "<br>Initial<br>";
 		//print_r($formInput);
+		if (isset($formInput['userID']))
+			$this->userID = $formInput['userID'];
+		else
+			$this->userID = 0;
 		if (isset ( $formInput ['username'] ))
 			$this->username = $formInput ['username'];
 		if (isset ( $formInput ['email'] ))
@@ -109,6 +136,8 @@ class UserData {
 			$this->whyRatChat = $formInput ['whyRatChat'];
 		if (isset ( $formInput ['ratsOwned'] ))
 			$this->ratsOwned = $formInput ['ratsOwned'];
+		if (isset($formInput['interestList']))
+			$this->interestList = $formInput['interestList'];
 	}
 }
 ?>

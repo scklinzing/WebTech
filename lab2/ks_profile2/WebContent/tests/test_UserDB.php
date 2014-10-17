@@ -13,14 +13,19 @@ echo "<h2>It should insert a new user</h2>";
 $testUser = array ( // create new user
 		"username" => "MaryJane",
 		"email" => "mary.jane@mail.com",
-		"pass2" => "password", // password
+		"password" => "password", // password
 		"phoneNum" => "8492748920",
 		"website" => "www.yahpp.com",
 		"favcolor" => "#000000", // color
 		"bday" => "1990-10",
-		"whyRatChat" => "2", // reason
-		"ratsOwned" => "0", // ratsOwned
+		"whyRatChat" => "1", // reason
+		"ratsOwned" => "4", // ratsOwned
+		"interestList" => array("ratVarieties", "ratToys", "ratCare")
 );
-$returnValue = userDB::addUser($testUser);
+
+$user = new UserData($testUser);
+$user->printUser();
+
+$returnValue = userDB::addUser($user);
 echo "It returned $returnValue";
 ?>
