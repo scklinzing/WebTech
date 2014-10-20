@@ -18,7 +18,7 @@ class Database {
 	public static function getDB() {
 		if (! isset ( self::$db )) {
 			try {
-				$passArray = parse_ini_file("../../myConfig.ini");
+				$passArray = parse_ini_file("../../../myConfig.ini");
 				$username = $passArray["username"];
 				$password = $passArray["password"];
 				self::$db = new PDO ( self::$dsn, $username, $password, self::$options );
