@@ -26,7 +26,7 @@ print_r($testResults);
 
 echo "<hr><h2>It should fetch the entire comment table</h2>";
 
-$myComments = CommentDB::fetchAll();
+$myComments = CommentDB::getAll();
 foreach ($myComments as $comment)
    $comment->printComment();
 echo "<hr>";

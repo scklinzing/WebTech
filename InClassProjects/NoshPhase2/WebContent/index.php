@@ -12,6 +12,8 @@
 
 <h3><a href="controllers/commentsController.php">See comments</a></h3>
 
+<h3><a href="controllers/lastCommentsController.php">See last 3 comments</a></h3>
+
 <h3>The footer goes here</h3>
 </body>
 </html>

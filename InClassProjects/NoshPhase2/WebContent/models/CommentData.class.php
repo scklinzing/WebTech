@@ -7,6 +7,7 @@ class CommentData {
 	private $comment;
 	private $memberClassName;
 	private $commentTagList;
+	private $commentDateCreated;
 	
 	public function __construct($formInput) {
 		$this->initialize($formInput);
@@ -14,6 +15,10 @@ class CommentData {
 	
 	public function getComment() {
 		return $this->comment;
+	}
+	
+	public function getCommentDateCreated() {
+		return $this->commentDateCreated;
 	}
 	
 	public function getCommentId() {
@@ -42,7 +47,8 @@ class CommentData {
 		                    "evaluationUrl" => $this->evaluationUrl,
 		                    "comment" => $this->comment,
 				            "memberClassName" => $this->memberClassName,
-				            "commentTagList" => $this->commentTagList
+				            "commentTagList" => $this->commentTagList,
+				            "commentDataCreated" => $this->commentDateCreated
 		                   );
 		return $paramArray;
 	}
@@ -57,6 +63,7 @@ class CommentData {
 		for ($k = 0; $k < count($this->commentTagList); $k++)
 	         echo $this->commentTagList[$k]." ";
 		echo "]<br>";
+		echo "Date created: $this->commentDateCreated<br>";
 	}
 	
 	private function initialize($formInput) {
@@ -72,6 +79,8 @@ class CommentData {
 			$this->memberClassName = $formInput['memberClassName'];	
 		if (isset($formInput['commentTagList']))
 			$this->commentTagList = $formInput['commentTagList'];
+		if (isset($formInput['commentDateCreated']))
+			$this->commentDateCreated = $formInput['commentDateCreated'];
 	}
 }
 ?>

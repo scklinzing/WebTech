@@ -1,6 +1,6 @@
-DROP DATABASE if EXISTS urlnoshdbphase2;
-CREATE DATABASE urlnoshdbphase2;
-USE urlnoshdbphase2;
+DROP DATABASE if EXISTS urlnoshdbphase3;
+CREATE DATABASE urlnoshdbphase3;
+USE urlnoshdbphase3;
 
 DROP TABLE if EXISTS memberClasses;
 CREATE TABLE memberClasses (
@@ -20,6 +20,7 @@ CREATE TABLE comments (
         evaluationUrl        varchar(1024) NOT NULL,
         comment	             varchar(2048) NOT NULL,
         memberClassId        int NOT NULL,
+        commentDateCreated   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (memberClassId) REFERENCES memberClasses(memberClassId)
 );
 

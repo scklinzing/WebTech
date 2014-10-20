@@ -2,24 +2,22 @@
 // Responsibility: maintains open DB connection (singleton)
 class Database {
 	private static $db;
-	private static $dsn = 'mysql:host=localhost;dbname=urlnoshdbphase2';
-	private static $username = 'root';
-	private static $password = '';
+	private static $dsn = 'mysql:host=localhost;dbname=urlnoshdbphase3';
 	private static $options = array (
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 	);
 
 	public static function getDB() {
 		if (! isset ( self::$db )) {
-			//echo "opening<br>";    // temporary debugging message
 			try {
-				self::$db = new PDO ( self::$dsn, self::$username,
-						self::$password, self::$options );
+				$passArray = parse_ini_file("../../../myConfig.ini");
+				$username = $passArray["username"];
+				$password = $passArray["password"];
+				self::$db = new PDO ( self::$dsn, $username, $password, self::$options );
 			} catch ( PDOException $e ) {
 				echo $e->getMessage ();  // not final error handling
 			}
 		}
-		//echo "Got it";             // temporary debugging message
 		return self::$db;
 	}
 }

@@ -1,29 +1,8 @@
 <?php
 // Responsibility: Handles all queries pertaining to comment
 class CommentDB {
-	public static function fetchAll() {
-		$query = "SELECT comments.commentId, evaluationUrl, comment, memberClasses.memberClassName,
-			                 GROUP_CONCAT(commentTags.commentTagName SEPARATOR ';') as taglist
-				      FROM comments
-			                 LEFT JOIN commentTagMap
-	 	                        ON comments.commentId = commentTagMap.commentId
-			                 LEFT JOIN commentTags
-			                    ON commentTagMap.commentTagId = commentTags.commentTagId
-					         LEFT Join memberClasses
-					            ON comments.memberClassId = memberClasses.memberClassId
-			          GROUP BY comments.commentId";
-		$comments = array();
-		try {
-			$db = Database::getDB ();
-			$statement = $db->prepare($query);
-			$statement->execute ();
-			$comments = CommentDB::getCommentArray($statement->fetchAll(PDO::FETCH_ASSOC));
-			$statement->closeCursor ();
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching comments ".$e->getMessage()."</p>";
-		}
-		return $comments;
-	}
+   
+
 	
 	public static function addComment($myComment) {
 		// Inserts the comment contained in a CommentData object into DB
@@ -51,10 +30,67 @@ class CommentDB {
 		return $returnId;
 	}
 	
+	public static function getAll() {
+		$query =  "SELECT comments.commentId, evaluationUrl, comment,
+				             memberClasses.memberClassName, commentDateCreated,
+			                 GROUP_CONCAT(commentTags.commentTagName SEPARATOR ';') as taglist
+				      FROM comments
+			                 LEFT JOIN commentTagMap
+	 	                        ON comments.commentId = commentTagMap.commentId
+			                 LEFT JOIN commentTags
+			                    ON commentTagMap.commentTagId = commentTags.commentTagId
+					         LEFT JOIN memberClasses
+					            ON comments.memberClassId = memberClasses.memberClassId
+			          GROUP BY comments.commentId";
+		$comments = array();
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare($query);
+			$statement->execute ();
+			$comments = CommentDB::getCommentArray($statement->fetchAll(PDO::FETCH_ASSOC));
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error getting all comments ".$e->getMessage()."</p>";
+		}
+		return $comments;
+	}
+	
+	public static function getLastNComments($n) {
+		$query =  "SELECT comments.commentId, evaluationUrl, comment,
+				             memberClasses.memberClassName, commentDateCreated,
+			                 GROUP_CONCAT(commentTags.commentTagName SEPARATOR ';') as taglist
+				      FROM comments
+			                 LEFT JOIN commentTagMap
+	 	                        ON comments.commentId = commentTagMap.commentId
+			                 LEFT JOIN commentTags
+			                    ON commentTagMap.commentTagId = commentTags.commentTagId
+					         LEFT JOIN memberClasses
+					            ON comments.memberClassId = memberClasses.memberClassId
+					  GROUP BY comments.commentId 
+		              ORDER BY comments.commentDateCreated DESC LIMIT " .strval($n);
+				      
+		$comments = array();
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare($query);
+			$statement->execute ();
+			$comments = CommentDB::getCommentArray($statement->fetchAll(PDO::FETCH_ASSOC));
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error getting last n comments ".$e->getMessage()."</p>";
+		}
+		return $comments;
+	}
+	
 	public static function getCommentById($commentId) {
 		// Returns a comment object or null (illustration of two separate selects)
 		// I could have used the same code as in fetchAll, but I want to talk about transactions
-		$query = "SELECT * FROM comments WHERE commentId = :commentId";
+		$query = "SELECT comments.commentId, evaluationUrl, comment, 
+				         memberClasses.memberClassName, commentDateCreated
+		             FROM comments
+		                 LEFT JOIN memberClasses
+		                    ON comments.memberClassId = memberClasses.memberClassId
+				     WHERE comments.commentId = :commentId";
 		$comment = null;
 		try {
 			$db = Database::getDB ();
@@ -75,10 +111,8 @@ class CommentDB {
 	
 	public static function getCommentArray($rowSets) {
 		$comments = array ();
-		print_r($rowSets);
 		foreach ( $rowSets as $commentRow ) {
 			$comment = CommentDB::getComment($commentRow);
-			$comment->printComment();
 			array_push ( $comments, $comment );
 		}
 		return $comments;
@@ -114,6 +148,7 @@ class CommentDB {
 				echo "<p>Error adding comment tags for comment ".$e->getMessage()."</p>";
 		}
 	}
+	
 	public static function getTagsByCommentId($commentId) {
 		$query = "SELECT commentTags.commentTagName 
 				     FROM commentTagMap 
