@@ -88,7 +88,7 @@ class UserData {
 	
 	/* be able to print out the user data */
 	public function printUser() {
-		echo "<h3>$this->username</h3><br>";
+		echo "<h3><a href=\"../views/userProfile.php?username=$this->username\">$this->username</a></h3><br>";
 		echo "userID: $this->userID<br>";
 		echo "Email: $this->email<br>";
 		echo "Password: $this->password<br>";

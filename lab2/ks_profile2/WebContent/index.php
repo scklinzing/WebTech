@@ -6,16 +6,18 @@
 </head>
 
 <body>
+	<!-- Include the header and nav bar -->
+	<!-- <?php include_once ("header.php"); ?>  -->
 	<header>
-		<img src="image/rat-chat-banner-728x187.gif" alt="[Rat Chat Image]"
-			width="728" height="187">
+	<img src="image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
+		width="728" height="187">
 	</header>
-
 	<nav>
-		<a href="index.html">Home</a> | <a href="">Fancy Rat Varieties</a> | <a
-			href="">Housing</a> | <a href="">Food</a> | <a href="">Toys</a> | <a
+		<a href="index.php">Home</a> | <a href="">Fancy Rat Varieties</a> |
+		<a href="">Housing</a> | <a href="">Food</a> | <a href="">Toys</a> | <a
 			href="">Links</a> | <a href="">My Profile</a>
 	</nav>
+	
 	<h1>Welcome to Rat Chat!</h1>
 	<section>
 		<h2>Here is some quick info:</h2>
@@ -24,22 +26,8 @@
 			more!</p>
 	</section>
 	<aside>
-		<p>Here are our three newest members:</p>
-		<a href="controllers/lastUsersController.php">See our 3 newest members!</a>
-		<ul>
-			<li><img src="image/no-photo-small.png" alt="User Image"
-				width="50" height="50"><a
-				href="views/userProfile.php?username=RatLover345"> RatLover345</a></li>
-			<li><img src="image/no-photo-small.png" alt="User Image"
-				width="50" height="50"><a
-				href="views/userProfile.php?username=SillyGirl"> SillyGirl</a></li>
-			<li><img src="image/no-photo-small.png" alt="User Image"
-				width="50" height="50"><a
-				href="views/userProfile.php?username=MrAwesome"> MrAwesome</a></li>
-		</ul>
-		<p>
-			Member List <a href="views/userList.php">HERE</a>
-		</p>
+		<h3><a href="controllers/lastUsersController.php">See our 3 newest members!</a></h3>
+		<h3><a href="views/userList.php">See the full member list here!</a></h3>
 	</aside>
 	<p>
 		If you haven't already signed up, sign up <a href="views/userForm.php">HERE</a>.
