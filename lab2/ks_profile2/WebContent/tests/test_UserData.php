@@ -10,14 +10,14 @@ echo "<h2>It should create a valid object when all input is provided</h2>";
 $validTest = array (
 		"username" => "Shelley",
 		"email" => "shelley@mail.com",
-		"pass2" => "password", // password
+		"password" => "password", // password
 		"phoneNum" => "8780203940",
 		"website" => "www.google.com",
 		"favcolor" => "#000000", // color
 		"bday" => "1992-07",
 		"whyRatChat" => "1", // reason
 		"ratsOwned" => "3", // ratsOwned
-		"interestList" => array("ratVarieties", "ratFood")
+		"interestList" => array("ratVarieties", "ratFood"),
 );
 $s1 = new UserData ( $validTest );
 $s1->printUser ();

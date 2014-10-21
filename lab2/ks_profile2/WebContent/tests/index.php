@@ -31,5 +31,10 @@
 		<li><a href="test_usersController.php">Test of users controller</a></li>
 		<li><a href="test_postUserController.php">Test of postUser controller</a></li>
 	</ul>
+	<h3>Miscellaneous</h3>
+	<ul>
+		<li><a href="tryGetLastN.php">Test get last N users</a></li>
+	</ul>
+	
 </body>
 </html>

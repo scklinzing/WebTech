@@ -19,6 +19,7 @@ class UserData {
 	private $whyRatChat;
 	private $ratsOwned;
 	private $interestList;
+	private $userDateJoined;
 	
 	/* constructor */
 	public function __construct($formInput) {
@@ -62,6 +63,9 @@ class UserData {
 	public function setInterestList($list) {
 		$this->interestList = $list;
 	}
+	public function getUserDateJoined() {
+		return $this->userDateJoined;
+	}
 	
 	/* be able to grab the parameters */
 	public function getParameters() {
@@ -76,7 +80,8 @@ class UserData {
 				"bday" => $this->bday,
 				"whyRatChat" => $this->whyRatChat,
 				"ratsOwned" => $this->ratsOwned,
-				"interestList" => $this->interestList
+				"interestList" => $this->interestList,
+				"userDateJoined" => $this->userDateJoined
 		);
 		return $paramArray;
 	}
@@ -108,6 +113,7 @@ class UserData {
 			for ($k = 0; $k < count($this->interestList); $k++)
 				echo $this->interestList[$k]." ";
 		echo "]<br>";
+		echo "Date user joined: $this->userDateJoined<br>";
 	}
 	/* initialize all the variables */
 	private function initialize($formInput) {
@@ -138,6 +144,8 @@ class UserData {
 			$this->ratsOwned = $formInput ['ratsOwned'];
 		if (isset($formInput['interestList']))
 			$this->interestList = $formInput['interestList'];
+		if (isset($formInput['userDateJoined']))
+			$this->userDateJoined = $formInput['userDateJoined'];
 	}
 }
 ?>

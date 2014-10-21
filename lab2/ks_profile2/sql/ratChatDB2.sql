@@ -13,7 +13,8 @@ CREATE TABLE user (
         favcolor		 	 varchar(7) not null,
         bday				 varchar(7) not null,
         whyRatChat			 int not null,
-        ratsOwned			 int not null
+        ratsOwned			 int not null,
+        userDateJoined		 TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE if EXISTS interestList;

@@ -25,6 +25,7 @@
 	</section>
 	<aside>
 		<p>Here are our three newest members:</p>
+		<a href="controllers/lastUsersController.php">See our 3 newest members!</a>
 		<ul>
 			<li><img src="image/no-photo-small.png" alt="User Image"
 				width="50" height="50"><a

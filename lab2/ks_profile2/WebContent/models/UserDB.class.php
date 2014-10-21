@@ -4,7 +4,7 @@
  */
 class UserDB {
 	public static function fetchAll() {
-		$query = "SELECT user.userID, username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned,
+		$query = "SELECT user.userID, username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned, userDateJoined,
 			                 GROUP_CONCAT(interestList.interestListName SEPARATOR ';') as interestlist
 				      FROM user
 			                 LEFT JOIN interestListMap
@@ -177,7 +177,7 @@ class UserDB {
 	
 	/* get last n users */
 	public static function getLastNUsers($n) {
-		$query = "SELECT user.userID, username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned,
+		$query = "SELECT user.userID, username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned, userDateJoined,
 			                 GROUP_CONCAT(interestList.interestListName SEPARATOR ';') as interestlist
 				      FROM user
 			                 LEFT JOIN interestListMap
