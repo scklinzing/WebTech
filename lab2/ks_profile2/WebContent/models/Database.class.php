@@ -2,27 +2,23 @@
 // Responsibility: maintains open DB connection (singleton)
 class Database {
 	private static $db;
-	private static $dsn = 'mysql:host=localhost;dbname=ks_data';
-	/* private static $options = array (
+	private static $dsn = 'mysql:host=localhost;dbname=';
+	private static $dbName = 'ks_data';
+	private static $options = array (
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-	); */
-	/*
-	private static $username = 'cs4413student';
-	private static $password = 'cs4413###database';
-	*/
+	);
 	/* private static $username = 'root';
 	private static $password = ''; */
-	private static $options = array (
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
-	);
-	public static function getDB() {
+	public static function getDB($dbName = 'ks_data', $configPath ="../../myConfig.ini") {
 		if (! isset ( self::$db )) {
 			try {
-				$passArray = parse_ini_file("../../../myConfig.ini");
+				$passArray = parse_ini_file($configPath);
 				$username = $passArray["username"];
 				$password = $passArray["password"];
-				self::$db = new PDO ( self::$dsn, $username, $password, self::$options );
-				//self::$db = new PDO ( self::$dsn, self::$username, self::$password, self::$options );
+				self::$dbName = $dbName;
+				$dbspec = self::$dsn.self::$dbName;
+				//self::$db = new PDO ( self::$dsn, $username, $password, self::$options );
+				self::$db = new PDO ( $dbspec, $username, $password, self::$options );
 			} catch ( PDOException $e ) {
 				echo "<p>Error with getDB function in Database.class.php " . $e->getMessage () . "</p>";
 			}
