@@ -23,7 +23,7 @@ class CommentDataTest extends UnitTestCase {
 		$this->testData = array("evaluationUrl" => "http://yahoo1.com",
 			                	"comment" => "Not here",
 			                 	"memberClassName" => "nosher",
-			                	"taglist" => "layout;semantics");
+			                	"commentTagList" => array("layout", "semantics"));
 	}
 	
 	function test_emptyCommentData() {
@@ -86,6 +86,17 @@ class CommentDataTest extends UnitTestCase {
 		$this->assertFalse(empty($s1->getError('evaluationUrl')));
 	}
 	
+	function test_isTag() {
+		// Tests that CommentData correctly indicates whether it has a tag
+		$s1 = new CommentData($this->testData);
+		$tagTruth = $s1->isTag("layout");
+		$this->assertTrue($tagTruth, "It should think it has a layout tag, but it doesn't");
+		$tagTruth = $s1->isTag("bash");
+		$this->assertFalse($tagTruth, "It should not have a bash tag");
+		$tagTruth = $s1->isTag("content");
+		$this->assertFalse($tagTruth, "It should not have a content tag");
+	}
+	
 	function test_missingUrl() {
 		// Tests that commentData has an error when the URL is missing
 		unset($this->testData['evaluationUrl']); // make URL missing
@@ -119,6 +130,18 @@ class CommentDataTest extends UnitTestCase {
 		$errors = $s1->getErrors();
 		$this->assertFalse(isset($errors['memberClassName']),
 				"Error message for class member should be clear if no map is provided");
+	}
+	
+	function test_badTags() {
+		// Tests that commentData has an error when the tag names are bad when the comment tag map is provided.
+		$this->testData['commentTagList'] = array("Blubber", "layout", "Banana", "content");
+		$s1 = new CommentData($this->testData, $this->memberClasses, $this->tagValues);
+		$errorCount = $s1->getErrorCount();
+		$this->assertEqual($errorCount, 1,
+				"Error count should be 1 for multiple invalid tags, but was $errorCount");
+		$errors = $s1->getErrors();
+		$this->assertTrue(isset($errors['commentTagList']),
+				"Error message should be set for invalid member class name, but was not");
 	}
 }
 

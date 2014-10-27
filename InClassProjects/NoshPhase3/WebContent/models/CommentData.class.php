@@ -9,19 +9,19 @@ class CommentData {
 	private $evaluationUrl;
 	private $memberClassName;
     private $memberClassMap;
-    private $commentTagNames;
+    private $commentTagMap;
 	private $errorCount;
 	private $errors;
 	private $formInput;
 	
-	public function __construct($formInput = "", $memberClassMap = "", $commentTagMap = "") {
+	public function __construct($formInput = null, $memberClassMap = array(), $commentTagMap = array()) {
 		$this->memberClassMap = $memberClassMap;
 		$this->commentTagMap = $commentTagMap;
 		$this->formInput = $formInput;
-		if (empty($formInput))
+		if (is_null($formInput))
 			$this->initializeEmpty();
 	    else
-		    $this->initialize($formInput, $memberClassMap, $commentTagMap);
+		    $this->initialize();
 	}
 	
 	public function getComment() {
@@ -91,6 +91,11 @@ class CommentData {
 		return $paramArray;
 	}
 	
+	public function isTag($tagName) {
+		//Return true if the tagname is in the comment tag list
+		return in_array($tagName, $this->commentTagList);
+	}
+	
 	public function printComment() {
 		echo "<h1>URL Nosh Member Comment</h1>";
 		echo "Comment Id: $this->commentId<br>";
@@ -137,10 +142,10 @@ class CommentData {
 	
 	private function stripInput($data) {
 		// Require most data be free of blanks, slashes and special characters
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			return $data;
+		$data = trim ( $data );
+		$data = stripslashes ( $data );
+		$data = htmlspecialchars ( $data );
+		return $data;
 	}
 	
 	private function verifyCommentId() {
@@ -161,7 +166,8 @@ class CommentData {
 	
 	private function verifyEvaluationUrl() {
 		// The evaluation URL must be a non-empty valid URL
-		if (! isset ( $this->formInput['evaluationUrl'] )) {
+		if (! isset ( $this->formInput['evaluationUrl'] ) || 
+		              empty($this->formInput['evaluationUrl'])) {
 			$this->evaluationUrl = '';
 			$this->errors ['evaluationUrl'] = "Evaluation URL is required";
 			$this->errorCount ++;
@@ -176,7 +182,8 @@ class CommentData {
 	
 	private function verifyComment() {
 		// The comment must be a non empty string
-		if (! isset ($this->formInput['comment'])) {
+		if (! isset ($this->formInput['comment']) || 
+		     empty($this->formInput['comment'])) {
 			$this->comment = '';
 			$this->errors ['comment'] = "Comment field is required";
 			$this->errorCount ++;
@@ -186,9 +193,9 @@ class CommentData {
 	}
 	
 	private function verifyMemberClassName() {
-		// The member class name must be a non empty valid member class
-        
-		if (! isset ( $this->formInput['memberClassName'] )) {
+		// The member class name must be a non empty valid member class    
+		if (! isset ( $this->formInput['memberClassName'] ) || 
+		     empty($this->formInput['memberClassName'])) {
 			$this->memberClassName = '';
 			$this->errors ['memberClassName'] = "Member class name is required";
 			$this->errorCount ++;
@@ -202,25 +209,27 @@ class CommentData {
 			}
 		}
 	}
-	
 	private function verifyCommentTagList() {
-		// The comment tag list must contain valid entries
-		$this->commentTagList = array();
-		if (!isset($this->formInput['commentTagList']))
+		// The comment tag list should contain valid entries
+		$this->commentTagList = array ();
+		if (! isset ( $this->formInput ['commentTagList'] ))
 			return;
-		elseif (! is_array ( $this->formInput['commentTagList'] )) {
+		elseif (! is_array ( $this->formInput ['commentTagList'] )) {
 			$this->errors ['commentTagList'] = "Comment tags should be a list";
 			$this->errorCount ++;
-		} else {
-			$list = $this->formInput['commentTagList'];
-			for ($k = 0; $k < count($list); $k++) {
-			   $nextTag = $this->stripInput ($list[$k]);
-			   array_push($this->commentTagList, $nextTag);
-// 			if (!empty($list) &&
-// 					!array_search($this->memberClassName)) {
-// 						$this->errors['memberClassName'] = "Member class name must be valid";
-// 						$this->errorCount++;
-// 						$this->memberClassName = "";
+		} else { // Counts multiple bad tags as only one error, but lists all bad tags
+			$list = $this->formInput ['commentTagList'];
+			for($k = 0; $k < count ( $list ); $k ++) {
+				$nextTag = $this->stripInput ( $list [$k] );
+				array_push ( $this->commentTagList, $nextTag );
+				if (! empty ( $this->commentTagMap ) && ! array_key_exists ( $nextTag, $this->commentTagMap )) {	
+					if (isset ( $this->errors ['commentTagList'] ))
+						$this->errors ['commentTagList'] = $this->errors ['commentTagList'] . "[$nextTag]";
+					else {
+						$this->errors ['commentTagList'] = "Invalid comment tag: [$nextTag]";
+						$this->errorCount ++;
+					}
+				}
 			}
 		}
 	}

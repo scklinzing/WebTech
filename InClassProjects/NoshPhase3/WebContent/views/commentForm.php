@@ -9,16 +9,22 @@ function commentForm($c) {
 <meta name="description" content = "Evaluation form for URLs">
 </head>
 <body>
+
 <h1>NOSH URL Survey</h1>
 <p>Give us your candidate comments about a URL worth consideration.</p>
 <section>
 <form action ="../controllers/postCommentController.php" method="Post">
-URL for Evaluation:<input type="url" name ="evaluationUrl" required> <span class="error"><?php echo $c->getError("evaluationUrl")?></span>
+URL for Evaluation:<input type="url" name ="evaluationUrl" 
+<?php if (!empty($c->getEvaluationUrl())) {echo 'value = "'. $c->getEvaluationUrl() .'"';}?>> 
+<span class="error"><?php echo $c->getError("evaluationUrl")?></span>
 
 <p>
-Give us your critique:<br>
-<textarea name="comment" placeholder="Your comments go here" rows = "20" cols="60" required>
+Give us your critique: <span class="error"><?php echo $c->getError("comment")?></span><br>
+<textarea name = "comment" placeholder = "Your comments go here" 
+<?php if (!empty($c->getComment())) {echo 'value = "'. $c->getComment() .'"';}?>
+ rows = "20" cols="60" >
 </textarea>
+
 </p>
 <fieldset>
 <legend>This comment addresses:</legend>
@@ -29,9 +35,13 @@ Give us your critique:<br>
 </fieldset>
 
 <p> Nosh member type:
-<input type="radio" name="memberClassName" value = "reader" required>Reader 
-<input type = "radio" name="memberClassName" value = "nosher">Nosher 
-<input type = "radio" name="memberClassName" value = "moderator">Moderator 
+<input type="radio" name="memberClassName" value = "reader" 
+<?php if ($c->getMemberClassName() == "reader") {echo '"checked"';}?>>Reader 
+<input type = "radio" name="memberClassName" value = "nosher"
+<?php if ($c->getMemberClassName() == "nosher") {echo '"checked"';}?>>Nosher 
+<input type = "radio" name="memberClassName" value = "moderator"
+<?php if ($c->getMemberClassName() == "moderator") {echo '"checked"';}?>>Moderator 
+<span class="error"><?php echo $c->getError("memberClassName")?></span>
 </p>
 
 <p><input type = "submit" name = "submit" value="Submit"></p>
