@@ -27,3 +27,9 @@ In this release, we will send passwords in the clear, but only store the passwor
 * userProfileFirstName
 * userProfileLastName
 * userProfileEmail: valid email, required
+
+### Design modifications Release 0
+*  Replaced print method with __toString method for each model object.
+*  Made sure that only functions in the view output to the response. All other output removed. This
+is in preparation for working on the client side and for session management.
+ 

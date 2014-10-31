@@ -10,7 +10,7 @@ class ModelTests extends TestSuite {
 		$this->addFile ( __DIR__."/CommentTagsDB_test.php" );
 		$this->addFile ( __DIR__."/Database_test.php" );
 		$this->addFile ( __DIR__."/CommentDB_test.php" );
-		$this->addFile ( __DIR__."/UserData_test.php" );
+		//$this->addFile ( __DIR__."/UserData_test.php" );
 		$this->addFile ( __DIR__."/UserDB_test.php" );
 		$this->addFile ( __DIR__."/UserProfileData_test.php" );
 	}

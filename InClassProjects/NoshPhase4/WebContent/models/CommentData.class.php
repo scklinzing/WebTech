@@ -96,19 +96,6 @@ class CommentData {
 		return in_array($tagName, $this->commentTagList);
 	}
 	
-	public function printComment() {
-		echo "<h1>URL Nosh Member Comment</h1>";
-		echo "Comment Id: $this->commentId<br>";
-		echo "Evaluation url: $this->evaluationUrl<br>";
-		echo "Comment: $this->comment<br>";
-		echo "Member class: $this->memberClassName<br>";
-		echo "Comment tags: [ ";
-		for ($k = 0; $k < count($this->commentTagList); $k++)
-	         echo $this->commentTagList[$k]." ";
-		echo "]<br>";
-		echo "Date created: $this->commentDateCreated<br>";
-	}
-	
 	public function __toString() {
 		$str = "Id:[".$this->commentId."] url:[".$this->evaluationUrl."] ".
 		"class:[".$this->memberClassName."] comment:[".$this->comment."] tags:[ ";

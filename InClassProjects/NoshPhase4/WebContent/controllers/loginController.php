@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once(dirname(__FILE__)."/../models/Database.class.php");
 include_once(dirname(__FILE__)."/../views/showUser.php");
 include_once(dirname(__FILE__)."/../views/loginForm.php");

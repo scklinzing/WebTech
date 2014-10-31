@@ -1,10 +1,14 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>URL Nosh homepage</title>
 </head>
 <body>
-
+<?php if (isset($_SESSION['userLoginStatus']) &&
+		    $_SESSION['userLoginStatus'] == 1) 
+		  echo "Hello " . $_SESSION['userName'];
+		    ?>
 <h1>URL Nosh</h1>
 <em>Discerning web evaluators come to complain and evaluate.</em>
 

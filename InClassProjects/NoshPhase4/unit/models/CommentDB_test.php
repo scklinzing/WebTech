@@ -87,22 +87,6 @@ class CommentDBTest extends UnitTestCase {
  		$myUrl = $s1->getEvaluationUrl();
  		$testUrl = $testrow['evaluationUrl'];
  		$this->assertEqual($myUrl, $testUrl, "evaluation url should be $testUrl but is $myUrl]");
-
-		// $this->assertEqual($s1->getComment(), "Interesting site",
-		// "comment should be Interesting site but is " .$s1->getComment());
-		// $this->assertEqual($s1->getMemberClassName(), "reader",
-		// "member class name should be reader but is ".$s1->getMemberClassName());
-		// $tags = $s1->getCommentTagList();
-		// $this->assertTrue(is_array($tags),
-		// "the tag list should be an array but is not");
-		// $params = $s1->getParameters();
-		// $this->assertEqual($params['evaluationUrl'], "http://npr.org",
-		// "Returned evaluationUrl should be http://npr.org but is ".$params['evaluationUrl']);
-		// $this->assertEqual($params['comment'], "Interesting site",
-		// "Returned comment should be Interesting site but is ".$params['comment']);
-		// $this->assertEqual($params['memberClassName'], "reader",
-		// "Returned member class name should be reader but is ".$params['memberClassName']);
 	}
-
 }
 ?>

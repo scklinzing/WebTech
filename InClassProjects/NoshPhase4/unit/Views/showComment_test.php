@@ -5,7 +5,7 @@ require_once(dirname(__FILE__)."/../../WebContent/models/CommentDB.class.php");
 require_once(dirname(__FILE__)."/../../WebContent/models/CommentData.class.php");
 require_once(dirname(__FILE__)."/../../WebContent/models/CommentTagsDB.class.php");
 require_once(dirname(__FILE__)."/../../WebContent/models/Database.class.php");
-require_once(dirname(__FILE__)."/../../WebContent/views/showComments.php");
+require_once(dirname(__FILE__)."/../../WebContent/views/showComment.php");
 require_once(dirname(__FILE__)."/../models/makeTestDB.php");
 
 class ShowCommentTest extends UnitTestCase {
@@ -25,6 +25,7 @@ class ShowCommentTest extends UnitTestCase {
 		                    "memberClassName" => "reader",
 		                    "commentTagList" => array("colors", "layout"));
 		$s1 = new CommentData($validTest1);
+		$this->assertIsA($s1, 'CommentData', "It should create a valid CommentData object but doesn't");
 		showComment($s1);
 		$comments = 0;
 		$this->assertEqual($comments, 0, "[Show comment executes]");

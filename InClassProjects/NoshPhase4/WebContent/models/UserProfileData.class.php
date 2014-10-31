@@ -67,14 +67,7 @@ class UserProfileData {
 		return $paramArray;
 	}
 	
-	public function printUserProfile() {
-		echo "<h1>URL Nosh Member Profile</h1>";
-		echo "User profile Id: $this->userProfileId<br>";
-		echo "User first name: $this->userProfileFirstName";
-		echo "User last name:  $this->userProfileLastName <br>";
-		echo "User email: $this->userProfileEmail<br>";
-		echo "Date profile last modified: $this->userProfileDateModified<br>";
-	}
+
 	
 	public function __toString() {
 		$str = "Id:[".$this->userProfileId. "]" .

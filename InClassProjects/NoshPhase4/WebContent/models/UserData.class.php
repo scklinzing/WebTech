@@ -5,7 +5,7 @@ class UserData {
 	private $errorCount;
 	private $errors;
 	private $formInput;
-	private $isauthenticated;
+	private $isAuthenticated;
 	private $userDateCreated;
 	private $userId;
 	private $userName;
@@ -76,14 +76,7 @@ class UserData {
 		return $paramArray;
 	}
 	
-	public function printUser() {
-		echo "<h1>URL Nosh Member</h1>";
-		echo "User Id: $this->userId<br>";
-		echo "User name: $this->userName<br>";
-		echo "Date created: $this->userDateCreated<br>";
-		echo "Is authenticated: $this->isAuthenticated<br>";
-	}
-	
+
 	public function __toString() {
 		$str = "Id:[".$this->userId."] name:[".$this->userName."] ".
 		"password:[" .$this->userPassword ."] . is authenticated:[".
@@ -136,7 +129,7 @@ class UserData {
 	}
 	
 	private function verifyUserName() {
-		// The user name must be a non empty string
+		// The user name must be a non empty string with only alpha numeric characters, dashes and underscores
 		if (! isset ($this->formInput['userName']) || 
 		     empty($this->formInput['userName'])) {
 			$this->userName = '';
@@ -144,6 +137,11 @@ class UserData {
 			$this->errorCount ++;
 		} else {
 			$this->userName = $this->stripInput ( $this->formInput['userName']);
+			if (! filter_var ( $this->userName, FILTER_VALIDATE_REGEXP,
+		                       array("options"=>array("regexp" =>"/^([a-zA-Z0-9])+$/i")) )) {
+				$this->errors ['userName'] = "User name can only contain letters, numbers, dashes and underscores";
+				$this->errorCount ++;
+		    }
 		}
 	}
 	
@@ -152,9 +150,19 @@ class UserData {
 		if (! isset ($this->formInput['userPassword']) ||
 				empty($this->formInput['userPassword'])) {
 					$this->userPassword = '';
-				} else {
-					$this->userPassword = $this->stripInput ( $this->formInput['userPassword']);
-				}
+					$this->errors['userPassword'] = "Non empty password required";
+					$this->errorCount++;
+				return;	
+		}
+		$this->userPassword = $this->stripInput ( $this->formInput['userPassword']);
+	    if (isset($this->formInput['userPasswordRetyped'])) {
+	    	$retyped = $this->stripInput ($this->formInput['userPasswordRetyped']);
+	    	if ($retyped != $this->userPassword) {
+	    		$this->errors['userPassword'] = "Retyped password doesn't agree";
+	    		$this->errorCount++;
+	    	}
+	    }
+							
 	}
 	
 	private function verifyUserDateCreated() {
