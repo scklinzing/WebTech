@@ -1,6 +1,6 @@
-DROP DATABASE if EXISTS ks_data;
-CREATE DATABASE ks_data;
-USE ks_data;
+DROP DATABASE if EXISTS ks_data3;
+CREATE DATABASE ks_data3;
+USE ks_data3;
 
 DROP TABLE if EXISTS user;
 CREATE TABLE user (
@@ -15,13 +15,13 @@ CREATE TABLE user (
         whyRatChat			 int not null,
         ratsOwned			 int not null,
         userDateJoined		 TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE if EXISTS interestList;
 CREATE TABLE interestList (
         interestListID             int PRIMARY KEY AUTO_INCREMENT,
         interestListName           varchar (255) UNIQUE
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS interestListMap;
 CREATE TABLE interestListMap (
@@ -29,7 +29,7 @@ CREATE TABLE interestListMap (
 		interestListID             int,
 		FOREIGN KEY (userID) REFERENCES user(userID),
         FOREIGN KEY (interestListID) REFERENCES interestList(interestListID)
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO interestList VALUES
       (1, 'ratVarieties'), (2, 'ratHousing'), (3, 'ratFood'), (4, 'ratToys'), (5, 'ratCare');

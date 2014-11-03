@@ -3,13 +3,13 @@
 class Database {
 	private static $db;
 	private static $dsn = 'mysql:host=localhost;dbname=';
-	private static $dbName = 'ks_data';
+	private static $dbName = 'ks_data3';
 	private static $options = array (
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 	);
 	/* private static $username = 'root';
 	private static $password = ''; */
-	public static function getDB($dbName = 'ks_data', $configPath ="../../myConfig.ini") {
+	public static function getDB($dbName = 'ks_data3', $configPath ="../../myConfig.ini") {
 		if (! isset ( self::$db )) {
 			try {
 				$passArray = parse_ini_file($configPath);
