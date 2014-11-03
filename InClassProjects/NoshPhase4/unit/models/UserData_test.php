@@ -56,15 +56,15 @@ class UserDataTest extends UnitTestCase {
 		$this->assertEqual($errors, 1, "It should have 1 error but has $errors");
 	}
 	
-// 	function test_validUserNameDashes() {
-// 		// Tests invalid user names are detected
-// 		$this->testData['userName'] = '-a_b';
-// 		$s1 = new UserData($this->testData);
-// 		$this->assertNotNull($s1, "UserData object $s1");
-// 		$this->assertTrue(is_a($s1, 'UserData'), "Should be a UserData object");
-// 		$errors = $s1->getErrorCount();
-// 		$this->assertEqual($errors, 0, "It should have no errors but has $errors");
-// 	}
+	function test_validUserNameDashes() {
+		// Tests invalid user names are detected
+		$this->testData['userName'] = '-a_b';
+		$s1 = new UserData($this->testData);
+		$this->assertNotNull($s1, "UserData object $s1");
+		$this->assertTrue(is_a($s1, 'UserData'), "Should be a UserData object");
+		$errors = $s1->getErrorCount();
+		$this->assertEqual($errors, 0, "It should have no errors but has $errors");
+	}
 	
 	function test_getParameters() {
 		// Tests that UserData returns a valid array when no errors

@@ -138,7 +138,7 @@ class UserData {
 		} else {
 			$this->userName = $this->stripInput ( $this->formInput['userName']);
 			if (! filter_var ( $this->userName, FILTER_VALIDATE_REGEXP,
-		                       array("options"=>array("regexp" =>"/^([a-zA-Z0-9])+$/i")) )) {
+		                       array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
 				$this->errors ['userName'] = "User name can only contain letters, numbers, dashes and underscores";
 				$this->errorCount ++;
 		    }
