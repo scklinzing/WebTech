@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Inline versus block versus line</title>
+<style type="text/css">
+div#nav a {
+	display:block; 
+}
+
+#inlineList li {
+	display: inline; border-right: 1px solid; padding: 0 0.33em;}
+}
+
+#inlineList li:first-child {
+	border-left: 1px solid;
+}
+
+div#blockInblock p {
+	display:block; width: 7em; text-align:center;}
+}
+
+div#inlineInBlock p {
+	display:inline; width: 7em; text-align:center;}
+	
+div#inlineBlockInBlock p {
+     display : inline-block; height: 2em; width :20%;
+}
+
+h3.runIn { 
+  display:run-in; border: 2px dotted; font-size: 130%;
+}
+</style>
+</head>
+
+<body>
+<h1>Inline versus block versus line</h1>
+
+<p>
+<strong>Example 1:</strong> Normal inline</p>
+
+<div id="nonav">
+<a href="#">Home</a>
+<a href="#">News</a>
+<a href="#">Articles</a>
+<a href="#">Blog</a>
+<a href="#">Contact</a>
+</div>
+
+
+<p>
+<strong>Example 2:</strong> Block display</p>
+
+<div id="nav">
+<a href="#">Home</a>
+<a href="#">News</a>
+<a href="#">Articles</a>
+<a href="#">Blog</a>
+<a href="#">Contact</a>
+</div>
+
+<p>
+<strong>Example 3:</strong> Normal list-item display</p>
+
+<ul id="normal">
+<li><a href="#">Home</a></li>
+<li><a href="#">News</a></li>
+<li><a href="#">Articles</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+
+<p>
+<strong>Example 4:</strong> Normal list-item display</p>
+
+<ul id="inlineList">
+<li><a href="#">Home</a></li>
+<li><a href="#">News</a></li>
+<li><a href="#">Articles</a></li>
+<li><a href="#">Blog</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+
+<p><strong>Example 5:</strong> a block element within a block</p>
+
+<div id="blockInblock">
+This is a block level element that contains a block element.
+<p>Here is the block element.</p>
+Now we are back to the outer block level element. 
+</div>
+
+<p><strong>Example 6:</strong> Inline element within a block  (Note that the <code>width</code>
+and <code>text-align</code> properties are ignored.)</p>
+
+<div id="inlineInBlock">
+This is a block level element that contains an inline element.
+<p>Here is the inline element.</p>
+Now we are back to the outer block level element. For some reason this doesn't render
+correctly in FireFox.
+</div>
+
+
+<p><strong>Example 7:</strong> Inline-block element within a block </p>
+
+<div id="inlineBlockInBlock">
+This is a block level element that contains an inline-block element.
+<p>Here is the inline-block element.</p>
+Now we are back to the outer block level element.
+</div>
+
+<p><strong>Example 8:</strong> Run-in element within a block (This should display
+the run-in element as inline on the front of the directly adjacent block, but neither
+Firefox nor IE 7 support run-in.) </p>
+
+<div>
+<h3 class="runIn">This is a run-in element</h3><p style="display:block">Now we are back
+to a block element.</p> 
+</div>
+
+</body>
+
+</html>
