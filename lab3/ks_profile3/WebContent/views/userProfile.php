@@ -13,7 +13,7 @@
 			width="728" height="187">
 	</header>
 	<nav>
-		<a href="../index.html">Home</a> | <a href="">Fancy Rat Varieties</a>
+		<a href="../index.php">Home</a> | <a href="">Fancy Rat Varieties</a>
 		| <a href="">Housing</a> | <a href="">Food</a> | <a href="">Toys</a> |
 		<a href="">Links</a> | <?php echo "<a href=\"userProfile.php?username=$username\">My Profile</a>"; ?>
 	</nav>
@@ -25,7 +25,6 @@
 	<section>
 		<?php
 		include_once ("../views/showUser.php");
-		//$username = $_GET ['username']; // this is declared at the beginning
 		showUser($username);
 		?>
 	</section>

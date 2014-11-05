@@ -79,7 +79,7 @@ class UserDB {
 		return $id;
 	}
 	
-	public static function getUserByID($ID) {
+	public static function getUserByID($userID) {
 		// Returns the UserData object corresponding to userID $Id
 		$userID = strval ( $userID );
 		$query = "SELECT * FROM USER WHERE (userID = :userID )";
@@ -87,7 +87,7 @@ class UserDB {
 		try {
 			$db = Database::getDB ();
 			$statement = $db->prepare($query);
-			$statement->bindParam(":userID", $ID); // Only binds at execute time
+			$statement->bindParam(":userID", $userID); // Only binds at execute time
 			$statement->execute ();
 			$result = $statement->fetch(PDO::FETCH_ASSOC);
 			if (!empty($result)) {
