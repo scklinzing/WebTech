@@ -5,7 +5,9 @@
  * Responsibility: Test the UserData class.
  */
 include ("../models/UserData.class.php");
-echo "<h1>Tests for UserData class";
+include_once ("../views/showUser.php");
+echo "<h1>Tests for UserData class<br>";
+echo "This does NOT add a user to the database.";
 echo "<h2>It should create a valid object when all input is provided</h2>";
 $validTest = array (
 		"username" => "Shelley",
@@ -20,7 +22,7 @@ $validTest = array (
 		"interestList" => array("ratVarieties", "ratFood"),
 );
 $s1 = new UserData ( $validTest );
-$s1->printUser ();
+showUser($s1);
 
 echo "<h2>It should extract the parameters that went in</h2>";
 $props = $s1->getParameters();

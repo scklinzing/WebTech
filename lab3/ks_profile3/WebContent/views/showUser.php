@@ -1,14 +1,19 @@
 <?php
 /**
  * Displays the information about the user passed through
- * Input: a username
+ * Input: a username (string) OR a UserData object.
  */
 include_once ("../models/UserData.class.php");
 include_once ("../models/UserDB.class.php");
 include_once ("../models/Database.class.php");
 function showUser($username) {
-	$userID = UserDB::getUserID($username);
-	$user = UserDB::getUserByID ( $userID );
+	/* if it is a username, fetch the data */
+	if(gettype($username) == "string") {
+		$userID = UserDB::getUserID($username);
+		$user = UserDB::getUserByID ( $userID );
+	} else { /* if it's a UserData object, do nothing */
+		$user = $username;
+	}
 
 	echo "<h3><a href=\"../views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></h3><br>";
 	echo "userID: ".$user->getUserID()."<br>";

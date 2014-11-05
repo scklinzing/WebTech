@@ -25,7 +25,7 @@ class UserDB {
 		return $users;
 	}
    
-	public static function addUser($myUser) {
+	public static function addUser($newUser) {
 		/**
 		 * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
 		 */
@@ -37,7 +37,7 @@ class UserDB {
 			$statement = $db->prepare ($query);
 			$statement->bindValue ( ":username", $newUser->getUsername() );
 			$statement->bindValue ( ":email", $newUser->getEmail() );
-			$passHash = password_hash($myUser->getPassword(), PASSWORD_DEFAULT);
+			$passHash = password_hash($newUser->getPassword(), PASSWORD_DEFAULT);
 			print_r($passHash);
 			$statement->bindValue (":userPasswordHash", $passHash);
 			$statement->bindValue ( ":phone", $newUser->getPhoneNum() );

@@ -3,12 +3,13 @@ include_once ("../models/UserDB.class.php");
 include_once ("../models/InterestListDB.class.php");
 include_once ("../models/Database.class.php");
 include_once ("../models/UserData.class.php");
+include_once ("../views/showUser.php");
 echo "<h1>Tests for UserDB class";
 echo "<h2>It should fetch the entire user table</h2>";
 /* get all the users from the database */
 $myUsers = UserDB::fetchAll ();
 foreach ( $myUsers as $user )
-	$user->printUser (); // print them out
+	showUser($user); // print them out
 
 echo "<h2>It should insert a new user</h2>";
 $testUser = array ( // create new user
@@ -25,7 +26,7 @@ $testUser = array ( // create new user
 );
 
 $user = new UserData($testUser);
-$user->printUser();
+showUser($user);
 
 $returnValue = userDB::addUser($user);
 echo "It returned $returnValue";

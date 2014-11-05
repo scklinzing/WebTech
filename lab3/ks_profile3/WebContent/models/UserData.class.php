@@ -137,7 +137,7 @@ class UserData {
 	}
 	
 	/* be able to print out the user data */
-	public function printUser() {
+	/* public function printUser() {
 		echo "<h3><a href=\"../views/userProfile.php?username=$this->username\">$this->username</a></h3><br>";
 		echo "userID: $this->userID<br>";
 		echo "Email: $this->email<br>";
@@ -164,7 +164,7 @@ class UserData {
 				echo $this->interestList[$k]." ";
 				echo "]<br>";
 		echo "Date user joined: $this->userDateJoined<br>";
-	}
+	} */
 	
 	/* initialize all the variables */
 	private function initialize() {

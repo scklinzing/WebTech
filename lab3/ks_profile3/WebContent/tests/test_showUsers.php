@@ -36,11 +36,11 @@ $userList = array (
 		$s1,
 		$s2 
 );
-showUsers ( $userList );
+showUsers ( $userList, "" );
 
 echo "<hr><h3>Testing with fetched database data</h3><br>";
 /* fetch the user information from the database instead */
 $userList = UserDB::fetchAll();
-showUsers ( $userList );
+showUsers ( $userList, "" );
 echo "<hr><hr><br>";
 ?>

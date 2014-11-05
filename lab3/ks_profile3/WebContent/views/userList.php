@@ -23,7 +23,7 @@
 	include_once ("../models/UserDB.class.php");
 	include_once ("../models/Database.class.php");
 	$userList = UserDB::fetchAll ();
-	showUsers ( $userList );
+	showUsers ( $userList, "" );
 	echo "<hr><hr><br>";
 	?>
 </body>
