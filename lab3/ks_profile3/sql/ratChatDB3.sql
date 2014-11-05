@@ -34,7 +34,7 @@ CREATE TABLE interestListMap (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO interestList VALUES
-      (1, 'ratVarieties'), (2, 'ratHousing'), (3, 'ratFood'), (4, 'ratToys'), (5, 'ratCare');
+      (1, 'Rat Varieties'), (2, 'Rat Housing'), (3, 'Rat Food'), (4, 'Rat Toys'), (5, 'Rat Care');
       
 INSERT INTO user (userID, username, userPasswordHash, email, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned) VALUES 
 	   (1, 
