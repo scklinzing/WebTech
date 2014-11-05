@@ -8,7 +8,7 @@ class Database {
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 	);
 
-	public static function getDB($dbName = 'urlnoshdbphase4', $configPath ="../../../myConfig.ini") {
+	public static function getDB($dbName = 'urlnoshdbphase4', $configPath ="../../myConfig.ini") {
 		if (! isset ( self::$db )) {
 			try {
 				$passArray = parse_ini_file($configPath);
