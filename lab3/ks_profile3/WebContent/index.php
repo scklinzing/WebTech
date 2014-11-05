@@ -30,7 +30,7 @@
 		<h3><a href="views/userList.php">See the full member list here!</a></h3>
 	</aside>
 	<p>
-		If you haven't already signed up, sign up <a href="views/userForm.php">HERE</a>.
+		If you haven't already signed up, sign up <a href="controllers/registerController.php">HERE</a>.
 	</p>
 	<footer>
 		<p>-x-</p>

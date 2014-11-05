@@ -1,20 +1,12 @@
 <?php
-/**
- * username, email, password, phoneNum, website, color, bday, whyRatChat, ratsOwned, interestList
- * 
- * Responsibility: Holds data for user and performs validation
- * Constructor expects an associative array with field values for initialization
- */
-class UserData {
-	
-	/* user variables */
+// Responsibility: Holds data for user profile and performs validation
+// Constructor expects an associative array with field values for initialization
+class UserProfileData {
 	private $errorCount;
 	private $errors;
 	private $formInput;
-	private $isAuthenticated;
-	private $userID;
-	private $username;
-	private $password;
+	private $userProfileID;
+	
 	private $email;
 	private $phoneNum;
 	private $website;
@@ -23,9 +15,9 @@ class UserData {
 	private $whyRatChat;
 	private $ratsOwned;
 	private $interestList;
-	private $userDateCreated;
 	
-	/* constructor */
+	private $userProfileDateModified;
+
 	public function __construct($formInput = null) {
 		$this->formInput = $formInput;
 		if (is_null($formInput))
@@ -41,11 +33,6 @@ class UserData {
 		else
 			return "";
 	}
-	public function setError($errorName, $errorValue) {
-		// Sets a particular error value and increments error count
-		$this->errors[$errorName] = $errorValue;
-		$this->errorCount ++;
-	}
 	public function getErrorCount() {
 		return $this->errorCount;
 	}
@@ -53,21 +40,9 @@ class UserData {
 		return $this->errors;
 	}
 	
-	/* getters and setters for UserData */
-	public function getIsAuthenticated() {
-		return $this->isAuthenticated;
-	}
-	public function setIsAuthenticated($isAuth) {
-		$this->isAuthenticated = $isAuth;
-	}
-	public function getUserID() {
-		return $this->userID;
-	}
-	public function getUsername() {
-		return $this->username;
-	}
-	public function getPassword() {
-		return $this->password;
+	/* Getters and setters for UserProfileData */
+	public function getuserProfileID() {
+		return $this->userProfileID;
 	}
 	public function getEmail() {
 		return $this->email;
@@ -96,35 +71,28 @@ class UserData {
 	public function setInterestList($list) {
 		$this->interestList = $list;
 	}
-	public function getUserDateCreated() {
-		return $this->userDateCreated;
+	public function getUserProfileDateModified() {
+		return $this->userProfileDateModified;
 	}
 	
-	/* be able to grab the parameters */
 	public function getParameters() {
 		// Return data fields as an associative array
-		$paramArray = array("userID" => $this->userID,
-				            "username" => $this->username,
-				            "password" => $this->password,
-							"email" => $this->email,
-							"phoneNum" => $this->phoneNum,
+		$paramArray = array("userProfileID" => $this->userProfileID,
+				            "email" => $this->email,
+		                    "phoneNum" => $this->phoneNum,
 							"website" => $this->website,
 							"favcolor" => $this->favcolor,
 							"bday" => $this->bday,
 							"whyRatChat" => $this->whyRatChat,
 							"ratsOwned" => $this->ratsOwned,
 							"interestList" => $this->interestList,
-				            "userDataCreated" => $this->userDateCreated,
-				            "isAuthenticated" => $this->isAuthenticated
+				            "userProfileDataModified" => $this->userProfileDateModified
 		                   );
 		return $paramArray;
 	}
 	
-	/* be able to print out the user data */
 	public function __toString() {
-		$str = "Id:[".$this->userID."] name:[".$this->username."] " .
-				"password:[" .$this->password ."] . is authenticated:[" .
-				$this->getIsAuthenticated(). "]" .
+		$str = "ID:[".$this->userProfileID. "]" .
 				"email:[".$this->email."]" .
 				"phoneNum:[".$this->phoneNum."]" .
 				"website:[".$this->website."]" .
@@ -136,14 +104,10 @@ class UserData {
 		return $str;
 	}
 	
-	/* initialize all the variables */
 	private function initialize() {
 		$this->errorCount = 0;
 		$errors = array();
-		$this->isAuthenticated = false;
-		$this->verifyUserID();	
-		$this->verifyUsername();	
-		$this->verifyPassword();
+		$this->verifyUserProfileID();	
 		$this->verifyEmail();
 		$this->verifyPhoneNum();
 		$this->verifyWebsite();
@@ -152,16 +116,13 @@ class UserData {
 		$this->verifyWhyRatChat();
 		$this->verifyRatsOwned();
 		$this->verifyInterestList();
-		$this->verifyUserDateCreated();
+		$this->verifyUserProfileDateModified();
 	}
 	
 	private function initializeEmpty() {
 		$this->errorCount = 0;
 		$errors = array();
-		$this -> isAuthenticated = false;
-		$this->userID = "";
-		$this->username = "";
-		$this->password = "";
+		$this->userProfileID = "";
 		$this->email = "";
 		$this->phoneNum = "";
 		$this->website = "";
@@ -170,7 +131,7 @@ class UserData {
 		$this->whyRatChat = "";
 		$this->ratsOwned = "";
 		$this->interestList = "";
-		$this->userDateCreated = "";
+		$this->userProfileDateModified = "";
 	}
 	
 	private function stripInput($data) {
@@ -181,57 +142,23 @@ class UserData {
 		return $data;
 	}
 	
-	private function verifyUserID() {
-		// If userID is not empty it should be a positive integer
-		if (!isset($this->formInput['userID']))
-			$this->userID = '';
+	private function verifyUserProfileID() {
+		// If userProfileID is not empty it should be a positive integer
+		if (!isset($this->formInput['userProfileID']))
+			$this->userProfileID = '';
 		else {
-			$this->userID = $this->stripInput($this->formInput['userID']);
-			if (!filter_var($this->userID, FILTER_VALIDATE_INT)) {
-				$this->errors['userID'] = "User Id is not a valid integer";
-				$this->errorCount++;
-			} elseif ((int)$this->userID <= 0) {
-				$this->errors['userID'] = "User Id must be a positive integer";
-				$this->errorCount++;
-			}
-		}
+			$this->userProfileID = $this->stripInput($this->formInput['userProfileID']);
+            if (!filter_var($this->userProfileID, FILTER_VALIDATE_INT)) {
+            	$this->errors['userProfileID'] = "User Id is not a valid integer";
+            	$this->errorCount++;
+            } elseif ((int)$this->userProfileID <= 0) {
+            	$this->errors['userProfileID'] = "User profile Id must be a positive integer";
+            	$this->errorCount++;
+            }
+		}		
 	}
 	
-	private function verifyUsername() {
-		// The user name must be a non empty string with only alpha numeric characters, dashes and underscores
-		if (! isset ($this->formInput['username']) ||
-				empty($this->formInput['username'])) {
-					$this->username = '';
-					$this->errors ['username'] = "User name is required";
-					$this->errorCount ++;
-				} else {
-					$this->username = $this->stripInput ( $this->formInput['username']);
-					if (! filter_var ( $this->username, FILTER_VALIDATE_REGEXP,
-							array("options"=>array("regexp" =>"/^([a-zA-Z0-9\-\_])+$/i")) )) {
-								$this->errors ['username'] = "User name can only contain letters, numbers, dashes and underscores";
-								$this->errorCount ++;
-			    }
-				}
-	}
-	private function verifyPassword() {
-		// The user password should be a non-empty string if set.
-		if (! isset ($this->formInput['password']) ||
-				empty($this->formInput['password'])) {
-					$this->password = '';
-					$this->errors['password'] = "Non empty password required";
-					$this->errorCount++;
-					return;
-				}
-				$this->password = $this->stripInput ( $this->formInput['password']);
-				if (isset($this->formInput['passwordRetyped'])) {
-					$retyped = $this->stripInput ($this->formInput['passwordRetyped']);
-					if ($retyped != $this->password) {
-						$this->errors['password'] = "Retyped password doesn't agree";
-						$this->errorCount++;
-					}
-				}
-					
-	}
+	/* --------------------- VERIFY THE INFORMATION FROM FORM --------------------- */
 	private function verifyEmail() {
 		// The user email must be a non-empty valid email
 		if (! isset ( $this->formInput['email'] ) ||
@@ -289,11 +216,11 @@ class UserData {
 			$this->interestList =
 			$this->stripInput ($this->formInput['interestList']);
 	}
-	private function verifyUserDateCreated() {
+	private function verifyUserProfileDateModified() {
 		// Just do base filtering at this point
-		if (isset($this->formInput['userDateCreated']))
-			$this->userDateCreated =
-			$this->stripInput ($this->formInput['userDateCreated']);
+		if (isset($this->formInput['userProfileDateModified']))
+			$this->userProfileDateModified = 
+		           $this->stripInput ($this->formInput['userProfileDateModified']);
 	}
 }
 ?>

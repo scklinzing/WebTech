@@ -1,156 +1,113 @@
 <?php
-/**
- * Responsibility: Handles all queries pertaining to USER 
- */
+// Responsibility: Handles all queries pertaining to user registration and login
 class UserDB {
-	public static function fetchAll() {
-		$query = "SELECT user.userID, username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned, userDateJoined,
-			                 GROUP_CONCAT(interestList.interestListName SEPARATOR ';') as interestlist
-				      FROM user
-			                 LEFT JOIN interestListMap
-	 	                        ON user.userID = interestListMap.userID
-			                 LEFT JOIN interestList
-			                    ON interestListMap.interestListID = interestList.interestListID
-			          GROUP BY user.userID";
-		$users = array ();
+   
+	public static function addUser($myUser) {
+		/**
+		 * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
+		 */
+		$query = "INSERT INTO user (username, email, userPasswordHash, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
+				VALUES(:username, :email, :userPasswordHash, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
+		$returnId = 0;
 		try {
 			$db = Database::getDB ();
-			$statement = $db->prepare ( $query );
+			$statement = $db->prepare ($query);
+			$statement->bindValue ( ":username", $newUser->getUsername() );
+			$statement->bindValue ( ":email", $newUser->getEmail() );
+			$passHash = password_hash($myUser->getPassword(), PASSWORD_DEFAULT);
+			print_r($passHash);
+			$statement->bindValue (":userPasswordHash", $passHash);
+			$statement->bindValue ( ":phone", $newUser->getPhoneNum() );
+			$statement->bindValue ( ":website", $newUser->getWebsite() );
+			$statement->bindValue ( ":favcolor", $newUser->getFavColor() );
+			$statement->bindValue ( ":bday", $newUser->getBDay() );
+			$statement->bindValue ( ":whyRatChat", $newUser->getWhyRatChat() );
+			$statement->bindValue ( ":numRats", $newUser->getRatsOwned() );
 			$statement->execute ();
-			$users = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
-			//print_r($users); // for debugging purposes
-			$statement->closeCursor ();
+			$statement->closeCursor();
+			$returnId = $db->lastInsertId("userID");
+			$myInterests = $newUser->getInterestList();
+			UserDB::writeInterestList($db, $returnId, $myInterests);
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching users (UserDB.class.php)" . $e->getMessage () . "</p>";
+			echo "<p>UserDB:addUser(): Error adding user ".$e->getMessage()."</p>";
 		}
-		return $users;
+		return $returnId;
 	}
 	
-	/* return the userID for a username */
-	public static function getUserID($username) {
-		$username = strval ( $username );
-		$query = "SELECT * FROM user WHERE username = :username";
-		// Returns a userID object or null;
-		$id = null;
+	public static function getUserByID($Id) {
+		// Returns the UserData object corresponding to userID $Id
+		$query = "SELECT * FROM USER WHERE (userID = :userID )";
+		$user = NULL;
 		try {
 			$db = Database::getDB ();
-			$statement = $db->prepare ( $query );
-			$statement->bindParam ( ":username", $username ); // Only binds at execute time
+			$statement = $db->prepare($query);
+			$statement->bindParam(":userID", $Id);
 			$statement->execute ();
-			$result = $statement->fetch ( PDO::FETCH_ASSOC );
-			//print_r($result); // for debugging purposes
-			if (! empty ( $result ))
-				$id = $result['userID'];
+			$userRows = $statement->fetch(PDO::FETCH_ASSOC);
+			if (!empty($userRows))
+				$user = new UserData($userRows);
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error retrieving userID by username (getUserID()) " . $e->getMessage () . "</p>";
-		}
-		return $id;
-	}
-	
-	/* get info about a specific user by their userID */
-	public static function getUserByID($userID) {
-		$userID = strval ( $userID );
-		$query = "SELECT * FROM user WHERE userID = :userID";
-		// Returns a user object or null;
-		$user = null;
-		try {
-			$db = Database::getDB ();
-			$statement = $db->prepare ( $query );
-			$statement->bindParam ( ":userID", $userID ); // Only binds at execute time
-			$statement->execute ();
-			$result = $statement->fetch ( PDO::FETCH_ASSOC );
-			//print_r($result); // for debugging purposes
-			if (! empty ( $result )) {
-				$result['interestList'] = UserDB::getInterestsByUserID($userID);
-				$user = new UserData ( $result );
-			}
-			$statement->closeCursor ();
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error retrieving users by userID " . $e->getMessage () . "</p>";
+			echo "<p>UserDB:getUserByID(): Error getting user with a particular Id ".$e->getMessage()."</p>";
 		}
 		return $user;
 	}
 	
-	/* get user rows and return a UserData object */
-	public static function getUser($userRow) {
-		// Return a comment object from a rowset.
-		if (isset($userRow['interestlist'])) {
-			$tags = $userRow['interestlist'];
-			$interestList = explode(";", $tags);
-			$userRow['interestList'] = explode(";", $tags);
-		}
-		return new UserData ( $userRow );
-	}
-	
-	/* return the interestList of a certain user by userID */
-	public static function getInterestsByUserId($userID) {
-		$query = "SELECT interestList.interestListName
-				     FROM interestListMap
-						LEFT JOIN interestList
-			               ON interestListMap.interestListID = interestList.interestListID
-				     WHERE interestListMap.userID = :userID";
-	
-		$tags = array ();
+	public static function getUserByName($name) {
+		// Returns the UserData object corresponding to username $name
+		$query = "SELECT * FROM USER WHERE (username = :username )"; 
+		$user = NULL;
 		try {
 			$db = Database::getDB ();
-			$statement = $db->prepare ( $query );
-			$statement->bindParam ( ":userID", $userID );
+			$statement = $db->prepare($query);
+			$statement->bindParam(":username", $name);
 			$statement->execute ();
-			$results = $statement->fetchAll ( PDO::FETCH_ASSOC );
-			$tags = array();
-			for ($k = 0; $k < count($results); $k++) {
-				array_push($tags, $results[$k]['interestListName']);
-			}
+			$userRows = $statement->fetch(PDO::FETCH_ASSOC);
+			if (!empty($userRows))
+				$user = new UserData($userRows);
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error retrieving interests for user .$userID in getInterestsByUserID() " . $e->getMessage () . "</p>";
+			echo "<p>UserDB:getUserByName(): Error getting user with a particular name ".$e->getMessage()."</p>";
 		}
-		return $tags;
+		return $user;
 	}
 	
-	/* add a user to the database */
-	public static function addUser($newUser) {
-		// Inserts the user contained in a UserData object into DB
-		/**
-		 * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
-		 */
-		$query = "INSERT INTO user (username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
-				VALUES(:username, :email, :pass2, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
-		$returnId = 0;
-		try {
-			$db = Database::getDB();
-			$username = $newUser->getUsername();
-			$email = $newUser->getEmail();
-			$password = $newUser->getPassword();
-			$phoneNum = $newUser->getPhoneNum();
-			$website = $newUser->getWebsite();
-			$favcolor = $newUser->getFavColor();
-			$bday = $newUser->getBDay();
-			$whyRatChat = $newUser->getWhyRatChat();
-			$ratsOwned = $newUser->getRatsOwned();
-			
-			$statement = $db->prepare ( $query );
-			$statement->bindValue ( ":username", $username );
-			$statement->bindValue ( ":email", $email );
-			$statement->bindValue ( ":pass2", $password );
-			$statement->bindValue ( ":phone", $phoneNum );
-			$statement->bindValue ( ":website", $website );
-			$statement->bindValue ( ":favcolor", $favcolor );
-			$statement->bindValue ( ":bday", $bday );
-			$statement->bindValue ( ":whyRatChat", $whyRatChat );
-			$statement->bindValue ( ":numRats", $ratsOwned );
-			
-			$statement->execute ();
-			$statement->closeCursor ();
-			$returnId = $db->lastInsertId ( "userID" );
-			
-			$myInterests = $newUser->getInterestList();
-			UserDB::writeInterestList($db, $returnId, $myInterests);
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error adding user in function addUser (UserDB.class.php)" . $e->getMessage () . "</p>";
+	public static function authenticateUser($user) {
+		// Returns true if the UserData object corresponds to a valid authenticated user.
+		if ($user->getErrorCount() > 0)
+		    $user->setIsAuthenticated(false);
+		else {
+		    $hash = UserDB::getPasswordHash($user->getUsername());
+		    if (is_null($hash)) {
+		    	$user->setIsAuthenticated(false);
+		    	$user->setError('username', "User doesn't exist");
+		    } else {
+			    $verify = password_verify($user->getPassword(), $hash);          
+		        $user->setIsAuthenticated($verify);
+		        if (!$verify)
+		        	$user->setError('password', "Invalid password");
+		    }
 		}
-		return $returnId;
+		return $user;
+	}
+	
+	private static function getPasswordHash($name) {
+		// Returns the UserData object corresponding to username $name
+		$query = "SELECT userPasswordHash FROM USER WHERE (username = :username )";
+		$hash = NULL;
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare($query);
+			$statement->bindParam(":username", $name);
+			$statement->execute ();
+			$userRows = $statement->fetch(PDO::FETCH_ASSOC);
+			if (!empty($userRows))
+				$hash = $userRows['userPasswordHash'];
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:getPasswordHash(): Error getting user password hash ".$e->getMessage()."</p>";
+		}
+		return $hash;
 	}
 	
 	/* write a user's interestList to the database */
@@ -164,7 +121,7 @@ class UserDB {
 		try {
 			$statement = $db->prepare ($query);
 			$statement->bindParam(":userID", $id);
-				
+	
 			for ($k = 0; $k < count($list); $k++) {
 				$statement->bindParam(":interestListID", $listMap[$list[$k]]);
 				$statement->execute ();
@@ -177,7 +134,7 @@ class UserDB {
 	
 	/* get last n users */
 	public static function getLastNUsers($n) {
-		$query = "SELECT user.userID, username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned, userDateJoined,
+		$query = "SELECT user.userID, username, email, userPasswordHash, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned, userDateJoined,
 			                 GROUP_CONCAT(interestList.interestListName SEPARATOR ';') as interestlist
 				      FROM user
 			                 LEFT JOIN interestListMap
@@ -196,18 +153,6 @@ class UserDB {
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>Error getting last n users in getLastNUsers() ".$e->getMessage()."</p>";
-		}
-		return $users;
-	}
-
-	/* get an array of users */
-	public static function getUserArray($rowSets) {
-		$users = array ();
-		//print_r($rowSets); // for debugging
-		foreach ( $rowSets as $userRow ) {
-			$user = UserDB::getUser($userRow);
-			//$user->printUser();
-			array_push ( $users, $user );
 		}
 		return $users;
 	}

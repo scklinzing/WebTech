@@ -4,17 +4,19 @@ USE ks_data3;
 
 DROP TABLE if EXISTS user;
 CREATE TABLE user (
-        userID		       	 int primary key auto_increment,
-        username         	 varchar(40) not null UNIQUE,
+        userID		       	 int(11) NOT NULL AUTO_INCREMENT,
+        username         	 varchar(64) COLLATE utf8_unicode_ci NOT NULL,
         email    		  	 varchar(100) not null,
-        password             varchar(40) not null,
+        userPasswordHash	 varchar(255) COLLATE utf8_unicode_ci NOT NULL,
         phoneNum			 int(10) not null,
         website				 varchar(1024) not null,
         favcolor		 	 varchar(7) not null,
         bday				 varchar(7) not null,
         whyRatChat			 int not null,
         ratsOwned			 int not null,
-        userDateJoined		 TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        userDateCreated		 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (userID),
+        UNIQUE KEY (username)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE if EXISTS interestList;
@@ -33,15 +35,43 @@ CREATE TABLE interestListMap (
 
 INSERT INTO interestList VALUES
       (1, 'ratVarieties'), (2, 'ratHousing'), (3, 'ratFood'), (4, 'ratToys'), (5, 'ratCare');
-
-insert into user (username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
-        values ('SillyGirl','sillyGirl@mail.com', 'password', '2102344453', 'http://www.google.com/', '#ab0021', '1990-10', '1', '3');
-        
-insert into user (username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
-        values ('MrAwesome','mrawesome@mail.com', 'password', '2442321353', 'http://www.dapper.com.au/', '#ffffff', '1991-12', '2', '0');
-        
-insert into user (username, email, password, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
-        values ('RatLover345','rat_lover_345@mail.com', 'password', '3612244453', 'www.gamestop.com/', '#f003ac', '1994-09', '3', '0');
+      
+INSERT INTO user (userID, username, userPasswordHash, email, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned) VALUES 
+	   (1, 
+	   'SillyGirl', 
+	   '$2y$10$TmIMGqe3o5JSQBw9v05qZ.qdNUBj0F7yWt1KpuS4rTNNFkYHWxiku',
+	   'sillyGirl@mail.com', 
+	   '2102344453', 
+	   'http://www.google.com/', 
+	   '#ab0021', 
+	   '1990-10', 
+	   '1', 
+	   '3'
+	   );  
+INSERT INTO user (userID, username,  userPasswordHash, email, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned) VALUES 
+	   (2, 
+	   'MrAwesome', 
+	   '$2y$10$Dl7HMpsFn/nIoceQM1Cmsu70oC7CkqAhlW8HfVc9knYtHnK3UnUGC',
+	   'mrawesome@mail.com', 
+	   '2442321353', 
+	   'http://www.dapper.com.au/', 
+	   '#ffffff', 
+	   '1991-12', 
+	   '2', 
+	   '0'
+	   );
+INSERT INTO user (userID, username,  userPasswordHash, email, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned) VALUES 
+	   (3, 
+	   'RatLover345', 
+	   '$2y$10$Dl7HMpsFn/nIoceQM1Cmsu70oC7CkqAhlW8HfVc9knYtHnK3UnUGC',
+	   'rat_lover_345@mail.com', 
+	   '3612244453', 
+	   'www.gamestop.com/', 
+	   '#f003ac', 
+	   '1994-09', 
+	   '3', 
+	   '0'
+	   );
         
 /**
  * SillyGirl 	(userID 1): 	(4, 'ratToys')
