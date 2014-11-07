@@ -4,6 +4,7 @@ include_once(dirname(__FILE__)."/../views/showUser.php");
 include_once(dirname(__FILE__)."/../views/registerForm.php");
 include_once(dirname(__FILE__)."/../models/UserData.class.php");
 include_once(dirname(__FILE__)."/../models/UserDB.class.php");
+include_once(dirname(__FILE__)."/../models/InterestListDB.class.php");
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
 	$user = new UserData();

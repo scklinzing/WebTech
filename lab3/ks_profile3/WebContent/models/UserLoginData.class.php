@@ -1,5 +1,5 @@
 <?php
-// Responsibility: Holds data for user login/registration and performs validation
+// Responsibility: Holds data for user login ONLY and performs validation
 // Constructor expects an associative array with field values for initialization
 class UserLoginData {
 	private $errorCount;

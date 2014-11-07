@@ -1,3 +1,9 @@
+<?php session_start();
+/* if the user isn't logged in, don't let them view profiles */
+if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1)) {
+	header("location: ../index.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,15 +14,8 @@
 <body>
 	<!-- This must be declared early so we can put a link in the nav bar to the user's profile -->
 	<?php $username = $_GET ['username']; ?>
-	<header>
-		<img src="../image/rat-chat-banner-728x187.gif" alt="[Rat Chat Image]"
-			width="728" height="187">
-	</header>
-	<nav>
-		<a href="../index.php">Home</a> | <a href="">Fancy Rat Varieties</a>
-		| <a href="">Housing</a> | <a href="">Food</a> | <a href="">Toys</a> |
-		<a href="">Links</a> | <?php echo "<a href=\"userProfile.php?username=$username\">My Profile</a>"; ?>
-	</nav>
+	<?php include_once ("../header.php"); ?>
+	
 	<br />
 	<img src="../image/no-photo-large.png" alt="User Image" title="user"
 		width="200" height="200">
@@ -26,6 +25,9 @@
 		<?php
 		include_once ("../views/showUser.php");
 		showUser($username);
+		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1 && $_SESSION['userName'] == $username) {
+			echo "<a href=\"\">Edit Profile</a>";
+		}
 		?>
 	</section>
 </body>

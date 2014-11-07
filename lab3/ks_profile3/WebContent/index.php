@@ -20,10 +20,11 @@
 		<a href="">Links</a> | 
 		<?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) { 
-		  		echo "<a href=\"../views/userProfile.php?username=".$_SESSION['userName']."\">My Profile</a> | ";
+		  		echo "Logged in as <a href=\"views/userProfile.php?username=".$_SESSION['userName']."\">".$_SESSION['userName']."</a> | ";
 		  		echo "<a href=\"controllers/logoutController.php\">Logout</a>";
 			} else {
-				echo "<a href=\"controllers/loginController.php\">Login</a>";
+				echo "<a href=\"controllers/loginController.php\">Login</a> or 
+				<a href=\"controllers/registerController.php\">Sign up</a>";
 			}
 		?>
 	</nav>
@@ -42,14 +43,9 @@
 	</section>
 	<aside>
 		<h3><a href="controllers/lastUsersController.php">See our 3 newest members!</a></h3>
+		
 		<h3><a href="views/userList.php">See the full member list here!</a></h3>
 	</aside>
-	<p>
-		If you haven't already signed up, sign up <a href="controllers/registerController.php">HERE</a>.
-	</p>
-	<p>
-		If you're already a member, sign in <a href="controllers/loginController.php">here</a>.
-	</p>
 	<footer>
 		<p>-x-</p>
 		<p>

@@ -15,7 +15,11 @@ function showUser($username) {
 		$user = $username;
 	}
 
-	echo "<h3><a href=\"../views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></h3><br>";
+	if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
+		echo "<h3><a href=\"../views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></h3><br>";
+	} else {
+		echo "<h3>Username: ".$user->getUsername()."</h3><br>";
+	}
 	echo "userID: ".$user->getUserID()."<br>";
 	echo "Email: ".$user->getEmail()."<br>";
 	echo "Password: ".$user->getPassword()."<br>";
