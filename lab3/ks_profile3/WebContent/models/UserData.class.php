@@ -136,36 +136,6 @@ class UserData {
 		return $str;
 	}
 	
-	/* be able to print out the user data */
-	/* public function printUser() {
-		echo "<h3><a href=\"../views/userProfile.php?username=$this->username\">$this->username</a></h3><br>";
-		echo "userID: $this->userID<br>";
-		echo "Email: $this->email<br>";
-		echo "Password: $this->password<br>";
-		echo "Phone Number: $this->phoneNum<br>";
-		echo "Website: $this->website<br>";
-		echo "Color: $this->favcolor<br>";
-		echo "Birthday Month and Year: $this->bday<br>";
-		echo "Reason on Rat Chat: ";
-		switch($this->whyRatChat) {
-			case 1:
-				echo "I own rats.<br>";
-				break;
-				case 2:
-				echo "I am looking into owning rats.<br>";
-				break;
-				default:
-				echo "Other reason.<br>";
-				break;
-		}
-		echo "Rats Owned: $this->ratsOwned<br>";
-		echo "Interest List: [ ";
-			for ($k = 0; $k < count($this->interestList); $k++)
-				echo $this->interestList[$k]." ";
-				echo "]<br>";
-		echo "Date user joined: $this->userDateJoined<br>";
-	} */
-	
 	/* initialize all the variables */
 	private function initialize() {
 		$this->errorCount = 0;

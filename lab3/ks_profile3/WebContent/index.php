@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,17 +7,31 @@
 </head>
 
 <body>
-	<!-- Include the header and nav bar -->
-	<!-- <?php include_once ("header.php"); ?>  -->
 	<header>
 	<img src="image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
 		width="728" height="187">
 	</header>
 	<nav>
-		<a href="index.php">Home</a> | <a href="">Fancy Rat Varieties</a> |
-		<a href="">Housing</a> | <a href="">Food</a> | <a href="">Toys</a> | <a
-			href="">Links</a> | <a href="">My Profile</a>
+		<a href="index.php">Home</a> | 
+		<a href="">Fancy Rat Varieties</a> |
+		<a href="">Housing</a> | 
+		<a href="">Food</a> | 
+		<a href="">Toys</a> | 
+		<a href="">Links</a> | 
+		<?php 
+			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) { 
+		  		echo "<a href=\"../views/userProfile.php?username=".$_SESSION['userName']."\">My Profile</a> | ";
+		  		echo "<a href=\"controllers/logoutController.php\">Logout</a>";
+			} else {
+				echo "<a href=\"controllers/loginController.php\">Login</a>";
+			}
+		?>
 	</nav>
+	
+	<?php if (isset($_SESSION['userLoginStatus']) &&
+		    $_SESSION['userLoginStatus'] == 1) 
+		  echo "<h1>Hello " . $_SESSION['userName']."!</h1>";
+	?>
 	
 	<h1>Welcome to Rat Chat!</h1>
 	<section>
@@ -31,6 +46,9 @@
 	</aside>
 	<p>
 		If you haven't already signed up, sign up <a href="controllers/registerController.php">HERE</a>.
+	</p>
+	<p>
+		If you're already a member, sign in <a href="controllers/loginController.php">here</a>.
 	</p>
 	<footer>
 		<p>-x-</p>
