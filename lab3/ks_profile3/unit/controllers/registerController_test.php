@@ -16,10 +16,18 @@ class RegisterControllerTest extends UnitTestCase {
 	function test_runRegisterController() {
 		// Tests that postCommentController code can be executed
 		$_SERVER["REQUEST_METHOD"] = "POST";
-		$_POST = array("userName" => "JohnnyCatchup",
-		               "userPassword" => "abc123",
-		                "userPasswordRetyped" => "abc123");
-		$comment = 0;
+		$_POST = array (
+						"username" => "LadyBug",
+						"email" => "lady-bug@mail.com",
+						"password" => "password", // password
+						"phoneNum" => "8443819620",
+						"website" => "www.facebook.com",
+						"favcolor" => "#ff0000", // color
+						"bday" => "1980-11",
+						"whyRatChat" => "2", // reason
+						"ratsOwned" => "0", // ratsOwned
+						"interestList" => array("ratToys")
+				);
 		require(dirname(__FILE__)."/../../WebContent/controllers/registerController.php");
 		$this->assertTrue(is_a($user, 'UserData'), 
 				"[It should create a UserData object but does not]");

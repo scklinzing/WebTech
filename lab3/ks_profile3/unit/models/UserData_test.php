@@ -13,8 +13,18 @@ class UserDataTest extends UnitTestCase {
 	}
 	
 	function setUp() {
-		$this->testData = array("userName" => "JohnnyCatchup",
-		                        "userPassword" => "abc123");
+		$this->testData = array (
+							"username" => "LadyBug",
+							"email" => "lady-bug@mail.com",
+							"password" => "password", // password
+							"phoneNum" => "8443819620",
+							"website" => "www.facebook.com",
+							"favcolor" => "#ff0000", // color
+							"bday" => "1980-11",
+							"whyRatChat" => "2", // reason
+							"ratsOwned" => "0", // ratsOwned
+							"interestList" => array("Rat Toys")
+							);
 	}
 	
 	function test_emptyUserData() {
@@ -31,8 +41,8 @@ class UserDataTest extends UnitTestCase {
 		$s1 = new UserData($this->testData);
   		$this->assertNotNull($s1, "UserData object $s1");
   		$this->assertTrue(is_a($s1, 'UserData'), "Should be a UserData object");
-		$this->assertEqual($s1->getUserName(), $this->testData['userName'],
-		       "userName should be ".$this->testData['userName'].
+		$this->assertEqual($s1->getUserName(), $this->testData['username'],
+		       "username should be ".$this->testData['username'].
 				" but is ".$s1->getUserName());
 	}
 	
@@ -48,7 +58,7 @@ class UserDataTest extends UnitTestCase {
 	
 	function test_invalidUserName() {
 		// Tests invalid user names are detected
-		$this->testData['userName'] = '$ab';
+		$this->testData['username'] = '$ab';
 		$s1 = new UserData($this->testData);
 		$this->assertNotNull($s1, "UserData object $s1");
 		$this->assertTrue(is_a($s1, 'UserData'), "Should be a UserData object");
@@ -58,7 +68,7 @@ class UserDataTest extends UnitTestCase {
 	
 	function test_validUserNameDashes() {
 		// Tests invalid user names are detected
-		$this->testData['userName'] = '-a_b';
+		$this->testData['username'] = '-a_b';
 		$s1 = new UserData($this->testData);
 		$this->assertNotNull($s1, "UserData object $s1");
 		$this->assertTrue(is_a($s1, 'UserData'), "Should be a UserData object");
@@ -74,9 +84,30 @@ class UserDataTest extends UnitTestCase {
 				"It should have no errors for valid input, but has $errorCount errors");
 		$params = $s1->getParameters();
 
-		$this->assertEqual($params['userName'], $this->testData['userName'],
-				"Returned userName should be ".$this->testData['userName']." but is ".
-				$params['userName']);
+		$this->assertEqual($params['username'], $this->testData['username'],
+				"Returned username should be ".$this->testData['username']." but is ".
+				$params['username']);
+		$this->assertEqual($params['email'], $this->testData['email'],
+				"Returned email should be ".$this->testData['email']." but is ".
+				$params['email']);
+		$this->assertEqual($params['phoneNum'], $this->testData['phoneNum'],
+				"Returned phoneNum should be ".$this->testData['phoneNum']." but is ".
+				$params['phoneNum']);
+		$this->assertEqual($params['website'], $this->testData['website'],
+				"Returned website should be ".$this->testData['website']." but is ".
+				$params['website']);
+		$this->assertEqual($params['favcolor'], $this->testData['favcolor'],
+				"Returned favcolor should be ".$this->testData['favcolor']." but is ".
+				$params['favcolor']);
+		$this->assertEqual($params['bday'], $this->testData['bday'],
+				"Returned bday should be ".$this->testData['bday']." but is ".
+				$params['bday']);
+		$this->assertEqual($params['whyRatChat'], $this->testData['whyRatChat'],
+				"Returned whyRatChat should be ".$this->testData['whyRatChat']." but is ".
+				$params['whyRatChat']);
+		$this->assertEqual($params['ratsOwned'], $this->testData['ratsOwned'],
+				"Returned ratsOwned should be ".$this->testData['ratsOwned']." but is ".
+				$params['ratsOwned']);
 	}
 	
 	function test_setError() {
@@ -86,11 +117,11 @@ class UserDataTest extends UnitTestCase {
 		$this->assertEqual($errorCount, 0,
 				"It should have no errors for valid input, but has $errorCount errors");
 		$thisError = 'User name is already in use';
-		$s1->setError('userName', $thisError);
+		$s1->setError('username', $thisError);
 		$errorCount = $s1->getErrorCount();
 		$this->assertEqual($errorCount, 1,
 				"It should have 1 error, but has $errorCount errors");
-		$setError = $s1->getError('userName');
+		$setError = $s1->getError('username');
 		$this->assertEqual($setError, $thisError, 
 		        "The error should have been $thisError but was $setError");
 	}

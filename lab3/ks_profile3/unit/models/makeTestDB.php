@@ -94,7 +94,6 @@ function makeTestDB($dbName = "temporary") {
 	} catch ( PDOException $e ) {
 	   	echo $e->getMessage ();  // not final error handling
 	}
-	  
 	return $db;
 }
 ?>

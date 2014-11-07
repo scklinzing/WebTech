@@ -11,7 +11,7 @@ class UserDBTest extends UnitTestCase {
 	function __construct() {
 		parent::__construct();
 
-		$existingUser = array("userName" => "Kay", 
+		$existingUser = array("username" => "Kay", 
 				              "userPasswordHash" => '$2y$10$TmIMGqe3o5JSQBw9v05qZ.qdNUBj0F7yWt1KpuS4rTNNFkYHWxiku');
 	}
 	
@@ -40,8 +40,5 @@ class UserDBTest extends UnitTestCase {
 		$this->assertEqual($actualName, $name, 
 				"It should have name $name but has name $actualName");
 	}
-	
-
-
 }
 ?>

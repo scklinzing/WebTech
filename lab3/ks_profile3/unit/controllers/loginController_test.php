@@ -16,9 +16,8 @@ class LoginControllerTest extends UnitTestCase {
 	function test_runLoginController() {
 		// Tests that loginController code can be executed
 		$_SERVER["REQUEST_METHOD"] = "POST";
-		$_POST = array("userName" => "JohnnyCatchup",
-				       "userEmail" => "catchup@gmail.com",
-		               "userPassword" => "abc123");
+		$_POST = array("username" => "SillyGirl",
+		               "password" => "abc123");
 		$user = 0;
 		require(dirname(__FILE__)."/../../WebContent/controllers/loginController.php");
 		$this->assertTrue(is_a($user, 'UserData'), 

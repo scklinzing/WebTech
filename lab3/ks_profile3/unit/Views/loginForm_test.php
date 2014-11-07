@@ -20,7 +20,7 @@ class LoginFormTest extends UnitTestCase {
 	
 	function test_loginForm() {
 		// Tests that loginForm can be called with non-null user
-		$validTest1 = array("userName" => "JohnnyCatchup",
+		$validTest1 = array("username" => "JohnnyCatchup",
 				"userPassword" => "abc123");
 		$s1 = new UserData($validTest1);
 		$this->assertIsA($s1, 'UserData', "It should create a valid UserData object but doesn't");
