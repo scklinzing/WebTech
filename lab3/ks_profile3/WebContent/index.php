@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php session_start();
+//include_once (dirname ( __FILE__ ) . "/../myConfig.ini");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +44,15 @@
 			more!</p>
 	</section>
 	<aside>
-		<h3><a href="controllers/lastUsersController.php">See our 3 newest members!</a></h3>
-		
+		<?php
+			include_once("views/showUsers.php");
+			include_once("models/UserDB.class.php");
+			include_once("models/UserData.class.php");
+			include_once("models/Database.class.php");
+			
+			$myUsers = UserDB::getLastNUsers(3);
+			showUsers($myUsers, "Here are our three newest members!"); 
+		?>
 		<h3><a href="views/userList.php">See the full member list here!</a></h3>
 	</aside>
 	<footer>
