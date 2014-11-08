@@ -4,18 +4,22 @@
   <meta charset="utf-8">
   <title>QUnit Example</title>
   <link rel="stylesheet" href="qunit-1.15.0.css">
-    <script src="qunit-1.15.0.js"></script>
-    <script src="../js/multiply.js"></script>
-
+ 
 </head>
 <body>
   <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
-    <script>
-    QUnit.test("hello test1", function( assert ) {
-    	  assert.ok( 1 == "1", "Passed!" );
-    	});
-    </script>
+    <script src ="../js/jquery-2.1.1.js"></script>
+    <script src="qunit-1.15.0.js"></script>
+    <script src="../js/multiply.js"></script>
+    <script src="../js/checkPasswordMatch2.js"></script>
+    <script src="checkPasswordMatch_test.js"></script>
+    
+<div id="qunit-fixture">
+<input id="password" type="password" name ="userPassword"> 
+<span id="passwordError" class="error"></span>
 
+<input id="retypedPassword" type="password" name ="userPasswordRetyped" onblur="checkPasswordMatch()">
+<span id="retypedError" class="error"></span>
+</div>
 </body>
 </html>

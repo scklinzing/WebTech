@@ -63,6 +63,7 @@ class UserDB {
 	
 	public static function authenticateUser($user) {
 		// Returns true if the UserData object corresponds to a valid authenticated user.
+		$user = null;
 		if ($user->getErrorCount() > 0)
 		    $user->setIsAuthenticated(false);
 		else {

@@ -3,10 +3,9 @@
  */
 //"use strict;"
 function checkPasswordMatch() {
-	var error = document.getElementById("retypedError");
-	var password = document.getElementById("password").value;
-	var retyped = document.getElementById("retypedPassword").value;
-	error.innerHTML = passwordMatch(password, retyped);
+	var password = $("#password").val();
+	var retyped = $("#retypedPassword").val();
+	$("#retypedError").html(passwordMatch(password, retyped));
 }
 
 function passwordMatch(password, retyped) {
