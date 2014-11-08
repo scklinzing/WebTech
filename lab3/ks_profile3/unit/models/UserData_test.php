@@ -16,7 +16,7 @@ class UserDataTest extends UnitTestCase {
 		$this->testData = array (
 							"username" => "LadyBug",
 							"email" => "lady-bug@mail.com",
-							"password" => "password", // password
+							"password" => "$2y$10\$TmIMGqe3o5JSQBw9v05qZ.qdNUBj0F7yWt1KpuS4rTNNFkYHWxiku", // password
 							"phoneNum" => "8443819620",
 							"website" => "www.facebook.com",
 							"favcolor" => "#ff0000", // color
@@ -48,7 +48,7 @@ class UserDataTest extends UnitTestCase {
 	
 	function test_invalidPassword() {
 		// Tests invalid passwords are detected
-		$this->testData['userPasswordRetyped'] = 'ab';
+		$this->testData['passwordRetyped'] = 'ab';
 		$s1 = new UserData($this->testData);
 		$this->assertNotNull($s1, "UserData object $s1");
 		$this->assertTrue(is_a($s1, 'UserData'), "Should be a UserData object");

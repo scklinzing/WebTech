@@ -131,8 +131,7 @@ class UserData {
 				"favcolor:[".$this->favcolor."]" .
 				"bday:[".$this->bday."]" .
 				"whyRatChat:[".$this->whyRatChat."]" .
-				"ratsOwned:[".$this->ratsOwned."]" .
-				"interestList:[".$this->interestList."]";
+				"ratsOwned:[".$this->ratsOwned."]";
 		return $str;
 	}
 	
