@@ -22,7 +22,6 @@ function showUser($username) {
 	}
 	echo "userID: ".$user->getUserID()."<br>";
 	echo "Email: ".$user->getEmail()."<br>";
-	echo "Password: ".$user->getPassword()."<br>";
 	echo "Phone Number: ".$user->getPhoneNum()."<br>";
 	echo "Website: ".$user->getWebsite()."<br>";
 	echo "Color: ".$user->getFavcolor()."<br>";

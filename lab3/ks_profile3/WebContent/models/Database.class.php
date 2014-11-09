@@ -7,10 +7,11 @@ class Database {
 	private static $options = array (
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 	);
-	public static function getDB($dbName = 'ks_data3', $configPath ="../../myConfig.ini") {
+	//$configPath = "../../../myConfig.ini" // changed for simpletest issues
+	public static function getDB($dbName = 'ks_data3', $configPath = "C:/xampp/myConfig.ini") {
 		if (! isset ( self::$db )) {
 			try {
-				$configPath = dirname(__FILE__). "/" . $configPath;
+				//$configPath = dirname(__FILE__). "/" . $configPath;
 				$passArray = parse_ini_file($configPath);
 				$username = $passArray["username"];
 				$password = $passArray["password"];

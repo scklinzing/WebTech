@@ -34,7 +34,7 @@ CREATE TABLE interestListMap (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO interestList VALUES
-      (1, 'Rat Varieties'), (2, 'Rat Housing'), (3, 'Rat Food'), (4, 'Rat Toys'), (5, 'Rat Care');
+      (1, 'varieties'), (2, 'housing'), (3, 'food'), (4, 'toys'), (5, 'care');
       
 INSERT INTO user (userID, username, userPasswordHash, email, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned) VALUES 
 	   (1, 
@@ -66,7 +66,7 @@ INSERT INTO user (userID, username,  userPasswordHash, email, phoneNum, website,
 	   '$2y$10$TmIMGqe3o5JSQBw9v05qZ.qdNUBj0F7yWt1KpuS4rTNNFkYHWxiku',
 	   'rat_lover_345@gmail.com', 
 	   '3612244453', 
-	   'www.gamestop.com/', 
+	   'http://www.gamestop.com/', 
 	   '#f003ac', 
 	   '1994-09', 
 	   '3', 

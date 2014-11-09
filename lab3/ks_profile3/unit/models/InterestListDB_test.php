@@ -13,74 +13,74 @@ class InterestListDBTest extends UnitTestCase {
 	
 	function test_getArrayByName() {
 		// Tests getArray with the interestListName as the key
-		$rowset = array(array("interestListID" => 1, "interestListName" => "Rat Varieties"),
-						array("interestListID" => 2, "interestListName" => "Rat Housing"),
-						array("interestListID" => 3, "interestListName" => "Rat Food"),
-						array("interestListID" => 4, "interestListName" => "Rat Toys"),
-						array("interestListID" => 5, "interestListName" => "Rat Care")
+		$rowset = array(array("interestListID" => 1, "interestListName" => "varieties"),
+						array("interestListID" => 2, "interestListName" => "housing"),
+						array("interestListID" => 3, "interestListName" => "food"),
+						array("interestListID" => 4, "interestListName" => "toys"),
+						array("interestListID" => 5, "interestListName" => "care")
 						);
 		$myArray = InterestListDB::getArray($rowset, "interestListName", "interestListID");
-		$this->assertEqual($myArray['Rat Varieties'], 1,  
-		       "Should return 1 for key of reader but returned ".$myArray['Rat Varieties']);
-		$this->assertEqual($myArray['Rat Housing'], 2,
-				"Should return 2 for key of nosher but returned ".$myArray['Rat Housing']);
-		$this->assertEqual($myArray['Rat Food'], 3,
-				"Should return 2 for key of nosher but returned ".$myArray['Rat Food']);
-		$this->assertEqual($myArray['Rat Toys'], 4,
-				"Should return 2 for key of nosher but returned ".$myArray['Rat Toys']);
-		$this->assertEqual($myArray['Rat Care'], 5,
-				"Should return 2 for key of nosher but returned ".$myArray['Rat Care']);
+		$this->assertEqual($myArray['varieties'], 1,  
+		       "Should return 1 for key of 'varieties' but returned " . $myArray['varieties']);
+		$this->assertEqual($myArray['housing'], 2,
+				"Should return 2 for key of 'housing' but returned ".$myArray['housing']);
+		$this->assertEqual($myArray['food'], 3,
+				"Should return 3 for key of 'food' but returned ".$myArray['food']);
+		$this->assertEqual($myArray['toys'], 4,
+				"Should return 4 for key of 'toys' but returned ".$myArray['toys']);
+		$this->assertEqual($myArray['care'], 5,
+				"Should return 5 for key of 'care' but returned ".$myArray['care']);
 	}
 	
 	function test_getArrayById() {
 		// Tests getArray with the interestListID as the key
-		$rowset = array(array("interestListID" => 1, "interestListName" => "Rat Varieties"),
-						array("interestListID" => 2, "interestListName" => "Rat Housing"),
-						array("interestListID" => 3, "interestListName" => "Rat Food"),
-						array("interestListID" => 4, "interestListName" => "Rat Toys"),
-						array("interestListID" => 5, "interestListName" => "Rat Care")
+		$rowset = array(array("interestListID" => 1, "interestListName" => "varieties"),
+						array("interestListID" => 2, "interestListName" => "housing"),
+						array("interestListID" => 3, "interestListName" => "food"),
+						array("interestListID" => 4, "interestListName" => "toys"),
+						array("interestListID" => 5, "interestListName" => "care")
 						);
 		$myArray = InterestListDB::getArray($rowset, "interestListID", "interestListName");
-		$this->assertEqual($myArray['1'], "Rat Varieties",
-				"Should return Rat Varieties for key of 1 but returned ".$myArray['1']);
-		$this->assertEqual($myArray['2'], 'Rat Housing',
-				"Should return Rat Housing for key of 2 but returned ".$myArray['2']);
-		$this->assertEqual($myArray['3'], 'Rat Food',
-				"Should return Rat Food for key of 3 but returned ".$myArray['3']);
-		$this->assertEqual($myArray['4'], 'Rat Toys',
-				"Should return Rat Toys for key of 4 but returned ".$myArray['4']);
-		$this->assertEqual($myArray['5'], 'Rat Care',
-				"Should return Rat Care for key of 5 but returned ".$myArray['5']);
+		$this->assertEqual($myArray['1'], "varieties",
+				"Should return varieties for key of 1 but returned ".$myArray['1']);
+		$this->assertEqual($myArray['2'], 'housing',
+				"Should return housing for key of 2 but returned ".$myArray['2']);
+		$this->assertEqual($myArray['3'], 'food',
+				"Should return food for key of 3 but returned ".$myArray['3']);
+		$this->assertEqual($myArray['4'], 'toys',
+				"Should return toys for key of 4 but returned ".$myArray['4']);
+		$this->assertEqual($myArray['5'], 'care',
+				"Should return care for key of 5 but returned ".$myArray['5']);
 	}
 
 	function test_getMapById() {
 		// Tests the getMap method for mapping interestListID -> interestListName
 		$myArray= InterestListDB::getMap('interestListID', 'interestListName');
-		$this->assertEqual($myArray['1'], "Rat Varieties",
-				"Should return Rat Varieties for key of 1 but returned ".$myArray['1']);
-		$this->assertEqual($myArray['2'], 'Rat Housing',
-				"Should return Rat Housing for key of 2 but returned ".$myArray['2']);
-		$this->assertEqual($myArray['3'], 'Rat Food',
-				"Should return Rat Food for key of 3 but returned ".$myArray['3']);
-		$this->assertEqual($myArray['4'], 'Rat Toys',
-				"Should return Rat Toys for key of 4 but returned ".$myArray['4']);
-		$this->assertEqual($myArray['5'], 'Rat Care',
-				"Should return Rat Care for key of 5 but returned ".$myArray['5']);
+		$this->assertEqual($myArray['1'], "varieties",
+				"Should return varieties for key of 1 but returned ".$myArray['1']);
+		$this->assertEqual($myArray['2'], 'housing',
+				"Should return housing for key of 2 but returned ".$myArray['2']);
+		$this->assertEqual($myArray['3'], 'food',
+				"Should return food for key of 3 but returned ".$myArray['3']);
+		$this->assertEqual($myArray['4'], 'toys',
+				"Should return toys for key of 4 but returned ".$myArray['4']);
+		$this->assertEqual($myArray['5'], 'care',
+				"Should return care for key of 5 but returned ".$myArray['5']);
 	}
 
 	function test_getNameById() {
 		// Tests getNameById for a valid interestListID
 		$myName = InterestListDB::getNameById(1);
-		$this->assertEqual($myName, "Rat Varieties",
-				"Should return Rat Varieties for key of 1 but returned ".$myName);
+		$this->assertEqual($myName, "varieties",
+				"Should return varieties for key of 1 but returned ".$myName);
 	}
 	
 	function test_getIdByName() {
 		// Tests getIdByName for a valid name
-		$myName = "Rat Housing";
+		$myName = "housing";
         $myId = InterestListDB::getIdByName($myName);
 		$this->assertEqual($myId, "2",
-				"Should return 2 for name Rat Housing but returned ".$myId);
+				"Should return 2 for name housing but returned ".$myId);
 	}
 }
 ?>

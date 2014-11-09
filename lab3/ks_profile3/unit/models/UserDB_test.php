@@ -11,7 +11,7 @@ class UserDBTest extends UnitTestCase {
 	function __construct() {
 		parent::__construct();
 
-		$existingUser = array("username" => "Kay", 
+		$existingUser = array("username" => "SillyGirl", 
 				              "userPasswordHash" => '$2y$10$TmIMGqe3o5JSQBw9v05qZ.qdNUBj0F7yWt1KpuS4rTNNFkYHWxiku');
 	}
 	
@@ -21,7 +21,7 @@ class UserDBTest extends UnitTestCase {
 	
 	function test_getUserByName() {
 		// Tests getUserByName which tests to see whether an item is already in the database
-		$name = "Kay";
+		$name = "SillyGirl";
 		$user = UserDB::getUserByName($name);
 		$this->assertIsA($user, 'UserData', 
 		   "It should return a UserData object for a valid user name");
@@ -32,7 +32,7 @@ class UserDBTest extends UnitTestCase {
 	
 	function test_getUserById() {
 		// Tests getUserByName which tests to see whether an item is already in the database
-		$name = "Kay";
+		$name = "SillyGirl";
 		$user = UserDB::getUserById(1);
 		$this->assertIsA($user, 'UserData',
 				"It should return a UserData object for a valid user name");

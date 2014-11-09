@@ -66,7 +66,7 @@
 					<span id="favColorError" class="error"><?php if (!is_null($user)) {echo $user->getError("favcolor");}?></span>
 				</p>
 				<p>
-					Birthday month and year: <input type="month" name="bday" required tabindex="8"
+					Birthday month and year: <input type="month" name="bday" placeholder="yyyy-mm" required tabindex="8"
 					<?php if (!is_null($user) && !empty($user->getBday())) {echo 'value = "'. $user->getBday() .'"';}?>> 
 					<span id="bdayError" class="error"><?php if (!is_null($user)) {echo $user->getError("bday");}?></span>
 				</p>

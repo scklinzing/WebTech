@@ -87,7 +87,7 @@ function makeTestDB($dbName = "temporary") {
 				   );");
 	   
 	   $db->query("INSERT INTO interestList VALUES
-  				    (1, 'Rat Varieties'), (2, 'Rat Housing'), (3, 'Rat Food'), (4, 'Rat Toys'), (5, 'Rat Care');");
+  				    (1, 'varieties'), (2, 'housing'), (3, 'food'), (4, 'toys'), (5, 'care');");
 	   
 	   $db->query("INSERT INTO interestListMap (userID, interestListID) VALUES
        (1, 4), (2, 1), (2, 2), (2, 5), (3, 1);");
