@@ -9,7 +9,7 @@ function showUsers($userList, $msg) {
 	foreach ( $userList as $user ) {
 		echo "<h1>Rat Chat User</h1>";
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-			echo "<b><a href=\"../views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></b><br>";
+			echo "<b><a href=\"views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></b><br>";
 		} else {
 			echo "Username: <b>".$user->getUsername()."</b><br>";
 		}

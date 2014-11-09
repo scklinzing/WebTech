@@ -4,6 +4,7 @@ include_once (dirname ( __FILE__ ) . "/../models/Database.class.php");
 include_once (dirname ( __FILE__ ) . "/../views/showUser.php");
 include_once (dirname ( __FILE__ ) . "/../views/loginForm.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserLoginData.class.php");
+include_once (dirname ( __FILE__ ) . "/../models/UserData.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");
 
 if ($_SERVER ["REQUEST_METHOD"] == "POST") {
@@ -27,7 +28,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST") {
 		loginForm ( $user );
 	}
 } else { // Initial link
-	$user = new userData ();
+	$user = new UserLoginData ();
 	loginForm ( $user );
 }
 
