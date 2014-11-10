@@ -38,7 +38,7 @@ class UserDB {
 			$statement->bindValue ( ":username", $newUser->getUsername() );
 			$statement->bindValue ( ":email", $newUser->getEmail() );
 			$passHash = password_hash($newUser->getPassword(), PASSWORD_DEFAULT);
-			print_r($passHash);
+			//print_r($passHash);
 			$statement->bindValue (":userPasswordHash", $passHash);
 			$statement->bindValue ( ":phone", $newUser->getPhoneNum() );
 			$statement->bindValue ( ":website", $newUser->getWebsite() );
@@ -53,6 +53,36 @@ class UserDB {
 			UserDB::writeInterestList($db, $returnId, $myInterests);
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>UserDB:addUser(): Error adding user ".$e->getMessage()."</p>";
+		}
+		return $returnId;
+	}
+	
+	/* takes a username and updated user rows */
+	public static function updateUser($username, $updateUser) {
+		$userID = UserDB::getUserID($username); // grab the userID
+		$query = "UPDATE user WHERE username=$username 
+					SET (email, userPasswordHash, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
+					VALUES(:email, :userPasswordHash, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
+		$returnId = 0;
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare ($query);
+			$statement->bindValue ( ":email", $updateUser->getEmail() );
+			$passHash = password_hash($updateUser->getPassword(), PASSWORD_DEFAULT);
+			$statement->bindValue (":userPasswordHash", $passHash);
+			$statement->bindValue ( ":phone", $updateUser->getPhoneNum() );
+			$statement->bindValue ( ":website", $updateUser->getWebsite() );
+			$statement->bindValue ( ":favcolor", $updateUser->getFavColor() );
+			$statement->bindValue ( ":bday", $updateUser->getBDay() );
+			$statement->bindValue ( ":whyRatChat", $updateUser->getWhyRatChat() );
+			$statement->bindValue ( ":numRats", $updateUser->getRatsOwned() );
+			$statement->execute ();
+			$statement->closeCursor();
+			//$returnId = $db->lastInsertId("userID");
+			$myInterests = $updateUser->getInterestList();
+			UserDB::writeInterestList($db, $userID, $myInterests);
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:updateUser(): Error updating user ".$e->getMessage()."</p>";
 		}
 		return $returnId;
 	}

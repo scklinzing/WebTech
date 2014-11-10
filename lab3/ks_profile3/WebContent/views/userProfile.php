@@ -26,7 +26,7 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 		include_once ("../views/showUser.php");
 		showUser($username);
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1 && $_SESSION['userName'] == $username) {
-			echo "<a href=\"\">Edit Profile</a>";
+			echo "<a href=\"../controllers/editProfileController.php\">Edit Profile</a>";
 		}
 		?>
 	</section>

@@ -6,23 +6,26 @@
 </head>
 
 <body>
-	<header>
-	<img src="../image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
-		width="728" height="187">
-	</header>
-	<nav>
-		<a href="../index.php">Home</a> | <a href="">Fancy Rat Varieties</a> |
-		<a href="">Housing</a> | <a href="">Food</a> | <a href="">Toys</a> | <a
-			href="">Links</a> | <a href="">My Profile</a>
-	</nav>
-	<?php  
+	<?php
+	session_start();
+	include_once ("../header.php");
+	
+	if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
+		$user = UserDB::getUserByName($_SESSION['userName']);
+	}
 	function registerForm($user) {
 	?>
 	<!-- Input Member Data -->
 	<section>
 	<h2>Sign up to Rat Chat to start posting!</h2>
-		<!-- <form id="signup-form" action="echoform1.php">-->
-		<form action ="../controllers/registerController.php" method="Post">
+		<?php 
+			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
+				echo "<form action =\"../controllers/editProfileController.php\" method=\"Post\">";
+			} else {
+				echo "<form action =\"../controllers/registerController.php\" method=\"Post\">";
+			}
+		?>
+		
 			<fieldset>
 				<legend>Member information</legend>
 				<p>
@@ -33,7 +36,9 @@
 				</p>
 				<p>
 					E-mail: <input type="email" name="email"
-						placeholder="joe@email.com" required tabindex="2">
+						placeholder="joe@email.com" required tabindex="2"
+						<?php if (!is_null($user) && !empty($user->getEmail())) {echo 'value = "'. $user->getEmail() .'"';}?>> 
+						<span class="error"><?php if (!is_null($user)) {echo $user->getError("email");}?></span>
 				</p>
 				<p>
 					Password: <input id="password" type="password" name ="password" required tabindex="3"
@@ -50,15 +55,16 @@
 					<span id="phoneNumError" class="error"><?php if (!is_null($user)) {echo $user->getError("phoneNum");}?></span>
 				</p>
 				<p>
-					Favorite website:<br> <input type="text" name="website"
+					Favorite website:<br> <input type="url" name="website" 
+						<?php if (!empty($user->getWebsite())) {echo 'value = "'. $user->getWebsite() .'"';}?>
 						list="favorites" required tabindex="6">
+						<span class="websiteError"><?php echo $user->getError("website")?></span> 
 					<datalist id="favorites">
 						<option value="npr">National Public Radio</option>
 						<option value="google">Google search</option>
 						<option value="nyt">New York Times</option>
 					</datalist>
-					<?php if (!empty($user->getWebsite())) {echo 'value = "'. $user->getWebsite() .'"';}?> 
-					<span class="websiteError"><?php echo $user->getError("website")?></span>
+					
 				</p>
 				<p>
 					Select your favorite color: <input type="color" name="favcolor" tabindex="7"
@@ -72,7 +78,7 @@
 				</p>
 				<p>
 					Select a profile picture: <input type="file" name="profile-pic"
-						accept="image/*" required tabindex="9">
+						accept="image/*" tabindex="9">
 				</p>
 			</fieldset>
 			<br>
@@ -81,26 +87,39 @@
 				<p>
 					What brings you to Rat Chat?<br>
 					<input type="radio" name="whyRatChat" value="1" tabindex="10" required
-					<?php if ($user->getWhyRatChat() == "1") {echo '"checked"';}?>> I own rats.<br>
+					<?php if ($user->getWhyRatChat() == "1") {echo "checked";}?>> I own rats.<br>
 					<input type="radio" name="whyRatChat" value="2" tabindex="11"
-					<?php if ($user->getWhyRatChat() == "2") {echo '"checked"';}?>> I am looking into getting a rat.<br>
+					<?php if ($user->getWhyRatChat() == "2") {echo "checked";}?>> I am looking into getting a rat.<br>
 					<input type="radio" name="whyRatChat" value="3" tabindex="12"
-					<?php if ($user->getWhyRatChat() == "3") {echo '"checked"';}?>> Other<br>
+					<?php if ($user->getWhyRatChat() == "3") {echo "checked";}?>> Other<br>
 				</p>
 				<p>
 					How many rats do you currently own? Please enter a number. <input type="number"
-						name="ratsOwned" min="0" value="0" required tabindex="13"
+						name="ratsOwned" min="0" placeholder="0" required tabindex="13"
 						<?php if (!is_null($user) && !empty($user->getRatsOwned())) {echo 'value = "'. $user->getRatsOwned() .'"';}?>> 
 						<span id="ratsOwnedError" class="error"><?php if (!is_null($user)) {echo $user->getError("ratsOwned");}?></span>
 				</p>
 				<p>
 					What type of information are you interested in?<br>
+					<?php 
+						if (!is_null($user) && !empty($list = $user->getInterestList())) {
+							echo "Interest List: [ ";
+							for($k = 0; $k < count ( $list ); $k ++)
+								echo $list [$k] . " ";
+							echo "]<br>";
+						}
+					?>
 					<!-- varieties, housing, food, toys, care -->
-					<input type="checkbox" name="interestList[]" value ="ratVarieties">Rat Varieties  
-					<input type="checkbox" name="interestList[]" value ="ratHousing">Housing 
-					<input type="checkbox" name="interestList[]" value ="ratFood">Food 
-					<input type="checkbox" name="interestList[]" value ="ratToys">Toys
-					<input type="checkbox" name="interestList[]" value ="ratCare">Rat Care/Health 
+					<input type="checkbox" name="interestList[]" value ="varieties"
+					<?php if (in_array("varieties", $list)) {echo "checked";}?>>Rat Varieties  
+					<input type="checkbox" name="interestList[]" value ="housing"
+					<?php if (in_array("housing", $list)) {echo "checked";}?>>Housing 
+					<input type="checkbox" name="interestList[]" value ="food"
+					<?php if (in_array("food", $list)) {echo "checked";}?>>Food 
+					<input type="checkbox" name="interestList[]" value ="toys"
+					<?php if (in_array("toys", $list)) {echo "checked";}?>>Toys
+					<input type="checkbox" name="interestList[]" value ="care"
+					<?php if (in_array("care", $list)) {echo "checked";}?>>Rat Care/Health 
 				</p>
 			</fieldset>
 <!-- 			<p>
