@@ -16,8 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
    $id = 0;
    if ($user->getErrorCount() == 0)   
         $id = UserDB::addUser($user);
-   if ($id != 0) { // if successfully added, show the user
-        showUser(UserDB::getUserByID($id)); // need to fix what comes back
+   if ($id != 0) { // if successfully added, show the user profile page
+        $user = UserDB::getUserByID($id); // get new user
+   		$_SESSION ['userName'] = $user->getUsername (); // set session
+   		$_SESSION ['userLoginStatus'] = 1;
+   		header("location: ../views/userProfile.php?username=".$_SESSION['userName']); // show profile page
     } else {
     	registerForm($user);	
     }

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<?php include_once ("../header.php"); ?>
+	<?php include_once(dirname(__FILE__)."/../header.php"); ?>
 	
 	<!-- List all members here -->
 	<?php

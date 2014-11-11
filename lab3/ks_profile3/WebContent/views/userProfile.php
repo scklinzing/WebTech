@@ -14,7 +14,7 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 <body>
 	<!-- This must be declared early so we can put a link in the nav bar to the user's profile -->
 	<?php $username = $_GET ['username']; ?>
-	<?php include_once ("../header.php"); ?>
+	<?php include_once(dirname(__FILE__)."/../header.php"); ?>
 	
 	<br />
 	<img src="../image/no-photo-large.png" alt="User Image" title="user"

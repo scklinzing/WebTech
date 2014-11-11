@@ -15,6 +15,7 @@ class UserData {
 	private $userID;
 	private $username;
 	private $password;
+	private $userPasswordHash;
 	private $email;
 	private $phoneNum;
 	private $website;
@@ -69,6 +70,9 @@ class UserData {
 	public function getPassword() {
 		return $this->password;
 	}
+	public function getPasswordHash() {
+		return $this->userPasswordHash;
+	}
 	public function getEmail() {
 		return $this->email;
 	}
@@ -107,6 +111,7 @@ class UserData {
 				"userID" => $this->userID,
 				"username" => $this->username,
 				"password" => $this->password,
+				"userPasswordHash" => $this->userPasswordHash,
 				"email" => $this->email,
 				"phoneNum" => $this->phoneNum,
 				"website" => $this->website,
@@ -123,7 +128,24 @@ class UserData {
 	
 	/* be able to print out the user data */
 	public function __toString() {
-		$str = "Id:[" . $this->userID . "] name:[" . $this->username . "] " . "password:[" . $this->password . "] . is authenticated:[" . $this->getIsAuthenticated () . "]" . "email:[" . $this->email . "]" . "phoneNum:[" . $this->phoneNum . "]" . "website:[" . $this->website . "]" . "favcolor:[" . $this->favcolor . "]" . "bday:[" . $this->bday . "]" . "whyRatChat:[" . $this->whyRatChat . "]" . "ratsOwned:[" . $this->ratsOwned . "]";
+		$list = $this->interestList;
+		$userList = "[ ";
+		for($k = 0; $k < count ( $list ); $k ++)
+			$userList = $userList . $list [$k] . " ";
+		$userList = $userList . "]";
+		
+		$str = "Id:[" . $this->userID . "] 
+				name:[" . $this->username . "] " . "
+				password:[" . $this->password . "] . 
+				is authenticated:[" . $this->getIsAuthenticated () . "]" . "
+				email:[" . $this->email . "]" . "
+				phoneNum:[" . $this->phoneNum . "]" . "
+				website:[" . $this->website . "]" . "
+				favcolor:[" . $this->favcolor . "]" . "
+				bday:[" . $this->bday . "]" . "
+				whyRatChat:[" . $this->whyRatChat . "]" . "
+				ratsOwned:[" . $this->ratsOwned . "]" . "
+				interestList:[" .$userList. "]";
 		return $str;
 	}
 	
@@ -135,6 +157,7 @@ class UserData {
 		$this->verifyUserID ();
 		$this->verifyUsername ();
 		$this->verifyPassword ();
+		$this->verifyPasswordHash();
 		$this->verifyEmail ();
 		$this->verifyPhoneNum ();
 		$this->verifyWebsite ();
@@ -218,6 +241,10 @@ class UserData {
 				$this->errorCount ++;
 			}
 		}
+	}
+	private function verifyPasswordHash() {
+		if (isset ( $this->formInput ['userPasswordHash'] ))
+			$this->userPasswordHash = $this->stripInput ( $this->formInput ['userPasswordHash'] );
 	}
 	private function verifyEmail() {
 		// The user email must be a non-empty valid email

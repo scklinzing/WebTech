@@ -17,7 +17,6 @@ class UserDB {
 			$statement = $db->prepare ( $query );
 			$statement->execute ();
 			$users = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
-			//print_r($users); // for debugging purposes
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>Error fetching users (UserDB.class.php)" . $e->getMessage () . "</p>";
@@ -38,7 +37,6 @@ class UserDB {
 			$statement->bindValue ( ":username", $newUser->getUsername() );
 			$statement->bindValue ( ":email", $newUser->getEmail() );
 			$passHash = password_hash($newUser->getPassword(), PASSWORD_DEFAULT);
-			//print_r($passHash);
 			$statement->bindValue (":userPasswordHash", $passHash);
 			$statement->bindValue ( ":phone", $newUser->getPhoneNum() );
 			$statement->bindValue ( ":website", $newUser->getWebsite() );
@@ -58,31 +56,53 @@ class UserDB {
 	}
 	
 	/* takes a username and updated user rows */
-	public static function updateUser($username, $updateUser) {
-		$userID = UserDB::getUserID($username); // grab the userID
-		$query = "UPDATE user WHERE username=$username 
-					SET (email, userPasswordHash, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
-					VALUES(:email, :userPasswordHash, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
+	public static function updateUser($username, $updateUser) {	
+		$query = "UPDATE user  
+					SET
+						email='".$updateUser->getEmail()."',
+						phoneNum='".$updateUser->getPhoneNum()."',
+						website='".$updateUser->getWebsite()."',
+						favcolor='".$updateUser->getFavColor()."',
+						bday='".$updateUser->getBDay()."',
+						whyRatChat='".$updateUser->getWhyRatChat()."',
+						ratsOwned='".$updateUser->getRatsOwned()."'
+				    WHERE username='$username'";
 		$returnId = 0;
 		try {
 			$db = Database::getDB ();
 			$statement = $db->prepare ($query);
-			$statement->bindValue ( ":email", $updateUser->getEmail() );
-			$passHash = password_hash($updateUser->getPassword(), PASSWORD_DEFAULT);
-			$statement->bindValue (":userPasswordHash", $passHash);
-			$statement->bindValue ( ":phone", $updateUser->getPhoneNum() );
-			$statement->bindValue ( ":website", $updateUser->getWebsite() );
-			$statement->bindValue ( ":favcolor", $updateUser->getFavColor() );
-			$statement->bindValue ( ":bday", $updateUser->getBDay() );
-			$statement->bindValue ( ":whyRatChat", $updateUser->getWhyRatChat() );
-			$statement->bindValue ( ":numRats", $updateUser->getRatsOwned() );
 			$statement->execute ();
 			$statement->closeCursor();
-			//$returnId = $db->lastInsertId("userID");
 			$myInterests = $updateUser->getInterestList();
-			UserDB::writeInterestList($db, $userID, $myInterests);
+			$returnId = UserDB::getUserID($username); // grab the userID
+			UserDB::deleteInterestList($db, $returnId, $myInterests); // remove all their data
+			UserDB::writeInterestList($db, $returnId, $myInterests); // re-write new interests
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>UserDB:updateUser(): Error updating user ".$e->getMessage()."</p>";
+		}
+		return $returnId;
+	}
+	
+	/* takes a username and updated user rows */
+	public static function updateUserPassword($username, $updateUser) {
+		/* get the new password, if there is one */
+		if ($updateUser->getPassword() != null) {
+			$passHash = password_hash($updateUser->getPassword(), PASSWORD_DEFAULT);
+		}
+	
+		$query = "UPDATE user
+					SET
+						password='".$passHash."',
+						phoneNum='".$updateUser->getPhoneNum()."',
+							WHERE username='$username'";
+		$returnId = 0;
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare ($query);
+			$statement->execute ();
+			$statement->closeCursor();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:updateUserPassword(): Error updating user password ".$e->getMessage()."</p>";
 		}
 		return $returnId;
 	}
@@ -244,6 +264,23 @@ class UserDB {
 			$statement->closeCursor();
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>Error adding interest list data for user in writeInterestList() ".$e->getMessage()."</p>";
+		}
+	}
+	
+	/* UPDATE a user's interestList to the database */
+	public static function deleteInterestList($db, $id, $list) {
+		$listMap = InterestListDB::getMap('interestListName', 'interestListID');
+		try {
+			for ($k = 0; $k < count($list); $k++) {
+				$query = "DELETE FROM interestListMap
+					WHERE
+						userID='".$id."'";
+				$statement = $db->prepare ($query);
+				$statement->execute ();
+			}
+			$statement->closeCursor();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB: Error removing interest list data for user in deleteInterestList() ".$e->getMessage()."</p>";
 		}
 	}
 	
