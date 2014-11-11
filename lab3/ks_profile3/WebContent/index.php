@@ -42,18 +42,8 @@
 			more!</p>
 	</section>
 	<aside>
-		<?php
-			include_once ("controllers/lastUsersController.php");
-			
-			include_once (dirname ( __FILE__ ) . "/views/showUsers.php");
-			include_once (dirname ( __FILE__ ) . "/models/UserDB.class.php");
-			include_once (dirname ( __FILE__ ) . "/models/UserData.class.php");
-			include_once (dirname ( __FILE__ ) . "/models/Database.class.php");
-			
-			//$myUsers = UserDB::getLastNUsers(3);
-			//showUsers($myUsers, "Here are our three newest members!"); 
-		?>
-		<h3><a href="views/userList.php">See the full member list here!</a></h3>
+		<?php include_once (dirname ( __FILE__ ) . "/controllers/lastUsersController.php"); ?>
+		<h3><a href="controllers/usersController.php">See the full member list here!</a></h3>
 	</aside>
 	<footer>
 		<p>-x-</p>

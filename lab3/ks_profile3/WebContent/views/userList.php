@@ -11,10 +11,10 @@
 	
 	<!-- List all members here -->
 	<?php
-	include_once ("../views/showUsers.php");
-	include_once ("../models/UserData.class.php");
-	include_once ("../models/UserDB.class.php");
-	include_once ("../models/Database.class.php");
+	include_once(dirname(__FILE__)."/../views/showUsers.php");
+	include_once(dirname(__FILE__)."/../models/UserData.class.php");
+	include_once(dirname(__FILE__)."/../models/UserDB.class.php");
+	include_once(dirname(__FILE__)."/../models/Database.class.php");
 	$userList = UserDB::fetchAll ();
 	showUsers ( $userList, "" );
 	echo "<hr><hr><br>";

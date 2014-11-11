@@ -7,11 +7,14 @@ function showUsers($userList, $msg) {
 	echo "<h1>" . $msg . "</h1>";
 	
 	foreach ( $userList as $user ) {
-		echo "<h1>Rat Chat User</h1>";
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-			echo "<b><a href=\"views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></b><br>";
+			echo "<b><img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
+					title=\"".$user->getUsername()."\" width=\"50\" height=\"50\">
+					<a href=\"views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></b><br>";
 		} else {
-			echo "Username: <b>".$user->getUsername()."</b><br>";
+			echo "<b><img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
+					title=\"".$user->getUsername()."\" width=\"50\" height=\"50\">
+					".$user->getUsername()."</b><br>";
 		}
 		echo "userID: ".$user->getUserID()."<br>";
 		echo "Email: ".$user->getEmail()."<br>";
@@ -39,6 +42,7 @@ function showUsers($userList, $msg) {
 			echo $tags [$k] . " ";
 		echo "]<br>";
 		echo "Date user joined: ".$user->getUserDateCreated()."<br>";
+		echo "<br>";
 	}
 }
 ?>

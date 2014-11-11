@@ -1,13 +1,19 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Sign Up</title>
+<?php 
+if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
+		echo "<title>Edit Profile</title>";
+} else {
+	echo "<title>Sign Up</title>";
+}
+?>
 </head>
 
 <body>
 	<?php
-	session_start();
 	include_once(dirname(__FILE__)."/../header.php");
 	
 	if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
