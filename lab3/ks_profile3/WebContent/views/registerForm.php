@@ -65,7 +65,7 @@ if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
 					<span id="phoneNumError" class="error"><?php if (!is_null($user)) {echo $user->getError("phoneNum");}?></span>
 				</p>
 				<p>
-					Favorite website:<br> <input type="url" name="website" 
+					Favorite website:<br> <input type="url" name="website" placeholder="http://www.url.com"
 						<?php if (!empty($user->getWebsite())) {echo 'value = "'. $user->getWebsite() .'"';}?>
 						list="favorites" required tabindex="6">
 						<span class="websiteError"><?php echo $user->getError("website")?></span> 

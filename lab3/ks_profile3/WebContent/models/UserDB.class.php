@@ -130,7 +130,7 @@ class UserDB {
 	public static function getUserByID($userID) {
 		// Returns the UserData object corresponding to userID $Id
 		$userID = strval ( $userID );
-		$query = "SELECT * FROM USER WHERE (userID = :userID )";
+		$query = "SELECT * FROM user WHERE (userID = :userID )";
 		$user = NULL;
 		try {
 			$db = Database::getDB ();
@@ -151,7 +151,7 @@ class UserDB {
 	
 	public static function getUserByName($name) {
 		// Returns the UserData object corresponding to username $name
-		$query = "SELECT * FROM USER WHERE (username = :username )"; 
+		$query = "SELECT * FROM user WHERE (username = :username )"; 
 		$user = NULL;
 		try {
 			$db = Database::getDB ();
@@ -202,7 +202,7 @@ class UserDB {
 	
 	private static function getPasswordHash($name) {
 		// Returns the UserData object corresponding to username $name
-		$query = "SELECT userPasswordHash FROM USER WHERE (username = :username )";
+		$query = "SELECT userPasswordHash FROM user WHERE (username = :username )";
 		$hash = NULL;
 		try {
 			$db = Database::getDB ();
