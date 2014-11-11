@@ -104,14 +104,7 @@
 				</p>
 				<p>
 					What type of information are you interested in?<br>
-					<?php 
-						if (!is_null($user) && !empty($list = $user->getInterestList())) {
-							echo "Interest List: [ ";
-							for($k = 0; $k < count ( $list ); $k ++)
-								echo $list [$k] . " ";
-							echo "]<br>";
-						}
-					?>
+					<?php $list = $user->getInterestList(); ?>
 					<!-- varieties, housing, food, toys, care -->
 					<input type="checkbox" name="interestList[]" value ="varieties"
 					<?php if (in_array("varieties", $list)) {echo "checked";}?>>Rat Varieties  

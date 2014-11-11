@@ -159,8 +159,10 @@ class UserDB {
 			$statement->bindParam(":username", $name);
 			$statement->execute ();
 			$userRows = $statement->fetch(PDO::FETCH_ASSOC);
-			if (!empty($userRows))
+			if (!empty($userRows)) {
+				$userRows['interestList'] = UserDB::getInterestsByUserID($userRows['userID']);
 				$user = new UserData($userRows);
+			}
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>UserDB:getUserByName(): Error getting user with a particular name ".$e->getMessage()."</p>";
