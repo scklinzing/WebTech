@@ -1,7 +1,7 @@
 <?php
 // Responsibility: Holds data for user login ONLY and performs validation
 // Constructor expects an associative array with field values for initialization
-class UserLoginData {
+class ChangePswdData {
 	private $errorCount;
 	private $errors;
 	private $formInput;
@@ -49,7 +49,7 @@ class UserLoginData {
 	public function getNewPassword() {
 		return $this->newPassword;
 	}
-	public function getOldPassword() {
+	public function getPassword() {
 		return $this->oldPassword;
 	}
 	

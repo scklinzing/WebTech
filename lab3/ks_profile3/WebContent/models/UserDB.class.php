@@ -86,15 +86,13 @@ class UserDB {
 	/* takes a username and updated user rows */
 	public static function updateUserPassword($username, $updateUser) {
 		/* get the new password, if there is one */
-		if ($updateUser->getPassword() != null) {
-			$passHash = password_hash($updateUser->getPassword(), PASSWORD_DEFAULT);
+		if ($updateUser->getNewPassword() != null) {
+			$passHash = password_hash($updateUser->getNewPassword(), PASSWORD_DEFAULT);
 		}
-	
 		$query = "UPDATE user
 					SET
 						password='".$passHash."',
-						phoneNum='".$updateUser->getPhoneNum()."',
-							WHERE username='$username'";
+					WHERE username='$username'";
 		$returnId = 0;
 		try {
 			$db = Database::getDB ();

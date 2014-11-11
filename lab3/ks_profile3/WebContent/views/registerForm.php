@@ -43,7 +43,6 @@
 				<?php 
 					if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
 						echo "<a href=\"../controllers/changePswdController.php\">Change Password</a>";
-						echo "<button onclick=\"changePassword()\">Change Password</button>";
 					} else {
 						echo "<p>Password: <input id=\"password\" type=\"password\" name =\"password\" tabindex=\"3\"";
 						if (!is_null($user) && !empty($user->getPassword())) {echo 'value = "'. $user->getPassword() .'"';}
@@ -54,11 +53,6 @@
 								name=\"userPasswordRetyped\" required tabindex=\"4\"><span id=\"retypedError\" class=\"error\"></span>";
 					}
 				?>
-				<script>
-					function changePassword() {
-						header("location: ../controllers/changePswdController.php");
-					}
-				</script>
 				<p>
 					Telephone: <input type="tel" name="phoneNum" placeholder="000-000-0000" required tabindex="5"
 					<?php if (!is_null($user) && !empty($user->getPhoneNum())) {echo 'value = "'. $user->getPhoneNum() .'"';}?>> 

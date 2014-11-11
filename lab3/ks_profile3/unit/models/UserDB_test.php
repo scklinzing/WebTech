@@ -19,18 +19,6 @@ class UserDBTest extends UnitTestCase {
 	
 	function setUp() {
 		makeTestDB('temp1');
-		$this->testData = array (
-				"username" => "LadyBug",
-				"email" => "lady-bug@mail.com",
-				"password" => '$2y$10$TmIMGqe3o5JSQBw9v05qZ.qdNUBj0F7yWt1KpuS4rTNNFkYHWxiku', // password
-				"phoneNum" => "8443819620",
-				"website" => "https://www.google.com",
-				"favcolor" => "#ff0000", // color
-				"bday" => "1980-11",
-				"whyRatChat" => "1", // reason
-				"ratsOwned" => "1", // ratsOwned
-				"interestList" => array("varieties", "toys")
-		);
 	}
 	
 	function test_getUserByName() {
@@ -95,14 +83,11 @@ class UserDBTest extends UnitTestCase {
 		$this->assertEqual($returnID, 1,
 				"The ID of updated object should be 1 but is $returnID");
 		
-		echo $newList;
-		echo $userList;
+		//echo $newList;
+		//echo $userList;
 		
 		$this->assertEqual($list, $parms['interestList'],
 				"New interest list should be ".$newList. " but is $userList");
-		
 	}
-	
-	
 }
 ?>
