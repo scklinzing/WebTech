@@ -21,11 +21,12 @@
 <script>
 $(document).ready(function(){
   $("button").click(function(){
-    $.ajax({type: "GET",
+    $.ajax({type: "GET", // explicitly say GET
     	    url:"controllers/jsonExampleController.php", 
     	    dataType: 'json',
+    	    /* on success, convert JSON object to string */
     	    success: function(result){$("#jsonString").html(JSON.stringify(result));},
-            error: function() {
+            error: function() { // error
             	alert ('Failed to download JSON string');
             }
            });
