@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Map demo - driving directions</title>
+<title>Map demo 7 - driving directions</title>
 <link href="bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoAvjUSnaUp7bPvF6vxMKLzGcsY3996BM&sensor=false">	
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDgKlS1CTUHbJTYfh315XpidDBS2Pu-uM&sensor=false">	
 </script>
 
 </head>
@@ -40,7 +40,6 @@
 			var directionsService = new google.maps.DirectionsService();
 			var directionsDisplay = new google.maps.DirectionsRenderer();
 			directionsDisplay.setPanel($('#directions-panel').get(0));
-			var chicago = new google.maps.LatLng(41.850033, -87.6500523);
 			directionsDisplay.setMap(map);
 	
 			google.maps.event.addListener(map, 'click',
