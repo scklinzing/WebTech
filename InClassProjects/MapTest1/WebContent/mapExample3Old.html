@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map demo 1 - simple Map</title>
+<link href="bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoAvjUSnaUp7bPvF6vxMKLzGcsY3996BM&sensor=false">
+</script>
+
+<script>
+	function initialize() {
+		var mapProp = {
+			center : new google.maps.LatLng(29.582587, -98.622400),
+			zoom : 14,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map"),
+				mapProp);
+	}
+
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Map demo</h1>
+
+        <div id="map" style="width:500px;height:380px;"></div>
+	
+</div>	
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html> 
