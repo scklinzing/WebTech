@@ -8,8 +8,10 @@ include_once(dirname(__FILE__)."/../models/Database.class.php");
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Member List Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<title>Member List Page</title>
 </head>
 
 <body>

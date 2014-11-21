@@ -4,17 +4,18 @@
  * Input: an array of UserData objects
  */
 function showUsers($userList, $msg) {
-	echo "<h1>" . $msg . "</h1>";
+	echo "<h2>" . $msg . "</h2>";
 	
 	foreach ( $userList as $user ) {
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-			echo "<b><img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
+			echo "<img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
 					title=\"".$user->getUsername()."\" width=\"50\" height=\"50\">
-					<a href=\"views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></b><br>";
+					<a href=\"views/userProfile.php?username=".$user->getUsername()."\"
+							 class=\"btn btn-default\" role=\"button\">".$user->getUsername()."</a><br>";
 		} else {
-			echo "<b><img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
+			echo "<img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
 					title=\"".$user->getUsername()."\" width=\"50\" height=\"50\">
-					".$user->getUsername()."</b><br>";
+					<a href=\"\" class=\"btn btn-default\" role=\"button\">".$user->getUsername()."</a><br>";
 		}
 		echo "userID: ".$user->getUserID()."<br>";
 		echo "Email: ".$user->getEmail()."<br>";

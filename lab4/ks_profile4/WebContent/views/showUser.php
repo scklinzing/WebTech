@@ -16,7 +16,8 @@ function showUser($username) {
 	}
 
 	if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-		echo "<h3><a href=\"../views/userProfile.php?username=".$user->getUsername()."\">".$user->getUsername()."</a></h3><br>";
+		echo "<br><a href=\"views/userProfile.php?username=".$user->getUsername()."\"
+							 class=\"btn btn-default btn-lg\" role=\"button\">".$user->getUsername()."</a><br>";
 	} else {
 		echo "<h3>Username: ".$user->getUsername()."</h3><br>";
 	}
