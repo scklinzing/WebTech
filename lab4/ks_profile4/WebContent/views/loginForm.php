@@ -14,26 +14,29 @@ function loginForm($user) {
 	<div class="container">
 		<form action="../controllers/loginController.php" method="Post">
 			<br>
-			<p>
-				User name: <input type="text" name="username"
-					<?php if (!is_null($user)) {echo 'value = "'. $user->getUsername() .'"';}?>>
-				<span class="error"><?php if (!is_null($user)) {echo $user->getError("username");}?></span>
-			</p>
+			<div class="row">
+				<div class="col-lg-2">
+					<label for="username">Username:</label>
+					<input class="form-control" type="text" name="username" id="username" 
+						<?php if (!is_null($user)) {echo 'value = "'. $user->getUsername() .'"';}?>> 
+						<span class="error"><?php if (!is_null($user)) {echo $user->getError("username");}?></span>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-2">
+					<label for="password">Password:</label>
+					<input class="form-control" type="password" name="password" id="password" 
+						<?php if (!is_null($user)) {echo 'value = "'. $user->getPassword() .'"';}?>>
+						<span class="error"><?php if (!is_null($user)) {echo $user->getError("password");}?></span>
+				</div>
+			</div>
 		
-			<p>
-				Password: <input type="password" name="password"
-					<?php if (!is_null($user)) {echo 'value = "'. $user->getPassword() .'"';}?>>
-				<span class="error"><?php if (!is_null($user)) {echo $user->getError("password");}?></span>
-			</p>
-		
-			<p>
-				<button class="btn btn-default" type = "submit" name = "submit" value="Submit">Submit</button>
-			</p>
+			<br>
+			<p><button class="btn btn-default" type = "submit" name = "submit" value="Submit">Submit</button></p>
 		</form>
 		
-		<p>
-			New user? <a href="../controllers/registerController.php">Sign up here</a>
-		</p>
+		<p>New user? <a href="../controllers/registerController.php">Sign up here</a></p>
 		
 		<p>Forget your password? Well good luck with that....</p>
 	</div>

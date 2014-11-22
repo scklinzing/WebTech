@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link href="../bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 	<meta charset="UTF-8">
 	<?php 
 	if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
@@ -12,6 +12,8 @@
 		echo "<title>Sign Up</title>";
 	}
 	?>
+	
+	
 </head>
 
 <body>
@@ -37,19 +39,24 @@
 		<div class="panel panel-default">
 		<div class="panel-heading"><label>Member Information</label></div>
 		<div class="panel-body">
-			<div class="form-group">
-			<label for="name">RatChat Username:</label>
-			<input class="form-control" type="text" name ="username" id="name" placeholder="Your nickname" 
-					autofocus required tabindex="1"
-					<?php if (!is_null($user) && !empty($user->getUsername())) {echo 'value = "'. $user->getUsername() .'"';}?>>
-			<span class="error"><?php if (!is_null($user)) {echo $user->getError("username");}?></span>
+		
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="username">RatChat Username:</label>
+					<input class="form-control" type="text" width="20" name="username" id="username" placeholder="Your nickname" 
+							autofocus required tabindex="1"
+							<?php if (!is_null($user) && !empty($user->getUsername())) {echo 'value = "'. $user->getUsername() .'"';}?>>
+					<span id="userNameError" class="error"><?php if (!is_null($user)) {echo $user->getError("username");}?></span>
+				</div>
 			</div>
 			
-			<div class="form-group">
-			<label for="email">Email:</label>
-			<input class="form-control" type="email" name="email" id="email" placeholder="joe@email.com" required tabindex="2"
-					<?php if (!is_null($user) && !empty($user->getEmail())) {echo 'value = "'. $user->getEmail() .'"';}?>>
-			<span class="error"><?php if (!is_null($user)) {echo $user->getError("email");}?></span>
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="email">Email:</label>
+					<input class="form-control" type="email" name="email" id="email" placeholder="joe@email.com" required tabindex="2"
+							<?php if (!is_null($user) && !empty($user->getEmail())) {echo 'value = "'. $user->getEmail() .'"';}?>>
+					<span class="error"><?php if (!is_null($user)) {echo $user->getError("email");}?></span>
+				</div>
 			</div>
 
 			
@@ -57,48 +64,57 @@
 				if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
 					echo "<a href=\"../controllers/changePswdController.php\" class=\"btn btn-default\" role=\"button\">Change Password</a>";
 				} else {
-					echo "<div class=\"form-group\">";
-					echo "<label for=\"password\">Password:</label>";
-					echo "<input class=\"form-control\" id=\"password\" type=\"password\" name =\"password\" tabindex=\"3\"";
-					if (!is_null($user) && !empty($user->getPassword())) {echo 'value = "'. $user->getPassword() .'"';}
-					echo "><span id=\"passwordError\" class=\"error\">";
-					if (!is_null($user)) {echo $user->getError("password");}
-					echo "</span></p>";
-					echo "</div>";
-					echo "<div class=\"form-group\">";
-					echo "<label for=\"retypedPassword\">Retype password:</label>";
-					echo "<input class=\"form-control\" id=\"retypedPassword\" type=\"password\"
-							name=\"userPasswordRetyped\" required tabindex=\"4\"><span id=\"retypedError\" class=\"error\"></span>";
-					echo "</div>";
+					echo "<div class=\"row\"><div class=\"col-lg-4\">";
+						echo "<label for=\"password\">Password:</label>";
+						echo "<input class=\"form-control\" id=\"password\" type=\"password\" name =\"password\" tabindex=\"3\"";
+						if (!is_null($user) && !empty($user->getPassword())) {echo 'value = "'. $user->getPassword() .'"';}
+						echo "><span id=\"passwordError\" class=\"error\">";
+						if (!is_null($user)) {echo $user->getError("password");}
+						echo "</span></p>";
+					echo "</div></div>";
+					
+					echo "<div class=\"row\"><div class=\"col-lg-4\">";
+						echo "<label for=\"retypedPassword\">Retype password:</label>";
+						echo "<input class=\"form-control\" id=\"retypedPassword\" type=\"password\"
+								name=\"userPasswordRetyped\" required tabindex=\"4\"><span id=\"retypedError\" class=\"error\"></span>";
+					echo "</div></div>";
 				}
 			?>
 			
-			<div class="form-group">
-			<label for="phone">Telephone:</label>
-			<input class="form-control" type="tel" name="phoneNum" id="phone" placeholder="000-000-0000" required tabindex="5"
-					<?php if (!is_null($user) && !empty($user->getPhoneNum())) {echo 'value = "'. $user->getPhoneNum() .'"';}?>>
-			<span id="phoneNumError" class="error"><?php if (!is_null($user)) {echo $user->getError("phoneNum");}?></span>
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="phone">Telephone:</label>
+					<input class="form-control" type="tel" name="phoneNum" id="phone" placeholder="000-000-0000" required tabindex="5"
+							<?php if (!is_null($user) && !empty($user->getPhoneNum())) {echo 'value = "'. $user->getPhoneNum() .'"';}?>>
+					<span id="phoneNumError" class="error"><?php if (!is_null($user)) {echo $user->getError("phoneNum");}?></span>
+				</div>
 			</div>
 			
-			<div class="form-group">
-			<label for="web">Favorite website:</label>
-			<input class="form-control" type="url" name="website" id="web" placeholder="http://www.url.com"
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="web">Favorite website:</label>
+					<input class="form-control" type="url" name="website" id="web" placeholder="http://www.url.com"
 					<?php if (!empty($user->getWebsite())) {echo 'value = "'. $user->getWebsite() .'"';}?> required tabindex="6">
           			<span id="websiteError" class="error"><?php echo $user->getError("website")?></span>
-			</div>
-
-			<div class="form-group">
-			<label for="color">Select your favorite color:</label>
-			<input class="form-control" type="color" name="favcolor" id="color" tabindex="7"
-				<?php if (!is_null($user) && !empty($user->getFavcolor())) {echo 'value = "'. $user->getFavcolor() .'"';}?>> 
-				<span id="favColorError" class="error"><?php if (!is_null($user)) {echo $user->getError("favcolor");}?></span>
+				</div>
 			</div>
 			
-			<div class="form-group">
-			<label for="birthday">Birthday month and year:</label>
-			<input class="form-control" type="month" name="bday" id="birthday" placeholder="yyyy-mm" required tabindex="8"
-				<?php if (!is_null($user) && !empty($user->getBday())) {echo 'value = "'. $user->getBday() .'"';}?>> 
-				<span id="bdayError" class="error"><?php if (!is_null($user)) {echo $user->getError("bday");}?></span>
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="color">Select your favorite color:</label>
+					<input class="form-control" type="color" name="favcolor" id="color" tabindex="7"
+						<?php if (!is_null($user) && !empty($user->getFavcolor())) {echo 'value = "'. $user->getFavcolor() .'"';}?>> 
+						<span id="favColorError" class="error"><?php if (!is_null($user)) {echo $user->getError("favcolor");}?></span>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="birthday">Birthday month and year:</label>
+					<input class="form-control" type="month" name="bday" id="birthday" placeholder="yyyy-mm" required tabindex="8"
+						<?php if (!is_null($user) && !empty($user->getBday())) {echo 'value = "'. $user->getBday() .'"';}?>> 
+						<span id="bdayError" class="error"><?php if (!is_null($user)) {echo $user->getError("bday");}?></span>
+				</div>
 			</div>
 
 			<p>
@@ -134,13 +150,15 @@
 				</div>
 			</div>
 			
-			<div class="form-group">
-			<label for="numRats">How many rats do you currently own? Please enter a number:</label>
-			<input class="form-control" type="number" name="ratsOwned" min="0" id="numRats" placeholder="0" required tabindex="13"
-					<?php if (!is_null($user) && !empty($user->getRatsOwned())) {echo 'value = "'. $user->getRatsOwned() .'"';}?>> 
-					<span id="ratsOwnedError" class="error"><?php if (!is_null($user)) {echo $user->getError("ratsOwned");}?></span>
+			<div class="row">
+				<div class="col-lg-4">
+					<label for="numRats">How many rats do you currently own? Please enter a number:</label>
+					<input class="form-control" type="number" name="ratsOwned" min="0" id="numRats" placeholder="0" required tabindex="13"
+							<?php if (!is_null($user) && !empty($user->getRatsOwned())) {echo 'value = "'. $user->getRatsOwned() .'"';}?>> 
+							<span id="ratsOwnedError" class="error"><?php if (!is_null($user)) {echo $user->getError("ratsOwned");}?></span>
+				</div>
 			</div>
-
+			
 			<p><b>What type of information are you interested in?</b></p>
 				<?php $list = $user->getInterestList(); ?>
 				<!-- varieties, housing, food, toys, care -->
@@ -197,5 +215,39 @@
 	?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <SCRIPT type="text/javascript">
+		pic1 = new Image(16, 16); 
+		pic1.src = "../image/loader.gif";
+		$(document).ready(function(){
+		$("#username").change(function() { 
+		var usr = $("#username").val();
+		if(usr.length >= 4) {
+		$("#status").html('<img src="loader.gif" align="absmiddle">&nbsp;Checking availability...');
+		    $.ajax({  
+		    type: "POST",  
+		    url: "../controllers/jsonUsernameController.php",  
+		    data: "username="+ usr,  
+		    success: function(msg){  
+		   $("#status").ajaxComplete(function(event, request, settings){ 
+			if(msg == 'OK') { 
+		        $("#username").removeClass('object_error'); // if necessary
+				$("#username").addClass("object_ok");
+				$(this).html('&nbsp;<img src="../image/tick.gif" align="absmiddle">');
+			} else {  
+				$("#username").removeClass('object_ok'); // if necessary
+				$("#username").addClass("object_error");
+				$(this).html(msg);
+			}  
+		   });
+		 } 
+		  }); 
+		} else {
+			$("#status").html('<font color="red">The username should have at least <strong>4</strong> characters.</font>');
+			$("#username").removeClass('object_ok'); // if necessary
+			$("#username").addClass("object_error");
+		}
+		});
+		});
+	</SCRIPT>
 </body>
 </html>
