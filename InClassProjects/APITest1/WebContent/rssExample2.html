@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSS demo</title>
+<link href="bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+<h1>RSS demo using JQuery</h1>
+
+<form>
+<select name="rss-feed">
+<option value="">Select an RSS-feed:</option>
+<option value="Google">Google News</option>
+<option value="NBC">NBC News</option>
+</select>
+</form>
+<br>
+<div id="rssOutput">RSS-feed will be listed here...</div>
+</div>
+</body>
+</html> 
+
+
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
+
+	$("select").change(function(){
+		var rssVal = $(this).val();
+		var rssUrl = "controllers/rssNewsController.php?q="+rssVal;
+	    $.ajax({type: "GET",
+	    	    url: rssUrl, 
+	    	    dataType: 'text',
+	    	    success: function(result){$("#rssOutput").html(result);},
+	            error: function() {
+	            	alert ('Failed to download feed');
+	            }
+	           });
+	  });
+});
+
+</script>
