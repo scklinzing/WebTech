@@ -13,7 +13,42 @@
 	}
 	?>
 	
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <SCRIPT type="text/javascript">
+		pic1 = new Image(16, 16); 
+		pic1.src = "../image/loader.gif";
+		$(document).ready(function(){
+		$("#username").change(function() { 
+		var usr = $("#username").val();
+		if(usr.length >= 4) {
+		$("#status").html('<img src="../image/loader.gif" align="absmiddle">&nbsp;Checking availability...');
+		    $.ajax({  
+		    type: "POST",  
+		    url: "../controllers/jsonUsernameController.php",  
+		    data: "username="+ usr,  
+		    success: function(msg){
+		   $("#status").ajaxComplete(function(event, request, settings){
+			if(msg == 'OK') { 
+		        $("#username").removeClass('object_error'); // if necessary
+				$("#username").addClass("object_ok");
+				$("#status").html('&nbsp;<img src="../image/tick.gif" align="absmiddle">');
+			} else {  
+				$("#username").removeClass('object_ok'); // if necessary
+				$("#username").addClass("object_error");
+				$("#status").html(msg);
+			}  
+		   });
+		 } 
+		  }); 
+		} else {
+			$("#status").html('<font color="red">The username should have at least <strong>4</strong> characters.</font>');
+			$("#username").removeClass('object_ok'); // if necessary
+			$("#username").addClass("object_error");
+		}
+		});
+		});
+	</SCRIPT>
 </head>
 
 <body>
@@ -48,6 +83,7 @@
 							<?php if (!is_null($user) && !empty($user->getUsername())) {echo 'value = "'. $user->getUsername() .'"';}?>>
 					<span id="userNameError" class="error"><?php if (!is_null($user)) {echo $user->getError("username");}?></span>
 				</div>
+				<div id="status"></div>
 			</div>
 			
 			<div class="row">
@@ -213,41 +249,5 @@
 	<?php 
 	}
 	?>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <SCRIPT type="text/javascript">
-		pic1 = new Image(16, 16); 
-		pic1.src = "../image/loader.gif";
-		$(document).ready(function(){
-		$("#username").change(function() { 
-		var usr = $("#username").val();
-		if(usr.length >= 4) {
-		$("#status").html('<img src="loader.gif" align="absmiddle">&nbsp;Checking availability...');
-		    $.ajax({  
-		    type: "POST",  
-		    url: "../controllers/jsonUsernameController.php",  
-		    data: "username="+ usr,  
-		    success: function(msg){  
-		   $("#status").ajaxComplete(function(event, request, settings){ 
-			if(msg == 'OK') { 
-		        $("#username").removeClass('object_error'); // if necessary
-				$("#username").addClass("object_ok");
-				$(this).html('&nbsp;<img src="../image/tick.gif" align="absmiddle">');
-			} else {  
-				$("#username").removeClass('object_ok'); // if necessary
-				$("#username").addClass("object_error");
-				$(this).html(msg);
-			}  
-		   });
-		 } 
-		  }); 
-		} else {
-			$("#status").html('<font color="red">The username should have at least <strong>4</strong> characters.</font>');
-			$("#username").removeClass('object_ok'); // if necessary
-			$("#username").addClass("object_error");
-		}
-		});
-		});
-	</SCRIPT>
 </body>
 </html>

@@ -5,17 +5,12 @@ include_once (dirname ( __FILE__ ) . "/../models/UserData.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");
 
    $reply = array();
-   if (!isset($_POST['username']) || empty($_POST['username'])) 
-       $reply['error'] = 'No user name';
-   else {
-      $reply['username'] = $_POST['username'];
-      $exists = UserDB::getUserByName($reply['username']);
+   if (isset($_POST['username'])) {
+      $username = $_POST['username'];
+      $exists = UserDB::getUserByName($username);
       if ($exists > "0")
-      	   echo '<font color="red">The nickname <STRONG>'.$reply['username'].'</STRONG> is already in use.</font>';
+      	   echo '<p>The username <b>'.$username.'</b> is already in use.</p>';
       else 
-      	   echo "OK";
+      	   echo 'OK';
    }
-     
-   //echo json_encode($reply);
 ?>
-
