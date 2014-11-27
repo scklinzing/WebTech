@@ -19,32 +19,32 @@ function showUsers($userList, $msg, $url) {
 		} else {
 			echo '<a href="" class="btn btn-default" role="button">'.$user->getUsername().'</a><br>';
 		}
-		echo "userID: ".$user->getUserID()."<br>";
-		echo "Email: ".$user->getEmail()."<br>";
-		echo "Phone Number: ".$user->getPhoneNum()."<br>";
-		echo "Website: ".$user->getWebsite()."<br>";
-		echo "Color: ".$user->getFavcolor()."<br>";
-		echo "Birthday Month and Year: ".$user->getBday()."<br>";
-		echo "Reason on Rat Chat: ";
+		echo "<b>userID:</b> ".$user->getUserID()."<br>";
+		echo "<b>Email:</b> ".$user->getEmail()."<br>";
+		echo "<b>Phone Number:</b> ".$user->getPhoneNum()."<br>";
+		echo "<b>Website:</b> ".$user->getWebsite()."<br>";
+		echo "<b>Color:</b> ".$user->getFavcolor()."<br>";
+		echo "<b>Birthday Month and Year:</b> ".$user->getBday()."<br>";
+		echo "<b>Reason on Rat Chat:</b> ";
 		switch($user->getWhyRatChat()) {
 				case 1:
-		echo "I own rats.<br>";
-				break;
+					echo "I own rats.<br>";
+					break;
 				case 2:
-		echo "I am looking into owning rats.<br>";
-				break;
+					echo "I am looking into owning rats.<br>";
+					break;
 				default:
-		echo "Other reason.<br>";
-		break;
+					echo "Other reason.<br>";
+					break;
 		}
-		echo "Rats Owned: ".$user->getRatsOwned()."<br>";
+		echo "<b>Rats Owned:</b> ".$user->getRatsOwned()."<br>";
 		/* print out the interest list */
 		$tags = $user->getInterestList ();
-		echo "Interest List: [ ";
+		echo "<b>Interest List:</b> [ ";
 		for($k = 0; $k < count ( $tags ); $k ++)
 			echo $tags [$k] . " ";
 		echo "]<br>";
-		echo "Date user joined: ".$user->getUserDateCreated()."<br>";
+		echo "<b>Date user joined:</b> ".$user->getUserDateCreated()."<br>";
 		echo "<br>";
 	}
 }
