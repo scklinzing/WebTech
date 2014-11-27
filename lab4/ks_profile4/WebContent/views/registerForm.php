@@ -98,21 +98,25 @@
 			
 			<?php 
 				if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-					echo "<a href=\"../controllers/changePswdController.php\" class=\"btn btn-default\" role=\"button\">Change Password</a>";
+					echo '<div class="row"><div class="col-lg-4">';
+						echo '<label for="changePassword">Change your Password:&nbsp;&nbsp;</label>';
+						echo '<a href="../controllers/changePswdController.php" 
+								class="btn btn-default" role="button">Change Password</a>';
+					echo "</div></div>";
 				} else {
-					echo "<div class=\"row\"><div class=\"col-lg-4\">";
-						echo "<label for=\"password\">Password:</label>";
-						echo "<input class=\"form-control\" id=\"password\" type=\"password\" name =\"password\" tabindex=\"3\"";
+					echo '<div class="row"><div class="col-lg-4">';
+						echo '<label for="password">Password:</label>';
+						echo '<input class="form-control" id="password" type="password" name="password" tabindex="3"';
 						if (!is_null($user) && !empty($user->getPassword())) {echo 'value = "'. $user->getPassword() .'"';}
-						echo "><span id=\"passwordError\" class=\"error\">";
+						echo '><span id="passwordError" class="error">';
 						if (!is_null($user)) {echo $user->getError("password");}
 						echo "</span></p>";
 					echo "</div></div>";
 					
-					echo "<div class=\"row\"><div class=\"col-lg-4\">";
-						echo "<label for=\"retypedPassword\">Retype password:</label>";
-						echo "<input class=\"form-control\" id=\"retypedPassword\" type=\"password\"
-								name=\"userPasswordRetyped\" required tabindex=\"4\"><span id=\"retypedError\" class=\"error\"></span>";
+					echo '<div class="row"><div class="col-lg-4">';
+						echo '<label for="retypedPassword">Retype password:</label>';
+						echo '<input class="form-control" id="retypedPassword" type="password"
+								name="userPasswordRetyped" required tabindex="4"><span id="retypedError" class="error"></span>';
 					echo "</div></div>";
 				}
 			?>
@@ -153,15 +157,32 @@
 				</div>
 			</div>
 			
-			<div class="row">
-				<div class="col-lg-4">
-					<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />
-					<label for="userImage">Select a profile picture:</label>
-					<input class="btn btn-default" type="file" name="userImage" id="userImage" accept="image/*" required tabindex="9"> 
-					<span id="userImageError" class="error"></span>
-				</div>
-			</div>
-
+			<?php 
+				if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
+					echo '<div class="row">';
+						echo '<div class="col-lg-4">';
+							echo '<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />';
+							echo '<label for="userImage">Change your profile picture 
+									(optional): </label>';
+							echo '<input class="btn btn-default" type="file" name="userImage" 
+									id="userImage" accept="image/*" tabindex="9">';
+							echo '<span id="userImageError" class="error"></span>';
+						echo '</div>';
+					echo '</div>';
+				} else {
+					echo '<div class="row">';
+						echo '<div class="col-lg-4">';
+							echo '<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />';
+							echo '<label for="userImage">Select a profile picture:</label>';
+							echo '<input class="btn btn-default" type="file" name="userImage" id="userImage" 
+									accept="image/*" required tabindex="9">';
+							echo '<span id="userImageError" class="error"></span>';
+						echo '</div>';
+					echo '</div>';						
+				}
+			?>
+			
+			
 			<!-- <p>Select a profile picture: <input class="btn btn-default" type="file" name="profile-pic" accept="image/*" tabindex="9"></p> -->
 					
 					

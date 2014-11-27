@@ -2,10 +2,14 @@
 // Responsibility: Handles all queries pertaining to user registration and login
 class UserDB {
 	
-	public static function addUser($newUser) {
-		/**
-		 * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
-		 */
+	/**
+	 * add a new user to the database
+	 * @param $newUser: UserData object
+	 * @param $IMAGE: array of image data fromm $_FILES
+	 * @return the new userID
+	 */
+	public static function addUser($newUser, $IMAGE) {
+		/* username, email, password, phoneNum, website, color, bday, reason, ratsOwned */
 		$query = "INSERT INTO user (username, email, userPasswordHash, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned)
 				VALUES(:username, :email, :userPasswordHash, :phone, :website, :favcolor, :bday, :whyRatChat, :numRats)";
 		$returnId = 0;
@@ -27,14 +31,56 @@ class UserDB {
 			$returnId = $db->lastInsertId("userID");
 			$myInterests = $newUser->getInterestList();
 			UserDB::writeInterestList($db, $returnId, $myInterests);
+			UserDB::addUserImage($returnId, $IMAGE);
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>UserDB:addUser(): Error adding user ".$e->getMessage()."</p>";
 		}
 		return $returnId;
 	}
 	
+	/**
+	 * Add the user's profile picture to the database
+	 * @param $userID: the userID of the user profile image
+	 * @param $IMAGE: array of image information from $_FILES
+	 */
+	public static function addUserImage($userID, $IMAGE) {
+		/* check to see if a file was uploaded */
+		if (is_uploaded_file ( $IMAGE ['userImage'] ['tmp_name'] ) && getimagesize ( $IMAGE ['userImage'] ['tmp_name'] ) != false) {
+			/* get the image info */
+			$size = getimagesize ( $IMAGE ['userImage'] ['tmp_name'] );
+			/* assign variables */
+			$type = $size ['mime'];
+			$imgfp = fopen ( $IMAGE ['userImage'] ['tmp_name'], 'rb' );
+			$size = $size [3];
+			$name = $IMAGE ['userImage'] ['name'];
+			$maxsize = 999999999;
+		
+			if ($IMAGE ['userImage'] ['size'] < $maxsize) {
+				$query = "INSERT INTO userImage (image_type, image, image_size, image_name, userID)
+							VALUES (? ,?, ?, ?, ?)";
+				
+				try { /* attempt to add image to databse */
+					$db = Database::getDB ();
+					$statement = $db->prepare ( $query );
+					$statement->bindParam ( 1, $type );
+					$statement->bindParam ( 2, $imgfp, PDO::PARAM_LOB );
+					$statement->bindParam ( 3, $size );
+					$statement->bindParam ( 4, $name );
+					$statement->bindParam ( 5, $userID );
+					$statement->execute ();
+				} catch ( PDOException $e ) { // Not permanent error handling
+					echo "<p>UserDB:addUserImage(): Error adding user image ".$e->getMessage()."</p>";
+				}
+			} else { /* throw an exception is image is not of correct type */
+				throw new Exception ( "UserDB:addUserImage(): Unsupported Image Format" );
+			}
+		} else { /* throw an exception if size above maximum allowed */
+			throw new Exception ( "UserDB:addUserImage(): File Size Error" );
+		}
+	}
+	
 	/* takes a username and updated user rows */
-	public static function updateUser($username, $updateUser) {	
+	public static function updateUser($username, $updateUser, $IMAGE) { 	
 		$query = "UPDATE user  
 					SET
 						email='".$updateUser->getEmail()."',
@@ -55,10 +101,27 @@ class UserDB {
 			$returnId = UserDB::getUserID($username); // grab the userID
 			UserDB::deleteInterestList($db, $returnId, $myInterests); // remove all their data
 			UserDB::writeInterestList($db, $returnId, $myInterests); // re-write new interests
+			if ($IMAGE != NULL) { // if the user changed their profile picture
+				UserDB::updateUserImage($returnId, $IMAGE);
+			}
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>UserDB:updateUser(): Error updating user ".$e->getMessage()."</p>";
 		}
 		return $returnId;
+	}
+	
+	/* takes a userID and array of image information */
+	public static function updateUserImage($userID, $IMAGE) {
+		/* delete and re-upload table entry */
+		$query = "DELETE FROM userImage WHERE userID=".$userID;
+		try { /* attempt to remove image to databse */
+			$db = Database::getDB ();
+			$statement = $db->prepare ( $query );
+			$statement->execute ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:updateUserImage(): Error updating user image ".$e->getMessage()."</p>";
+		}
+		UserDB::addUserImage($userID, $IMAGE);
 	}
 	
 	/* takes a username and updated user rows */
