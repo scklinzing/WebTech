@@ -25,7 +25,10 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 	
 		<!-- Fetch and display user data -->
 		<?php
-		include_once ("../views/showUser.php");
+		include_once (dirname ( __FILE__ ) . "/../views/showUser.php");
+		include_once (dirname ( __FILE__ ) . "/../views/showUserImage.php");
+		showUserImage($username);
+		echo "<br>";
 		showUser($username);
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1 && $_SESSION['userName'] == $username) {
 			echo "<a href=\"../controllers/editProfileController.php\" class=\"btn btn-default\" role=\"button\">Edit Profile</a>";

@@ -6,6 +6,7 @@
 include_once (dirname ( __FILE__ ) . "/../models/UserData.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/Database.class.php");
+
 function showUser($username) {
 	/* if it is a username, fetch the data */
 	if(gettype($username) == "string") {

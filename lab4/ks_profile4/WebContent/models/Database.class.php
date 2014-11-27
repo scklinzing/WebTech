@@ -3,12 +3,12 @@
 class Database {
 	private static $db;
 	private static $dsn = 'mysql:host=localhost;dbname=';
-	private static $dbName = 'ks_data3';
+	private static $dbName = 'ks_data4';
 	private static $options = array (
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 	);
 	//$configPath = "../../../myConfig.ini" // changed for simpletest issues
-	public static function getDB($dbName = 'ks_data3', $configPath = "C:/xampp/myConfig.ini") {
+	public static function getDB($dbName = 'ks_data4', $configPath = "C:/xampp/myConfig.ini") {
 		if (! isset ( self::$db )) {
 			try {
 				//$configPath = dirname(__FILE__). "/" . $configPath;

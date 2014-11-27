@@ -152,11 +152,19 @@
 						<span id="bdayError" class="error"><?php if (!is_null($user)) {echo $user->getError("bday");}?></span>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col-lg-4">
+					<input type="hidden" name="MAX_FILE_SIZE" value="99999999" />
+					<label for="userImage">Select a profile picture:</label>
+					<input class="btn btn-default" type="file" name="userImage" id="userImage" accept="image/*" required tabindex="9"> 
+					<span id="userImageError" class="error"></span>
+				</div>
+			</div>
 
-			<p>
-				Select a profile picture: <input class="btn btn-default" type="file" name="profile-pic"
-					accept="image/*" tabindex="9">
-			</p>
+			<!-- <p>Select a profile picture: <input class="btn btn-default" type="file" name="profile-pic" accept="image/*" tabindex="9"></p> -->
+					
+					
 		</div></div>
 		
 		<!-- RAT INFORMATION --><br>

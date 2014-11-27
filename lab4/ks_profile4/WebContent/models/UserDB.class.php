@@ -2,28 +2,6 @@
 // Responsibility: Handles all queries pertaining to user registration and login
 class UserDB {
 	
-	public static function fetchAll() {
-		$query = "SELECT user.userID, username, email, userPasswordHash, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned, userDateCreated,
-			                 GROUP_CONCAT(interestList.interestListName SEPARATOR ';') as interestlist
-				      FROM user
-			                 LEFT JOIN interestListMap
-	 	                        ON user.userID = interestListMap.userID
-			                 LEFT JOIN interestList
-			                    ON interestListMap.interestListID = interestList.interestListID
-			          GROUP BY user.userID";
-		$users = array ();
-		try {
-			$db = Database::getDB ();
-			$statement = $db->prepare ( $query );
-			$statement->execute ();
-			$users = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
-			$statement->closeCursor ();
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>Error fetching users (UserDB.class.php)" . $e->getMessage () . "</p>";
-		}
-		return $users;
-	}
-   
 	public static function addUser($newUser) {
 		/**
 		 * username, email, password, phoneNum, website, color, bday, reason, ratsOwned
@@ -181,42 +159,21 @@ class UserDB {
 		return new UserData ( $userRow );
 	}
 	
-	public static function authenticateUser($user) {
-		// Returns true if the UserData object corresponds to a valid authenticated user.
-		if ($user->getErrorCount() > 0)
-		    $user->setIsAuthenticated(false);
-		else {
-		    $hash = UserDB::getPasswordHash($user->getUsername());
-		    if (is_null($hash)) {
-		    	$user->setIsAuthenticated(false);
-		    	$user->setError('username', "User doesn't exist");
-		    } else {
-			    $verify = password_verify($user->getPassword(), $hash);          
-		        $user->setIsAuthenticated($verify);
-		        if (!$verify)
-		        	$user->setError('password', "Invalid password");
-		    }
-		}
-		return $user;
-	}
-	
-	private static function getPasswordHash($name) {
-		// Returns the UserData object corresponding to username $name
-		$query = "SELECT userPasswordHash FROM user WHERE (username = :username )";
-		$hash = NULL;
+	/* return the user profile image of a certain user by userID */
+	public static function getImageByUserId($userID) {
+		$query = "SELECT image, image_type FROM userImage WHERE (userID = :userID )";
+		$image = array();
 		try {
 			$db = Database::getDB ();
 			$statement = $db->prepare($query);
-			$statement->bindParam(":username", $name);
+			$statement->bindParam(":userID", $userID); // Only binds at execute time
 			$statement->execute ();
-			$userRows = $statement->fetch(PDO::FETCH_ASSOC);
-			if (!empty($userRows))
-				$hash = $userRows['userPasswordHash'];
+			$image = $statement->fetch(PDO::FETCH_ASSOC);
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>UserDB:getPasswordHash(): Error getting user password hash ".$e->getMessage()."</p>";
+			echo "<p>UserDB:getImageByUserId(): Error getting user image ".$e->getMessage()."</p>";
 		}
-		return $hash;
+		return $image;
 	}
 	
 	/* return the interestList of a certain user by userID */
@@ -306,6 +263,69 @@ class UserDB {
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>Error getting last n users in getLastNUsers() ".$e->getMessage()."</p>";
+		}
+		return $users;
+	}
+	
+	private static function getPasswordHash($name) {
+		// Returns the UserData object corresponding to username $name
+		$query = "SELECT userPasswordHash FROM user WHERE (username = :username )";
+		$hash = NULL;
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare($query);
+			$statement->bindParam(":username", $name);
+			$statement->execute ();
+			$userRows = $statement->fetch(PDO::FETCH_ASSOC);
+			if (!empty($userRows))
+				$hash = $userRows['userPasswordHash'];
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:getPasswordHash(): Error getting user password hash ".$e->getMessage()."</p>";
+		}
+		return $hash;
+	}
+	
+	public static function authenticateUser($user) {
+		// Returns true if the UserData object corresponds to a valid authenticated user.
+		if ($user->getErrorCount() > 0)
+			$user->setIsAuthenticated(false);
+		else {
+			$hash = UserDB::getPasswordHash($user->getUsername());
+			if (is_null($hash)) {
+				$user->setIsAuthenticated(false);
+				$user->setError('username', "User doesn't exist");
+			} else {
+				$verify = password_verify($user->getPassword(), $hash);
+				$user->setIsAuthenticated($verify);
+				if (!$verify)
+					$user->setError('password', "Invalid password");
+			}
+		}
+		return $user;
+	}
+	
+	/* NO LONGER USED? */
+	public static function fetchAll() {
+		$query = "SELECT user.userID, username, email, userPasswordHash, phoneNum, website, favcolor, bday, whyRatChat, ratsOwned, userDateCreated,
+			                 GROUP_CONCAT(interestList.interestListName SEPARATOR ';') as interestlist
+				      FROM user
+			                 LEFT JOIN interestListMap
+	 	                        ON user.userID = interestListMap.userID
+			                 LEFT JOIN interestList
+			                    ON interestListMap.interestListID = interestList.interestListID
+							LEFT JOIN userImage
+			                    ON user.userID = userImage.userID
+			          GROUP BY user.userID";
+		$users = array ();
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare ( $query );
+			$statement->execute ();
+			$users = UserDB::getUserArray ( $statement->fetchAll ( PDO::FETCH_ASSOC ) );
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>Error fetching users (UserDB.class.php)" . $e->getMessage () . "</p>";
 		}
 		return $users;
 	}
