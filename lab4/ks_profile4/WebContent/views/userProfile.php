@@ -30,7 +30,8 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 		/* show the user information */
 		showUser($username, "userProfile.php?username=");
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1 && $_SESSION['userName'] == $username) {
-			echo "<a href=\"../controllers/editProfileController.php\" class=\"btn btn-default\" role=\"button\">Edit Profile</a>";
+			//echo "<a href=\"../controllers/editProfileController.php\" class=\"btn btn-default\" role=\"button\">Edit Profile</a>";
+			echo '<a href="../controllers/editProfileController.php" class="btn btn-default" role="button">Edit Profile</a>';
 		}
 		?>
 	</div>

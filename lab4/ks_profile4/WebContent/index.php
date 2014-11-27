@@ -37,7 +37,7 @@
 	<div class="container">
 		<?php
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) { 
-				echo "<h1>Hello " . $_SESSION['userName']."! Welcome back to Rat Chat!</h1>";
+				echo "<h1><i>Hello <b>" . $_SESSION['userName']."</b>! Welcome back to Rat Chat!</i></h1>";
 			} else {
 				echo "<h1>Welcome to Rat Chat!</h1>";
 			}

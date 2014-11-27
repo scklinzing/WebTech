@@ -1,7 +1,9 @@
 <?php
 /**
  * Displays the information about the user passed through
- * Input: a username (string) OR a UserData object.
+ * INPUT: 
+ * 		$username: 	a username (string) ---OR--- a UserData object.
+ * 		$url:		relative profile link location (can't get absolute paths to work for some reason)
  */
 include_once (dirname ( __FILE__ ) . "/../models/UserData.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");

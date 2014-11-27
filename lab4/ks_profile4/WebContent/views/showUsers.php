@@ -1,7 +1,10 @@
 <?php
 /**
  * Displays a list of users
- * Input: an array of UserData objects
+ * INPUT: 
+ * 		$userList: 	an array of UserData objects
+ * 		$msg:		discriptive header message to display
+ * 		$url:		relative profile link location (can't get absolute paths to work for some reason)
  */
 include_once (dirname ( __FILE__ ) . "/../views/showUserImage.php");
 
