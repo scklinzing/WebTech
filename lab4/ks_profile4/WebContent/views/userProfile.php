@@ -22,13 +22,13 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 		<p>&nbsp;</p>
 		<!-- Fetch and display user data -->
 		<?php
-		include_once (dirname ( __FILE__ ) . "/../views/showUser.php");
-		include_once (dirname ( __FILE__ ) . "/../views/showUserImage.php");
+		include_once (dirname ( __FILE__ ) . "/showUser.php");
+		include_once (dirname ( __FILE__ ) . "/showUserImage.php");
 		/* print out their user profile picture */
 		showUserImage($username, "large");
 		echo "<br>";
 		/* show the user information */
-		showUser($username);
+		showUser($username, "userProfile.php?username=");
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1 && $_SESSION['userName'] == $username) {
 			echo "<a href=\"../controllers/editProfileController.php\" class=\"btn btn-default\" role=\"button\">Edit Profile</a>";
 		}

@@ -18,9 +18,10 @@ include_once(dirname(__FILE__)."/../models/Database.class.php");
 	<!-- This must be declared early so we can put a link in the nav bar to the user's profile -->
 	<?php
 		include_once(dirname(__FILE__)."/../header.php");
-		echo "<h1>Here are all our current members!</h1>";
-		$myUsers = UserDB::fetchAll ();
-		showUsers ( $myUsers, "" );
+		echo '<div class="container">';
+			$myUsers = UserDB::fetchAll ();
+			showUsers ( $myUsers, "Here are all our current members!", "../views/userProfile.php?username=");
+		echo '</div>';
 	?>
 </body>
 </html>

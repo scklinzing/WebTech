@@ -6,8 +6,9 @@
 include_once (dirname ( __FILE__ ) . "/../models/UserData.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/Database.class.php");
+include_once (dirname ( __FILE__ ) . "/../views/showUserImage.php");
 
-function showUser($username) {
+function showUser($username, $url) {
 	/* if it is a username, fetch the data */
 	if(gettype($username) == "string") {
 		$userID = UserDB::getUserID($username);
@@ -16,9 +17,10 @@ function showUser($username) {
 		$user = $username;
 	}
 
+	echo "<br>";
+	showUserImage($user->getUsername(), "small");
 	if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-		echo "<br><a href=\"views/userProfile.php?username=".$user->getUsername()."\"
-							 class=\"btn btn-default btn-lg\" role=\"button\">".$user->getUsername()."</a><br>";
+		echo '<a href="'.$url.''. $user->getUsername().'" class="btn btn-default" role="button">'.$user->getUsername().'</a><br>';
 	} else {
 		echo "<h3>Username: ".$user->getUsername()."</h3><br>";
 	}

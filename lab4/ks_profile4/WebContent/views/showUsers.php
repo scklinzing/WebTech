@@ -3,19 +3,18 @@
  * Displays a list of users
  * Input: an array of UserData objects
  */
-function showUsers($userList, $msg) {
+include_once (dirname ( __FILE__ ) . "/../views/showUserImage.php");
+
+function showUsers($userList, $msg, $url) {
 	echo "<h2>" . $msg . "</h2>";
 	
 	foreach ( $userList as $user ) {
+		showUserImage($user->getUsername(), "small");
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-			echo "<img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
-					title=\"".$user->getUsername()."\" width=\"50\" height=\"50\">
-					<a href=\"views/userProfile.php?username=".$user->getUsername()."\"
-							 class=\"btn btn-default\" role=\"button\">".$user->getUsername()."</a><br>";
+			echo '<a href="'.$url.''.$user->getUsername().'" 
+					class="btn btn-default" role="button">'.$user->getUsername().'</a><br>';
 		} else {
-			echo "<img src=\"image/no-photo-small.png\" alt=\"[User Image]\" 
-					title=\"".$user->getUsername()."\" width=\"50\" height=\"50\">
-					<a href=\"\" class=\"btn btn-default\" role=\"button\">".$user->getUsername()."</a><br>";
+			echo '<a href="" class="btn btn-default" role="button">'.$user->getUsername().'</a><br>';
 		}
 		echo "userID: ".$user->getUserID()."<br>";
 		echo "Email: ".$user->getEmail()."<br>";
