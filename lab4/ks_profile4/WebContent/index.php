@@ -16,11 +16,11 @@
 	<div class="container">
       <ul class="nav nav-pills" role="tablist">
         <li class="active"><a href="index.php">Home</a> </li>
-        <li> <a href="">Fancy Rat Varieties</a> </li>
+        <li> <a href="views/varieties.php">Fancy Rat Varieties</a> </li>
         <li> <a href="">Housing</a> </li>
         <li> <a href="">Food</a> </li>
         <li> <a href="">Toys</a> </li> 
-        <li> <a href="">Links</a> </li>
+        <li> <a href="/views/links.php">Links</a> </li>
         <?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) { 
 		  		echo "<li><a href=\"views/userProfile.php?username="

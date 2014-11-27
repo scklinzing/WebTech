@@ -16,9 +16,9 @@
 			
 			/* VARIETIES */
 			if (strstr($uri, "varieties") != FALSE)
-				echo '<li class="active"><a href="">Fancy Rat Varieties</a></li>';
+				echo '<li class="active"><a href="../views/varieties.php">Fancy Rat Varieties</a></li>';
 			else
-				echo '<li><a href="">Fancy Rat Varieties</a></li>';
+				echo '<li><a href="../views/varieties.php">Fancy Rat Varieties</a></li>';
 			
 			/* HOUSING */
 			if (strstr($uri, "housing") != FALSE)
@@ -40,9 +40,9 @@
 			
 			/* LINKS */
 			if (strstr($uri, "links") != FALSE)
-				echo '<li class="active"><a href="">Links</a></li>';
+				echo '<li class="active"><a href="../views/links.php">Links</a></li>';
 			else
-				echo '<li><a href="">Links</a></li>';
+				echo '<li><a href="../views/links.php">Links</a></li>';
 			
         	/* USER PROFILE, LOGOUT, LOGIN, SIGN UP */
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
