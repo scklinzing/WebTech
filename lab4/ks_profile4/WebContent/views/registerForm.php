@@ -65,10 +65,10 @@
 		<?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
 				echo "<h2>Edit Profile</h2>";
-				echo "<form class=\"form-vertical\" role=\"form\" action =\"../controllers/editProfileController.php\" method=\"Post\">";
+				echo "<form class=\"form-vertical\" role=\"form\" enctype=\"multipart/form-data\" action =\"../controllers/editProfileController.php\" method=\"Post\">";
 			} else {
 				echo "<h2>Sign up to Rat Chat to start posting!</h2>";
-				echo "<form class=\"form-vertical\" role=\"form\" action =\"../controllers/registerController.php\" method=\"Post\">";
+				echo "<form class=\"form-vertical\" role=\"form\" enctype=\"multipart/form-data\" action =\"../controllers/registerController.php\" method=\"Post\">";
 			}
 		?>
 		<div class="panel panel-default">
@@ -155,7 +155,7 @@
 			
 			<div class="row">
 				<div class="col-lg-4">
-					<input type="hidden" name="MAX_FILE_SIZE" value="99999999" />
+					<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />
 					<label for="userImage">Select a profile picture:</label>
 					<input class="btn btn-default" type="file" name="userImage" id="userImage" accept="image/*" required tabindex="9"> 
 					<span id="userImageError" class="error"></span>

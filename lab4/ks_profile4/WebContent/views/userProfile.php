@@ -20,15 +20,14 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 	
 	<div class="container">
 		<p>&nbsp;</p>
-		<img src="../image/no-photo-large.png" alt="User Image" title="user"
-			width="200" height="200">
-	
 		<!-- Fetch and display user data -->
 		<?php
 		include_once (dirname ( __FILE__ ) . "/../views/showUser.php");
 		include_once (dirname ( __FILE__ ) . "/../views/showUserImage.php");
-		showUserImage($username);
+		/* print out their user profile picture */
+		showUserImage($username, "large");
 		echo "<br>";
+		/* show the user information */
 		showUser($username);
 		if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1 && $_SESSION['userName'] == $username) {
 			echo "<a href=\"../controllers/editProfileController.php\" class=\"btn btn-default\" role=\"button\">Edit Profile</a>";
