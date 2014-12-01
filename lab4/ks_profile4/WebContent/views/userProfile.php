@@ -11,6 +11,7 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<meta charset="UTF-8">
 	<title>User Profile</title>
+	<style>footer {text-align:center;}</style>
 </head>
 
 <body>
@@ -37,5 +38,11 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <footer>
+		<p>-x-</p>
+		<p>
+			<i>Rat Chat Website created by Shelley Klinzing</i>
+		</p>
+	</footer>
 </body>
 </html>

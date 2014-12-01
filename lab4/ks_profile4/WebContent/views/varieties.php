@@ -7,12 +7,12 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>Fancy Rat Varieties</title>
-<style>
-table, th, td {
-    border: 1px solid black;
-}
-footer {text-align:center;}
-</style>
+	<style>
+		table, th, td {
+		    border: 1px solid black;
+		}
+		footer {text-align:center;}
+	</style>
 </head>
 
 <body>

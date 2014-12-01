@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<meta charset="UTF-8">
 	<title>Rat Chat</title>
+	<style>footer {text-align:center;}</style>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
         <li> <a href="">Housing</a> </li>
         <li> <a href="">Food</a> </li>
         <li> <a href="">Toys</a> </li> 
-        <li> <a href="/views/links.php">Links</a> </li>
+        <li> <a href="views/links.php">Links</a> </li>
         <?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) { 
 		  		echo "<li><a href=\"views/userProfile.php?username="
