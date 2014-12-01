@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessing the DOM by tag name</title>
+<link href="bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+<h1>Demo of getElementByTagName and corresponding JQuery</h1>
+
+<div id="main">
+<p>The DOM is very useful.</p>
+<p>This example demonstrates the <b>getElementsByTagName</b> method</p>
+</div>
+
+<p id="demo"></p>
+<p id="demo1"></p>
+<p id="demo2"></p>
+</div>
+
+<script>
+var x = document.getElementById("main");
+var y = x.getElementsByTagName("p");
+document.getElementById("demo").innerHTML = 
+'The first paragraph inside "main" is ' + y[0].innerHTML;
+</script>
+
+
+<script>
+var x1 = $("#main p").html();
+$("#demo1").html("Jquery: " + x1);
+</script>
+
+<script>
+$(document).ready(function(){
+	$("#demo2").html("Jquery in ready: " + $("#main p").html());
+});
+</script>
+</body>
+</html> 
