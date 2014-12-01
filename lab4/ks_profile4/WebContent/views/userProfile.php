@@ -21,6 +21,18 @@ if (!(isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1))
 	
 	<div class="container">
 		<p>&nbsp;</p>
+		<ul>
+			<li><img src="src="images/yourimage.jpg"/></li>
+		</ul>
+		
+		
+		
+		
+		
+		
+		
+		
+		<p>&nbsp;</p>
 		<!-- Fetch and display user data -->
 		<?php
 		include_once (dirname ( __FILE__ ) . "/showUser.php");
