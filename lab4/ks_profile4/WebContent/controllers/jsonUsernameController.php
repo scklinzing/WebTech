@@ -9,7 +9,7 @@ include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");
       $username = $_POST['username'];
       $exists = UserDB::getUserByName($username);
       if ($exists > "0")
-      	   echo '<p>The username <b>'.$username.'</b> is already in use.</p>';
+      	   echo '<font color="red"><p>The username <b>'.$username.'</b> is already in use.</p></font>';
       else 
       	   echo 'OK';
    }

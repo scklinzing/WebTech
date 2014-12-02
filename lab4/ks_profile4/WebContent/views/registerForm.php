@@ -18,36 +18,35 @@
     <SCRIPT type="text/javascript">
 		pic1 = new Image(16, 16); 
 		pic1.src = "../image/loader.gif";
-		$(document).ready(function(){
-		$("#username").change(function() { 
-		var usr = $("#username").val();
-		if(usr.length >= 4) {
-		$("#status").html('<img src="../image/loader.gif" align="absmiddle">&nbsp;Checking availability...');
-		    $.ajax({  
-		    type: "POST",  
-		    url: "../controllers/jsonUsernameController.php",  
-		    data: "username="+ usr,  
-		    success: function(msg){
-		   $("#status").ajaxComplete(function(event, request, settings){
-			if(msg == 'OK') { 
-		        $("#username").removeClass('object_error'); // if necessary
-				$("#username").addClass("object_ok");
-				$("#status").html('&nbsp;<img src="../image/tick.gif" align="absmiddle">');
-			} else {  
-				$("#username").removeClass('object_ok'); // if necessary
-				$("#username").addClass("object_error");
-				$("#status").html(msg);
-			}  
-		   });
-		 } 
-		  }); 
-		} else {
-			$("#status").html('<font color="red">The username should have at least <strong>4</strong> characters.</font>');
-			$("#username").removeClass('object_ok'); // if necessary
-			$("#username").addClass("object_error");
-		}
+		$(document).ready( function(){
+			$("#username").change(function() { 
+				var usr = $("#username").val();
+				if(usr.length >= 3) {
+					$("#status").html('<img src="../image/loader.gif" align="absmiddle">&nbsp;Checking availability...');
+					    $.ajax({  
+						    type: "POST",  
+						    url: "../controllers/jsonUsernameController.php",  
+						    data: "username="+ usr,  
+						    success: function(result) {
+							    if (result=="OK") {
+							    	$("#username").removeClass('object_error'); 
+							    	$("#username").addClass("object_ok");
+						    	    $("#status").html('&nbsp;<img src="../image/tick.gif" align="absmiddle">');
+							    } else {
+							    	$("#username").removeClass('object_ok');
+							    	$("#status").html(result);
+							    }
+						    },
+							failure: function(result) {
+							    alert ('Failed to download JSON string' + result);
+							}
+						});
+				} else { // if username less than 3 characters
+					$("#status").html('<font color="red">The username should have at least <strong>3</strong> characters.</font>');
+				}
+			});
 		});
-		});
+		
 	</SCRIPT>
 </head>
 
@@ -64,7 +63,7 @@
 	<div class="container">
 		<?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
-				echo "<h2>Edit Profile</h2>";
+				echo '<h2>Edit Profile for <b>'.$user->getUsername().'</b></h2>';
 				echo "<form class=\"form-vertical\" role=\"form\" enctype=\"multipart/form-data\" action =\"../controllers/editProfileController.php\" method=\"Post\">";
 			} else {
 				echo "<h2>Sign up to Rat Chat to start posting!</h2>";
@@ -75,17 +74,23 @@
 		<div class="panel-heading"><label>Member Information</label></div>
 		<div class="panel-body">
 		
-			<div class="row">
-				<div class="col-lg-4">
-					<label for="username">RatChat Username:</label>
-					<input class="form-control" type="text" width="20" name="username" id="username" placeholder="Your nickname" 
-							autofocus required tabindex="1"
-							<?php if (!is_null($user) && !empty($user->getUsername())) {echo 'value = "'. $user->getUsername() .'"';}?>>
-					<span id="userNameError" class="error"><?php if (!is_null($user)) {echo $user->getError("username");}?></span>
-				</div>
-				<div id="status"></div>
-			</div>
-			
+			<?php // do not allow a current user to change their username
+				if (!isset($_SESSION['userLoginStatus'])) {
+					echo '<div class="row">';
+						echo '<div class="col-lg-4">';
+							echo '<label for="username">RatChat Username:</label>';
+							echo '<input class="form-control" type="text" width="20" 
+										name="username" id="username" placeholder="Your nickname" 
+										autofocus required tabindex="1">';
+							echo '<span id="userNameError" class="error">';
+									if (!is_null($user)) {echo $user->getError("username");}
+							echo '</span>';
+						echo '</div>';
+						echo '<div id="status"></div>';
+					echo '</div>';
+				}
+			?>
+
 			<div class="row">
 				<div class="col-lg-4">
 					<label for="email">Email:</label>
