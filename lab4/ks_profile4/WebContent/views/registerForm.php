@@ -64,10 +64,10 @@
 		<?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
 				echo '<h2>Edit Profile for <b>'.$user->getUsername().'</b></h2>';
-				echo "<form class=\"form-vertical\" role=\"form\" enctype=\"multipart/form-data\" action =\"../controllers/editProfileController.php\" method=\"Post\">";
+				echo '<form class="form-vertical" role="form" enctype="multipart/form-data" action ="../controllers/editProfileController.php" method="Post">';
 			} else {
 				echo "<h2>Sign up to Rat Chat to start posting!</h2>";
-				echo "<form class=\"form-vertical\" role=\"form\" enctype=\"multipart/form-data\" action =\"../controllers/registerController.php\" method=\"Post\">";
+				echo '<form class="form-vertical" role="form" enctype="multipart/form-data" action ="../controllers/registerController.php" method="Post">';
 			}
 		?>
 		<div class="panel panel-default">
