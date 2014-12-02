@@ -24,7 +24,6 @@ footer {
 ul {
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
-	
 }
 
 ul li {
@@ -87,7 +86,7 @@ table, th, td {
 <body>
 	<!-- This must be declared early so we can put a link in the nav bar to the user's profile -->
 	<?php $username = $_GET ['username']; ?>
-	<?php include_once(dirname(__FILE__)."/../header.php"); ?>
+	<?php include_once (dirname ( __FILE__ ) . "/../header.php"); ?>
 	
 	<!-- USER INFORMATION -->
 	<div class="container">
@@ -96,6 +95,7 @@ table, th, td {
 		<?php
 		include_once (dirname ( __FILE__ ) . "/showUser.php");
 		include_once (dirname ( __FILE__ ) . "/showUserImage.php");
+		include_once (dirname ( __FILE__ ) . "/showGallery.php");
 		/* print out their user profile picture */
 		showUserImage ( $username, "large" );
 		echo "<br>";
@@ -107,69 +107,39 @@ table, th, td {
 		}
 		?>
 	</div>
-	
+
 	<!-- IMAGE GALLERY -->
 	<div class="container">
 		<p>&nbsp;</p>
-		<div class="panel panel-default" style="width:750px;">
-		<div class="panel-heading"><label>Gallery</label></div>
-		<div class="panel-body">
-			<ul class="row" >
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/berkshire.jpg" title="Berkshire Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/black-eyed-white.jpg" title="Black Eyed White Rat"
-					width="100"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/black.jpg" title="Black Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/blue.jpg" title="Blue Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/capped.jpg" title="Capped Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/chocolate.jpg" title="Chocolate Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/dumbo-rat.jpg" title="Dumbo Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/hairless-rat.jpg" title="Hairless Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/hooded.jpg" title="Hooded Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/irish.jpg" title="Irish Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/manx-rat.jpg" title="Manx Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/mink.jpg" title="Mink Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/pink-eyed-champagne.jpg"
-					title="Pink Eyed Champagne Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/pink-eyed-white.jpg" title="Pink Eyed White Rat"
-					width="100"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/rex-rat.jpg" title="Rex Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/satin-rat.jpg" title="Satin Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/standard-rat.jpg" title="Standard Rat"></li>
-				<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4"><img
-					src="../image/variegated.jpg" title="Variegated Rat"></li>
-			</ul>
-		</div></div>
+		<div class="panel panel-default" style="width: 750px;">
+			<div class="panel-heading">
+				<label>Gallery</label>
+			</div>
+			<div class="panel-body">
+				<ul class="row">
+					<?php showGallery($username); ?>
+				</ul>
+			</div>
+		</div>
 	</div>
-	
-	<form class="form-vertical" role="form" enctype="multipart/form-data" action ="../controllers/editProfileController.php" method="Post">
+
+	<form class="form-vertical" role="form" enctype="multipart/form-data"
+		action="../controllers/addPhotoController.php" method="Post">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
-					<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />
-					<label for="gallery">Add photos to gallery:</label>
-					<input class="btn btn-default" type="file" name="addPhoto" id="addPhoto" accept="image/*">
+					<input type="hidden" name="MAX_FILE_SIZE" value="999999999" /> <label
+						for="addPhoto">Add photos to gallery:</label> <input
+						class="btn btn-default" type="file" name="addPhoto" id="addPhoto"
+						accept="image/*">
+					<button class="btn btn-default" type="submit" name="submit"
+						value="Submit">Upload</button>
+					
 				</div>
 			</div>
 		</div>
 	</form>
-	
+	<a href="../views/addPhoto.php" class="btn btn-default" role="button">Add Photo</a>
 
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

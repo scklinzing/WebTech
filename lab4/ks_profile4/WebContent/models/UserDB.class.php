@@ -79,6 +79,94 @@ class UserDB {
 		}
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Add a photo to a user's gallery.
+	 * @param unknown $userID: the ID of the user
+	 * @param unknown $IMAGE: the array of the image to be added
+	 * @return If successful, return userID
+	 */
+	public static function addPhoto($userID, $IMAGE) {
+		/* check to see if a file was uploaded */
+		if (is_uploaded_file ( $IMAGE ['addPhoto'] ['tmp_name'] ) && getimagesize ( $IMAGE ['addPhoto'] ['tmp_name'] ) != false) {
+			/* get the image info */
+			$size = getimagesize ( $IMAGE ['addPhoto'] ['tmp_name'] );
+			/* assign variables */
+			$type = $size ['mime'];
+			$imgfp = fopen ( $IMAGE ['addPhoto'] ['tmp_name'], 'rb' );
+			$size = $size [3];
+			$name = $IMAGE ['addPhoto'] ['name'];
+			$maxsize = 999999999;
+	
+			if ($IMAGE ['addPhoto'] ['size'] < $maxsize) {
+				$query = "INSERT INTO gallery (image_type, image, image_size, image_name, userID)
+							VALUES (? ,?, ?, ?, ?)";
+	
+				try { /* attempt to add image to databse */
+					$db = Database::getDB ();
+					$statement = $db->prepare ( $query );
+					$statement->bindParam ( 1, $type );
+					$statement->bindParam ( 2, $imgfp, PDO::PARAM_LOB );
+					$statement->bindParam ( 3, $size );
+					$statement->bindParam ( 4, $name );
+					$statement->bindParam ( 5, $userID );
+					$statement->execute ();
+				} catch ( PDOException $e ) { // Not permanent error handling
+					echo "<p>UserDB:addPhoto(): Error adding image to gallery ".$e->getMessage()."</p>";
+				}
+			} else { /* throw an exception is image is not of correct type */
+				throw new Exception ( "UserDB:addPhoto(): Unsupported Image Format" );
+			}
+		} else { /* throw an exception if size above maximum allowed */
+			throw new Exception ( "UserDB:addPhoto(): File Size Error" );
+		}
+		return $userID;
+	}
+	
+	/**
+	 * Get the gallery of the user to display.
+	 * @param $userID: the ID of the user
+	 * @return an array of images
+	 */
+	public static function getGallery($userID) {
+		$query = "SELECT image, image_type FROM gallery WHERE (userID = :userID )";
+		$images = array();
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare($query);
+			$statement->bindParam(":userID", $userID); // Only binds at execute time
+			$statement->execute ();
+			$results = $statement->fetch(PDO::FETCH_ASSOC);
+			$images = array();
+			for ($k = 0; $k < count($results); $k++) {
+				array_push($images, $results[$k]['image']['image_type']);
+			}
+			$statement->closeCursor ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:getImageByUserId(): Error getting user image ".$e->getMessage()."</p>";
+		}
+		return $images;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/* takes a username and updated user rows */
 	public static function updateUser($username, $updateUser, $IMAGE) { 	
 		$query = "UPDATE user  

@@ -11,10 +11,6 @@ if ($_SERVER ["REQUEST_METHOD"] != "POST") {
 	registerForm ( $user );
 } else {
 	/* check to see if the image is an actual image */
-	//print_r($_POST);
-	//echo "<br><br>";
-	//print_r($_FILES);
-	//echo "<br><br>";
 	if ($_FILES ["userImage"] ["size"] > 0) { // if user chose a new user image
 		$check = getimagesize ( $_FILES ["userImage"] ["tmp_name"] );
 		if ($check == false) { // file not an image
@@ -25,8 +21,6 @@ if ($_SERVER ["REQUEST_METHOD"] != "POST") {
 		}
 	} else { // if user did not choose a new user image
 		$IMAGE = NULL;
-		//echo "Image is null";
-		//print_r($IMAGE);
 	}
 	
 	$user = UserDB::getUserByName ( $_SESSION ['userName'] );
