@@ -136,23 +136,19 @@ class UserDB {
 	 * @return an array of images
 	 */
 	public static function getGallery($userID) {
-		$query = "SELECT image, image_type FROM gallery WHERE (userID = :userID )";
-		$images = array();
+		$query = "SELECT image FROM gallery WHERE (userID = :userID )";
+		$results = array();
 		try {
 			$db = Database::getDB ();
 			$statement = $db->prepare($query);
 			$statement->bindParam(":userID", $userID); // Only binds at execute time
 			$statement->execute ();
 			$results = $statement->fetch(PDO::FETCH_ASSOC);
-			$images = array();
-			for ($k = 0; $k < count($results); $k++) {
-				array_push($images, $results[$k]['image']['image_type']);
-			}
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>UserDB:getImageByUserId(): Error getting user image ".$e->getMessage()."</p>";
 		}
-		return $images;
+		return $results;
 	}
 	
 	

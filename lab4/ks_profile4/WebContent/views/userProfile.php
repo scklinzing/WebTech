@@ -20,66 +20,6 @@ if (! (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] 
 footer {
 	text-align: center;
 }
-
-ul {
-	padding: 0 0 0 0;
-	margin: 0 0 0 0;
-}
-
-ul li {
-	list-style: none;
-	padding: 0 0 0 0;
-	margin: 0 0 0 0;
-}
-
-ul li img {
-	cursor: pointer;
-	width: 100px;
-	height: 100px;
-	overflow: hidden;
-}
-
-.modal-body {
-	padding: 5px !important;
-}
-
-.modal-content {
-	border-radius: 0;
-}
-
-.modal-dialog img {
-	text-align: center;
-	margin: 0 auto;
-}
-
-.controls {
-	width: 50px;
-	display: block;
-	font-size: 11px;
-	padding-top: 8px;
-	font-weight: bold;
-}
-
-.next {
-	float: right;
-	text-align: right;
-}
-/*override modal for demo only*/
-.modal-dialog {
-	max-width: 500px;
-	padding-top: 90px;
-}
-
-@media screen and (min-width: 768px) {
-	.modal-dialog {
-		width: 500px;
-		padding-top: 90px;
-	}
-}
-
-table, th, td {
-	border: 1px solid black;
-}
 </style>
 </head>
 
@@ -95,117 +35,47 @@ table, th, td {
 		<?php
 		include_once (dirname ( __FILE__ ) . "/showUser.php");
 		include_once (dirname ( __FILE__ ) . "/showUserImage.php");
+		include_once (dirname ( __FILE__ ) . "/modal.php");
 		include_once (dirname ( __FILE__ ) . "/showGallery.php");
+		include_once (dirname ( __FILE__ ) . "/tempGallery.php"); // DELETE LATER!!
 		/* print out their user profile picture */
 		showUserImage ( $username, "large" );
 		echo "<br>";
 		/* show the user information */
 		showUser ( $username, "userProfile.php?username=" );
 		if (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] == 1 && $_SESSION ['userName'] == $username) {
-			// echo "<a href=\"../controllers/editProfileController.php\" class=\"btn btn-default\" role=\"button\">Edit Profile</a>";
 			echo '<a href="../controllers/editProfileController.php" class="btn btn-default" role="button">Edit Profile</a>';
 		}
 		?>
 	</div>
 
-	<!-- IMAGE GALLERY -->
-	<div class="container">
-		<p>&nbsp;</p>
-		<div class="panel panel-default" style="width: 750px;">
-			<div class="panel-heading">
-				<label>Gallery</label>
-			</div>
-			<div class="panel-body">
-				<ul class="row">
-					<?php showGallery($username); ?>
-				</ul>
-			</div>
-		</div>
-	</div>
+	<?php showGallery($username); ?>
+	<br>&nbsp;<br>
+	<?php tempGallery(); ?>
 
 	<form class="form-vertical" role="form" enctype="multipart/form-data"
 		action="../controllers/addPhotoController.php" method="Post">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
-					<input type="hidden" name="MAX_FILE_SIZE" value="999999999" /> <label
-						for="addPhoto">Add photos to gallery:</label> <input
-						class="btn btn-default" type="file" name="addPhoto" id="addPhoto"
-						accept="image/*">
-					<button class="btn btn-default" type="submit" name="submit"
-						value="Submit">Upload</button>
-					
+					<?php // if the user is on their profile page, allow gallery upload
+						if (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] == 1 && $_SESSION ['userName'] == $username) {
+							echo '<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />';
+							echo '<input type="hidden" name="username" value="'. $_SESSION['userName'].'" />';
+							echo '<label for="addPhoto">Add photos to gallery:</label> <input
+									class="btn btn-default" type="file" name="addPhoto" id="addPhoto"
+									accept="image/*">';
+							echo '<button class="btn btn-default" type="submit" name="submit"
+									value="Submit">Upload</button>';
+						}
+					?>
 				</div>
 			</div>
 		</div>
 	</form>
-	<a href="../views/addPhoto.php" class="btn btn-default" role="button">Add Photo</a>
 
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body"></div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
+	<?php modal(); ?>
 
-	<script>
-	$(document).ready(function(){        
-        $('li img').on('click',function(){
-            var src = $(this).attr('src');
-            var img = '<img src="' + src + '" class="img-responsive"/>';
-            //start of new code new code
-            var index = $(this).parent('li').index();   
-            var html = '';
-            html += img;                
-            html += '<div style="height:25px;clear:both;display:block;">';
-            html += '<a class="controls next" href="'+ (index+2) + '">next &raquo;</a>';
-            html += '<a class="controls previous" href="' + (index) + '">&laquo; prev</a>';
-            html += '</div>';
-            $('#myModal').modal();
-            $('#myModal').on('shown.bs.modal', function(){
-                $('#myModal .modal-body').html(html);
-                //new code
-                $('a.controls').trigger('click');
-            })
-            $('#myModal').on('hidden.bs.modal', function(){
-                $('#myModal .modal-body').html('');
-            });
-       });
-    })
-    $(document).on('click', 'a.controls', function(){
-        var index = $(this).attr('href');
-        var src = $('ul.row li:nth-child('+ index +') img').attr('src');             
-        $('.modal-body img').attr('src', src);
-        var newPrevIndex = parseInt(index) - 1; 
-        var newNextIndex = parseInt(newPrevIndex) + 2; 
-        if($(this).hasClass('previous')){               
-            $(this).attr('href', newPrevIndex); 
-            $('a.next').attr('href', newNextIndex);
-        }else{
-            $(this).attr('href', newNextIndex); 
-            $('a.previous').attr('href', newPrevIndex);
-        }
-        var total = $('ul.row li').length + 1; 
-        //hide next button
-        if(total === newNextIndex){
-            $('a.next').hide();
-        }else{
-            $('a.next').show()
-        }            
-        //hide previous button
-        if(newPrevIndex === 0){
-            $('a.previous').hide();
-        }else{
-            $('a.previous').show()
-        }
-        return false;
-    });
-    </script>
 	<footer>
 		<p>-x-</p>
 		<p>
