@@ -29,7 +29,6 @@ if (($_SERVER ["REQUEST_METHOD"] == "POST") && ($_FILES["addPhoto"]["size"] > 0)
 	// attempt to add the image to user gallery
 	if (($userID != 0) && (UserDB::addPhoto($userID, $IMAGE) != 0)) {
 		// redirect the user to their profile page
-		//echo "Successfully added!<br>";
 		header ( "location: ../views/userProfile.php?username=" . $_POST ['username'] );
 	} else {
 		throw new Exception ( "Error adding new image to gallery." );

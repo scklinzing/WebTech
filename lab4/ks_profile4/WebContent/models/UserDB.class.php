@@ -79,13 +79,50 @@ class UserDB {
 		}
 	}
 	
+	/* takes a username and updated user rows */
+	public static function updateUser($username, $updateUser, $IMAGE) { 	
+		$query = "UPDATE user  
+					SET
+						email='".$updateUser->getEmail()."',
+						phoneNum='".$updateUser->getPhoneNum()."',
+						website='".$updateUser->getWebsite()."',
+						favcolor='".$updateUser->getFavColor()."',
+						bday='".$updateUser->getBDay()."',
+						whyRatChat='".$updateUser->getWhyRatChat()."',
+						ratsOwned='".$updateUser->getRatsOwned()."'
+				    WHERE username='$username'";
+		$returnId = 0;
+		try {
+			$db = Database::getDB ();
+			$statement = $db->prepare ($query);
+			$statement->execute ();
+			$statement->closeCursor();
+			$myInterests = $updateUser->getInterestList();
+			$returnId = UserDB::getUserID($username); // grab the userID
+			UserDB::deleteInterestList($db, $returnId, $myInterests); // remove all their data
+			UserDB::writeInterestList($db, $returnId, $myInterests); // re-write new interests
+			if ($IMAGE != NULL) { // if the user changed their profile picture
+				UserDB::updateUserImage($returnId, $IMAGE);
+			}
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:updateUser(): Error updating user ".$e->getMessage()."</p>";
+		}
+		return $returnId;
+	}
 	
-	
-	
-	
-	
-	
-	
+	/* takes a userID and array of image information */
+	public static function updateUserImage($userID, $IMAGE) {
+		/* delete and re-upload table entry */
+		$query = "DELETE FROM userImage WHERE userID=".$userID;
+		try { /* attempt to remove image to databse */
+			$db = Database::getDB ();
+			$statement = $db->prepare ( $query );
+			$statement->execute ();
+		} catch ( PDOException $e ) { // Not permanent error handling
+			echo "<p>UserDB:updateUserImage(): Error updating user image ".$e->getMessage()."</p>";
+		}
+		UserDB::addUserImage($userID, $IMAGE);
+	}
 	
 	/**
 	 * Add a photo to a user's gallery.
@@ -143,69 +180,12 @@ class UserDB {
 			$statement = $db->prepare($query);
 			$statement->bindParam(":userID", $userID); // Only binds at execute time
 			$statement->execute ();
-			$results = $statement->fetch(PDO::FETCH_ASSOC);
+			$results = UserDB::getGalleryArray($statement->fetchAll(PDO::FETCH_ASSOC));
 			$statement->closeCursor ();
 		} catch ( PDOException $e ) { // Not permanent error handling
 			echo "<p>UserDB:getImageByUserId(): Error getting user image ".$e->getMessage()."</p>";
 		}
 		return $results;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/* takes a username and updated user rows */
-	public static function updateUser($username, $updateUser, $IMAGE) { 	
-		$query = "UPDATE user  
-					SET
-						email='".$updateUser->getEmail()."',
-						phoneNum='".$updateUser->getPhoneNum()."',
-						website='".$updateUser->getWebsite()."',
-						favcolor='".$updateUser->getFavColor()."',
-						bday='".$updateUser->getBDay()."',
-						whyRatChat='".$updateUser->getWhyRatChat()."',
-						ratsOwned='".$updateUser->getRatsOwned()."'
-				    WHERE username='$username'";
-		$returnId = 0;
-		try {
-			$db = Database::getDB ();
-			$statement = $db->prepare ($query);
-			$statement->execute ();
-			$statement->closeCursor();
-			$myInterests = $updateUser->getInterestList();
-			$returnId = UserDB::getUserID($username); // grab the userID
-			UserDB::deleteInterestList($db, $returnId, $myInterests); // remove all their data
-			UserDB::writeInterestList($db, $returnId, $myInterests); // re-write new interests
-			if ($IMAGE != NULL) { // if the user changed their profile picture
-				UserDB::updateUserImage($returnId, $IMAGE);
-			}
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>UserDB:updateUser(): Error updating user ".$e->getMessage()."</p>";
-		}
-		return $returnId;
-	}
-	
-	/* takes a userID and array of image information */
-	public static function updateUserImage($userID, $IMAGE) {
-		/* delete and re-upload table entry */
-		$query = "DELETE FROM userImage WHERE userID=".$userID;
-		try { /* attempt to remove image to databse */
-			$db = Database::getDB ();
-			$statement = $db->prepare ( $query );
-			$statement->execute ();
-		} catch ( PDOException $e ) { // Not permanent error handling
-			echo "<p>UserDB:updateUserImage(): Error updating user image ".$e->getMessage()."</p>";
-		}
-		UserDB::addUserImage($userID, $IMAGE);
 	}
 	
 	/* takes a username and updated user rows */
@@ -477,7 +457,24 @@ class UserDB {
 		return $users;
 	}
 	
-	/* get an array of users */
+	/**
+	 * Helper function to get an array of images
+	 * @param $rowSets: The rows from the database.
+	 * @return An array of images.
+	 */
+	public static function getGalleryArray($rowSets) {
+		$images = array ();
+		foreach ( $rowSets as $image ) {
+			array_push ( $images, $image['image'] );
+		}
+		return $images;
+	}
+	
+	/**
+	 * Helper function to get an array of users.
+	 * @param $rowSets: the rows returned from database query 
+	 * @return an array of user
+	 */
 	public static function getUserArray($rowSets) {
 		$users = array ();
 		//print_r($rowSets); // for debugging

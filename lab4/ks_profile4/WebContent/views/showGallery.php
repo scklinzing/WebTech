@@ -23,13 +23,12 @@ function showGallery($username) {
 					$IMAGES = UserDB::getGallery ( $userID );
 					
 					if ($IMAGES > 0) { // print out the images
-						echo sizeof ( $IMAGES );
-						foreach ( $IMAGES as $image ) {
+						for ($i = 0; $i < sizeof($IMAGES); $i++) {
 							echo '<li class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-								<img src="data:image;base64,' . base64_encode ( $image ) . '"></li>';
+								<img src="data:image;base64,' . base64_encode ( $IMAGES[$i] ) . '"></li>';
 						}
 					} else { // if user has no images, say so
-						echo '<li>No images!</li>';
+						echo '<li>&nbsp;No images!</li>';
 					}
 					?>
 			</ul>

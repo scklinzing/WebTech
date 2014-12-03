@@ -39,7 +39,7 @@ if (! (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] 
 			<div class="col-lg-3">
 				<?php showUserImage ( $username, "large" );?>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<?php
 				/* show the user information */
 				showUser ( $username, "userProfile.php?username=" );
@@ -53,12 +53,10 @@ if (! (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] 
 
 	<?php
 		showGallery($username); // show user gallery
-		echo '<br>&nbsp;<br>';
-		tempGallery(); // DELETE LATER!!!!!!!!!!
 		// if the user is on their profile page, allow gallery upload
 		if (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] == 1 && $_SESSION ['userName'] == $username) {
 			include_once (dirname ( __FILE__ ) . "/addPhoto.php");
-			addPhoto();
+			addPhoto($username); // add a new photo
 		}
 		modal(); // include modal code
 	?>
