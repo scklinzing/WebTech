@@ -52,7 +52,7 @@ class UserDBTest extends UnitTestCase {
 		$parms = $user->getParameters();
 		$parms['email'] = "kay@gmail.com";
 		$newUser = new UserData($parms);
-		$returnID = UserDB::updateUser($name, $newUser);
+		$returnID = UserDB::updateUser($name, $newUser, NULL);
 		$this->assertEqual($returnID, 1, 
 				"The ID of updated object should be 1 but is $returnID");
 		$email = $newUser->getEmail();
@@ -71,7 +71,7 @@ class UserDBTest extends UnitTestCase {
 		
 		/* try and update */
 		$newUser = new UserData($parms);
-		$returnID = UserDB::updateUser($name, $newUser);
+		$returnID = UserDB::updateUser($name, $newUser, NULL);
 		
 		/* print out the user list */
 		$list = $newUser->getInterestList();
