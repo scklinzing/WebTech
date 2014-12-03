@@ -1,4 +1,9 @@
-<?php function modal() { ?>
+<?php
+/**
+ * This is the code for the gallery modal.
+ */
+function modal() {
+?>
 <style>
 ul {
 	padding: 0 0 0 0;
@@ -58,6 +63,10 @@ ul li img {
 
 table, th, td {
 	border: 1px solid black;
+}
+
+footer {
+	text-align: center;
 }
 </style>
 

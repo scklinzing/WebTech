@@ -2,7 +2,9 @@
 include_once (dirname ( __FILE__ ) . "/../models/Database.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserData.class.php");
 include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");
-
+/**
+ * Add a photo to a user's gallery
+ */
 if (($_SERVER ["REQUEST_METHOD"] == "POST") && ($_FILES["addPhoto"]["size"] > 0)) {
 	echo '<br>';
 	print_r($_FILES);

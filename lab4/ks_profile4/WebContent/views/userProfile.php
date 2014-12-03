@@ -16,11 +16,6 @@ if (! (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] 
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>User Profile</title>
-<style>
-footer {
-	text-align: center;
-}
-</style>
 </head>
 
 <body>
@@ -39,42 +34,34 @@ footer {
 		include_once (dirname ( __FILE__ ) . "/showGallery.php");
 		include_once (dirname ( __FILE__ ) . "/tempGallery.php"); // DELETE LATER!!
 		/* print out their user profile picture */
-		showUserImage ( $username, "large" );
-		echo "<br>";
-		/* show the user information */
-		showUser ( $username, "userProfile.php?username=" );
-		if (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] == 1 && $_SESSION ['userName'] == $username) {
-			echo '<a href="../controllers/editProfileController.php" class="btn btn-default" role="button">Edit Profile</a>';
-		}
 		?>
-	</div>
-
-	<?php showGallery($username); ?>
-	<br>&nbsp;<br>
-	<?php tempGallery(); ?>
-
-	<form class="form-vertical" role="form" enctype="multipart/form-data"
-		action="../controllers/addPhotoController.php" method="Post">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4">
-					<?php // if the user is on their profile page, allow gallery upload
-						if (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] == 1 && $_SESSION ['userName'] == $username) {
-							echo '<input type="hidden" name="MAX_FILE_SIZE" value="999999999" />';
-							echo '<input type="hidden" name="username" value="'. $_SESSION['userName'].'" />';
-							echo '<label for="addPhoto">Add photos to gallery:</label> <input
-									class="btn btn-default" type="file" name="addPhoto" id="addPhoto"
-									accept="image/*">';
-							echo '<button class="btn btn-default" type="submit" name="submit"
-									value="Submit">Upload</button>';
-						}
-					?>
-				</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<?php showUserImage ( $username, "large" );?>
+			</div>
+			<div class="col-lg-4">
+				<?php
+				/* show the user information */
+				showUser ( $username, "userProfile.php?username=" );
+				if (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] == 1 && $_SESSION ['userName'] == $username) {
+					echo '<a href="../controllers/editProfileController.php" class="btn btn-default" role="button">Edit Profile</a>';
+				}
+				?>
 			</div>
 		</div>
-	</form>
+	</div>
 
-	<?php modal(); ?>
+	<?php
+		showGallery($username); // show user gallery
+		echo '<br>&nbsp;<br>';
+		tempGallery(); // DELETE LATER!!!!!!!!!!
+		// if the user is on their profile page, allow gallery upload
+		if (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] == 1 && $_SESSION ['userName'] == $username) {
+			include_once (dirname ( __FILE__ ) . "/addPhoto.php");
+			addPhoto();
+		}
+		modal(); // include modal code
+	?>
 
 	<footer>
 		<p>-x-</p>
