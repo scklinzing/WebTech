@@ -224,7 +224,13 @@
 				<div class="col-lg-4">
 					<label for="numRats">How many rats do you currently own? Please enter a number:</label>
 					<input class="form-control" type="number" name="ratsOwned" min="0" id="numRats" placeholder="0" required tabindex="13"
-							<?php if (!is_null($user) && !empty($user->getRatsOwned())) {echo 'value = "'. $user->getRatsOwned() .'"';}?>> 
+							<?php 
+								if (!is_null($user) && !empty($user->getRatsOwned())) {
+									echo 'value = "'. $user->getRatsOwned() .'"';
+								} else { 
+									echo 'value = 0';
+								}
+							?>> 
 							<span id="ratsOwnedError" class="error"><?php if (!is_null($user)) {echo $user->getError("ratsOwned");}?></span>
 				</div>
 			</div>

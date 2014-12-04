@@ -334,9 +334,8 @@ class UserData {
 		if (isset ( $this->formInput ['ratsOwned'] )) {
 			$this->ratsOwned = $this->stripInput ( $this->formInput ['ratsOwned'] );
 			if (! filter_var ( $this->ratsOwned, FILTER_VALIDATE_REGEXP,
-					array("options"=>array("regexp"=>"/[1-9][\d]*/")))) {
-						$this->errors ['ratsOwned'] = "ratsOwned is not valid";
-						$this->errorCount ++;
+					array("options"=>array("regexp"=>"/[0-9][\d]*/")))) {
+						$this->ratsOwned = "0";
 					}
 		}
 	}

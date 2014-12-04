@@ -8,6 +8,7 @@ class Database {
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 	);
 	//$configPath = "../../../myConfig.ini" // changed for simpletest issues
+	//public static function getDB($dbName = 'ks_data4', $configPath = "/opt/lampp/myConfig.ini") {
 	public static function getDB($dbName = 'ks_data4', $configPath = "C:/xampp/myConfig.ini") {
 		if (! isset ( self::$db )) {
 			try {
