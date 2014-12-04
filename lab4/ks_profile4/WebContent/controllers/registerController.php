@@ -10,7 +10,6 @@ if ($_SERVER ["REQUEST_METHOD"] != "POST") {
 	$user = new UserData ();
 	registerForm ( $user );
 } else {
-	
 	/* check to see if the image is an actual image */
 	if (isset ( $_POST ["submit"] )) {
 		$check = getimagesize ( $_FILES ["userImage"] ["tmp_name"] );

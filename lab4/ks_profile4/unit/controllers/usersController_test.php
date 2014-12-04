@@ -20,6 +20,7 @@ class UsersControllerTest extends UnitTestCase {
 	function test_runUsersController() {
 		// Tests that usersController code can be executed
 		$myUsers = 0;
+		session_destroy(); // not sure why I needed this...
 		require(dirname(__FILE__)."/../../WebContent/controllers/usersController.php");
 		$this->assertTrue(is_array($myUsers), 
 				"[It should create an array of UserData but does not]");

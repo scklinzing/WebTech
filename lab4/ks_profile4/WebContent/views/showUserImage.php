@@ -18,8 +18,6 @@ width="200" height="200" alt="[User Image]" title="' . $username . '"/>';
 		} else { // size was not specified! ERROR!
 			throw new Exception ( "showUserImage: Image size not specified." );
 		}
-	} else {
-		throw new Exception ( "showUserImage: Out of bounds Error" );
 	}
 }
 ?>

@@ -6,8 +6,9 @@
 	<ul class="nav nav-pills" role="tablist">
 		<?php 
 			/* get the uri to see what the active pill tab is */
-			$uri = $_SERVER['REQUEST_URI'];
-			
+			//$uri = $_SERVER['REQUEST_URI'];
+			$uri = "";
+		
 			/* INDEX */
 			if (strstr($uri, "index") != FALSE)
 				echo '<li class="active"><a href="../index.php">Home</a> </li>';
