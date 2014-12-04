@@ -9,7 +9,7 @@ include_once (dirname ( __FILE__ ) . "/../models/UserDB.class.php");
 if ($_SERVER ["REQUEST_METHOD"] == "POST") {
 	$_POST["username"] = $_SESSION ['userName'];
 	$user = new ChangePswdData ( $_POST ); 
-	print_r($_POST);
+	//print_r($_POST);
 	echo "<br>";
 	print_r($user->getErrors());
 	if ($user->getErrorCount() == 0) {

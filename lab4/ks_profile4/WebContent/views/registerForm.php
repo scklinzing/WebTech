@@ -269,8 +269,8 @@
 		<?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) {
 				echo '<p>Please enter password to update profile:
-						 <input id="password" type="password" name ="updatePass" required tabindex="15"';
-				if (!is_null($user) && !empty($user->getPassword())) {echo 'value = "'. $user->getPassword() .'"';}
+						 <input id="password" type="password" name ="updatePass" required tabindex="15">';
+				//if (!is_null($user) && !empty($user->getPassword())) {echo 'value = "'. $user->getPassword() .'"';}
 				echo '<p><button class="btn btn-default" type="submit" name="submit" 
 						value="Update Profile" tabindex="16">Update Profile</button></p>';
 			} else {

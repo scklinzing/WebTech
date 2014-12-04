@@ -24,14 +24,16 @@ if ($_SERVER ["REQUEST_METHOD"] != "POST") {
 	}
 	
 	$user = UserDB::getUserByName ( $_SESSION ['userName'] );
+	$_POST["username"] = $_SESSION ['userName'];
 	$_POST["password"] = $user->getPasswordHash();
 	$_POST["userPasswordRetyped"] = $user->getPasswordHash();
 	$user = new UserData ( $_POST );
-	if ($user->getErrorCount () == 0)
+	if ($user->getErrorCount () == 0) {
 		$id = UserDB::updateUser ( $_SESSION ['userName'], $user, $IMAGE );
-	if ($id != 0) { // if successfully updated, show the user
-		// redirect the user to their profile page
-		header ( "location: ../views/userProfile.php?username=" . $_SESSION ['userName'] );
+		if ($id != 0) { // if successfully updated, show the user
+			// redirect the user to their profile page
+			header ( "location: ../views/userProfile.php?username=" . $_SESSION ['userName'] );
+	}
 	} else {
 		registerForm ( $user );
 	}

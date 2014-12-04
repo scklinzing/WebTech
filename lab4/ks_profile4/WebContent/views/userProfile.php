@@ -32,7 +32,6 @@ if (! (isset ( $_SESSION ['userLoginStatus'] ) && $_SESSION ['userLoginStatus'] 
 		include_once (dirname ( __FILE__ ) . "/showUserImage.php");
 		include_once (dirname ( __FILE__ ) . "/modal.php");
 		include_once (dirname ( __FILE__ ) . "/showGallery.php");
-		include_once (dirname ( __FILE__ ) . "/tempGallery.php"); // DELETE LATER!!
 		/* print out their user profile picture */
 		?>
 		<div class="row">

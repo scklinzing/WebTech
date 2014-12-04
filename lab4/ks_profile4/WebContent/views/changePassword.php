@@ -23,9 +23,9 @@ function changePassword($user) {
 	</p>
 
 	<p>
-		Current Password: <input type="password" name="password"
+		Current Password: <input type="password" name="oldPassword"
 			<?php if (!is_null($user)) {echo 'value = "'. $user->getPassword() .'"';}?>>
-		<span class="error"><?php if (!is_null($user)) {echo $user->getError("password");}?></span>
+		<span class="error"><?php if (!is_null($user)) {echo $user->getError("oldPassword");}?></span>
 	</p>
 
 	<p>
