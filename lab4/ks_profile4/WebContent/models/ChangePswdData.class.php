@@ -76,6 +76,7 @@ class ChangePswdData {
 		$this->isAuthenticated = false;
 		$this->verifyUsername();	
 		$this->verifyNewPassword();
+		$this->verifyOldPassword();
 	}
 	
 	private function initializeEmpty() {

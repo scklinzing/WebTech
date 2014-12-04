@@ -70,7 +70,7 @@ class UserLoginData {
 		$paramArray = array("userID" => $this->userID,
 				            "username" => $this->username,
 				            "password" => $this->password,
-				            "userDataCreated" => $this->userDateCreated,
+				            "userDateCreated" => $this->userDateCreated,
 				            "isAuthenticated" => $this->isAuthenticated
 		                   );
 		return $paramArray;
