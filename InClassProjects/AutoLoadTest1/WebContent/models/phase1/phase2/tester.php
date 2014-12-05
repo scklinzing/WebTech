@@ -7,7 +7,7 @@
 <h1>Test of autoloading from the deeps</h1>
 
 <?php
-require_once "../../../includer.php";
+require_once dirname(__FILE__)."/../../../includer.php";
 
    $x = new User1();
    echo "User 1: $x <br>";
