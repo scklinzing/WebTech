@@ -12,7 +12,6 @@ class UserDB {
 			$statement = $db->prepare ($query);
 			$statement->bindValue(":userName", $myUser->getUserName());
 			$passHash = password_hash($myUser->getUserPassword(), PASSWORD_DEFAULT);
-			print_r($passHash);
 			$statement->bindValue(":userPasswordHash", $passHash);
 			$statement->execute ();
 			$statement->closeCursor();

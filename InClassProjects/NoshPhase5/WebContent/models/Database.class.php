@@ -18,7 +18,9 @@ class Database {
 				$dbspec = self::$dsn.self::$dbName.";charset=utf8";
 				self::$db = new PDO ( $dbspec, $username, $password, self::$options );
 			} catch ( PDOException $e ) {
-				echo $e->getMessage ();  // not final error handling
+			    $msg = "Failed to open connection to ".self::$dbName. $e->getMessage();
+				error_log($msg);
+				
 			}
 		}
 		return self::$db;

@@ -15,7 +15,7 @@ class CommentForm {
 	<h1>NOSH URL Survey</h1>
 	<p>Give us your candidate comments about a URL worth consideration.</p>
 	<section>
-	<form action ="PostCommentController" method="Post">
+	<form action ="PostComment" method="Post">
 	URL for Evaluation:<input type="url" name ="evaluationUrl" 
 	<?php if (!empty($c->getEvaluationUrl())) {echo 'value = "'. $c->getEvaluationUrl() .'"';}?>> 
 	<span class="error"><?php echo $c->getError("evaluationUrl")?></span>

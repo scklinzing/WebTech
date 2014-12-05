@@ -16,7 +16,7 @@ else
 	$control = $urlPieces[2];
 
 switch ($control) {
-	case "PostCommentController": 
+	case "PostComment": 
 		PostCommentController::run();
 		break;
 	case "CommentsController":

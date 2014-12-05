@@ -13,7 +13,7 @@ class ShowHome {
 	<h1>URL Nosh</h1>
 	<em>Discerning web evaluators come to complain and evaluate.</em>
 	
-	<h3><a href="PostCommentController">Make comment here </a></h3>
+	<h3><a href="PostComment">Make comment here </a></h3>
 	
 	<h3><a href="CommentsController">See comments</a></h3>
 	
