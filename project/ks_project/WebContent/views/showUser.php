@@ -26,7 +26,6 @@ function showUser($username, $url) {
 	} else {
 		echo "<h3><b>Username:</b> ".$user->getUsername()."</h3><br>";
 	}
-	echo "<b>userID:</b> ".$user->getUserID()."<br>";
 	echo "<b>Email:</b> ".$user->getEmail()."<br>";
 	echo "<b>Phone Number:</b> ".$user->getPhoneNum()."<br>";
 	echo "<b>Website:</b> ".$user->getWebsite()."<br>";

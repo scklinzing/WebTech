@@ -23,9 +23,15 @@ if ($_SERVER ["REQUEST_METHOD"] != "POST") {
 		$IMAGE = NULL;
 	}
 	
+	
+	
+	
+	
+	
 	$user = UserDB::getUserByName ( $_SESSION ['userName'] );
 	$_POST["username"] = $_SESSION ['userName'];
-	$_POST["password"] = $user->getPasswordHash();
+	//$_POST["password"] = $user->getPasswordHash();
+	$_POST["password"] = $_POST["updatePass"];
 	$_POST["userPasswordRetyped"] = $user->getPasswordHash();
 	$user = new UserData ( $_POST );
 	if ($user->getErrorCount () == 0) {

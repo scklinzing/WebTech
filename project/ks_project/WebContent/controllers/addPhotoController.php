@@ -34,6 +34,15 @@ if (($_SERVER ["REQUEST_METHOD"] == "POST") && ($_FILES["addPhoto"]["size"] > 0)
 		throw new Exception ( "Error adding new image to gallery." );
 	}
 } else { // user did not select a file
-	header ( "location: ../views/userProfile.php?username=" . $_POST['username'] );
+	$url = "../views/userProfile.php?username=" . $_POST['username'];
+	
+	echo '<script language="javascript">';
+	if ($_FILES["addPhoto"]["size"] > 999999999) {
+		echo 'alert("Photo too large!\nPlease select a smaller photo.");';
+	} else {
+		echo 'alert("No photo selected.");';
+	}
+	echo 'window.location.href = "'.$url.'";';
+	echo '</script>';
 }
 ?>

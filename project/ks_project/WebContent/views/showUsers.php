@@ -19,7 +19,6 @@ function showUsers($userList, $msg, $url) {
 		} else {
 			echo '<a href="" class="btn btn-default" role="button">'.$user->getUsername().'</a><br>';
 		}
-		echo "<b>userID:</b> ".$user->getUserID()."<br>";
 		echo "<b>Email:</b> ".$user->getEmail()."<br>";
 		echo "<b>Phone Number:</b> ".$user->getPhoneNum()."<br>";
 		echo "<b>Website:</b> ".$user->getWebsite()."<br>";

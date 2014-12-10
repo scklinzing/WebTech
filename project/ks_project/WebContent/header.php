@@ -1,7 +1,9 @@
+<div class="container">
 <header>
 <img src="../image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
 	width="728" height="187">
 </header>
+</div>
 <div class="container">
 	<ul class="nav nav-pills" role="tablist">
 		<?php 
