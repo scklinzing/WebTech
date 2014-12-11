@@ -10,6 +10,7 @@
 </head>
 
 <body>
+	<a id="top"></a>
 	<div class="container">
 	<header>
 	<img src="https://lh4.googleusercontent.com/-fNMdMjLxjGA/VIjf2IdlMrI/AAAAAAAAALw/u8T-cRrNlJs/w728-h187-no/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
@@ -76,7 +77,7 @@
 		</aside>
 	</div>
 	<footer>
-		<p>-x-</p>
+		<p><a href="#top">-top-</a></p>
 		<p>
 			<i>Rat Chat Website created by Shelley Klinzing</i>
 		</p>

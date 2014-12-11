@@ -16,6 +16,7 @@ include_once(dirname(__FILE__)."/../models/Database.class.php");
 </head>
 
 <body>
+	<a id="top"></a>
 	<!-- This must be declared early so we can put a link in the nav bar to the user's profile -->
 	<?php
 		include_once(dirname(__FILE__)."/../header.php");
@@ -25,7 +26,7 @@ include_once(dirname(__FILE__)."/../models/Database.class.php");
 		echo '</div>';
 	?>
 	<footer>
-		<p>-x-</p>
+		<p><a href="#top">-top-</a></p>
 		<p>
 			<i>Rat Chat Website created by Shelley Klinzing</i>
 		</p>
