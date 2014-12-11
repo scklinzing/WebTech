@@ -1,6 +1,6 @@
 <div class="container">
 <header>
-<img src="../image/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
+<img src="https://lh4.googleusercontent.com/-fNMdMjLxjGA/VIjf2IdlMrI/AAAAAAAAALw/u8T-cRrNlJs/w728-h187-no/rat-chat-banner-728x187.gif" alt="Rat Chat Image"
 	width="728" height="187">
 </header>
 </div>
@@ -25,9 +25,9 @@
 			
 			/* HOUSING */
 			if (strstr($uri, "housing") != FALSE)
-				echo '<li class="active"><a href="">Housing</a></li>';
+				echo '<li class="active"><a href="../views/varieties.php">Housing</a></li>';
 			else
-				echo '<li><a href="">Housing</a></li>';
+				echo '<li><a href="../views/varieties.php">Housing</a></li>';
 			
 			/* FOOD */
 			if (strstr($uri, "food") != FALSE)

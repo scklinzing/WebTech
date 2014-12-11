@@ -425,8 +425,10 @@ class UserDB {
 			} else {
 				$verify = password_verify($user->getPassword(), $hash);
 				$user->setIsAuthenticated($verify);
-				if (!$verify)
+				if (!$verify) {
 					$user->setError('password', "Invalid password");
+					//$user = NULL;
+				}
 			}
 		}
 		return $user;

@@ -24,22 +24,32 @@ if ($_SERVER ["REQUEST_METHOD"] != "POST") {
 	}
 	
 	
-	
-	
-	
-	
-	$user = UserDB::getUserByName ( $_SESSION ['userName'] );
+	//$user = UserDB::getUserByName ( $_SESSION ['userName'] );
 	$_POST["username"] = $_SESSION ['userName'];
 	//$_POST["password"] = $user->getPasswordHash();
 	$_POST["password"] = $_POST["updatePass"];
 	$_POST["userPasswordRetyped"] = $user->getPasswordHash();
 	$user = new UserData ( $_POST );
-	if ($user->getErrorCount () == 0) {
-		$id = UserDB::updateUser ( $_SESSION ['userName'], $user, $IMAGE );
-		if ($id != 0) { // if successfully updated, show the user
-			// redirect the user to their profile page
-			header ( "location: ../views/userProfile.php?username=" . $_SESSION ['userName'] );
-	}
+	
+	if ($user->getErrorCount() == 0) {
+		$actualUser = userDB::getUserByName ( $user->getUsername() );
+		if (is_null ( $actualUser )) { // bad username
+			$user->setError ( 'username', 'Invalid user name' );
+			registerForm ( $user );
+		} elseif (! userDB::authenticateUser ( $user )) { // bad password
+			$user->setError ( 'password', 'Invalid current password' );
+			registerForm ( $user );
+		} else { // upload photo
+			
+			$id = UserDB::updateUser ( $_SESSION ['userName'], $user, $IMAGE );
+			if ($id != 0) { // if successfully updated, show the user
+				// redirect the user to their profile page
+				header ( "location: ../views/userProfile.php?username=" . $_SESSION ['userName'] );
+				//echo "<br>Successfully updated profile<br>";
+			}
+		}
+	
+	
 	} else {
 		registerForm ( $user );
 	}

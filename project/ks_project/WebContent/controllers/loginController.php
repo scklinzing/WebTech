@@ -16,7 +16,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST") {
 			$user->setError ( 'username', 'Invalid user name' );
 			loginForm ( $user );
 		} elseif (! UserDB::authenticateUser ( $user )) {
-			$user->setError ( 'password', 'Invalid password' );
+			$user->setError ( 'password', 'Invalid password!' );
 			loginForm ( $user );
 		} else { // Add sessions here
 			$_SESSION ['userName'] = $user->getUsername ();

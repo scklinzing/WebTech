@@ -129,7 +129,7 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<label for="phone">Telephone:</label>
-					<input class="form-control" type="tel" name="phoneNum" id="phone" placeholder="000-000-0000" required tabindex="5"
+					<input class="form-control" type="tel" name="phoneNum" id="phone" placeholder="0123456789" required tabindex="5"
 							<?php if (!is_null($user) && !empty($user->getPhoneNum())) {echo 'value = "'. $user->getPhoneNum() .'"';}?>>
 					<span id="phoneNumError" class="error"><?php if (!is_null($user)) {echo $user->getError("phoneNum");}?></span>
 				</div>
