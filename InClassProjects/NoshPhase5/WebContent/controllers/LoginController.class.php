@@ -10,7 +10,7 @@ class LoginController {
 	        	$user->setError('userName', 'Invalid user name');
 	        	LoginForm::show($user);
 	        } elseif (!userDB::authenticateUser($user)) {
-	        	$user->setError('userPassword', 'Invalid password');
+	        	$user->setError('userPassword', 'Invalid password!');
 	        	LoginForm::show($user);
 	        } else	{// Add sessions here
 	        	$_SESSION ['userName'] = $user->getUserName();
