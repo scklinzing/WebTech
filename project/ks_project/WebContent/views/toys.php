@@ -15,6 +15,7 @@ footer {
 </head>
 
 <body>
+	<a id="top"></a>
 	<?php include_once(dirname(__FILE__)."/../header.php"); ?>
 	
 	<div class="container">
@@ -38,8 +39,9 @@ footer {
 			<li><a href="#hammocks">Hammocks</a></li>
 			<li><a href="#fort">Rat Fort</a></li>
 			<li><a href="#beanBags">Beanbags</a></li>
-			<li><a href="#tissueBoxes">Tissue Boxes</a></li>
+			<li><a href="#nestBoxes">Nest Boxes</a></li>
 			<li><a href="#rope">Rope Toys</a></li>
+			<li><a href="#socks">Socks</a></li>
 		</ul>
 
 		<!-- CONTENT -->
@@ -68,6 +70,7 @@ footer {
 		<p>This can also be done with scraps of cloth or shredded paper,
 			cardboard, tissies, paper towels, clean wood blocks, wine corks, or
 			anything you know your rats would love to chew on and dig through.</p>
+		<p><a href="#top">-top-</a></p>
 		<h2>
 			<a id="peaFishing"></a>Fishing for Peas
 		</h2>
@@ -89,6 +92,7 @@ footer {
 			make a mess. Rats will jump or wade in the water to nab the peas. If
 			the rats are more nervous, they may fish for peas with their paws
 			from the pool side.</p>
+		<p><a href="#top">-top-</a></p>
 		<h2>
 			<a id="hammocks"></a>Hammocks
 		</h2>
@@ -153,6 +157,7 @@ footer {
 				src="https://lh4.googleusercontent.com/-7A-yLM7QcuQ/VIkkPjPT_gI/AAAAAAAAARE/DsohO1VQSsU/w800-h600-no/snuggle-sack.jpg"
 				alt="snuggle sack" title="Snuggle Sack" width="500"></a>
 		</p>
+		<p><a href="#top">-top-</a></p>
 		<h2>
 			<a id="fort"></a>Rat Fort
 		</h2>
@@ -167,6 +172,7 @@ footer {
 			climbing, bird ladders, or anything else interesting that might be
 			fun (but safe) for rats to play on. Remember to cut holes for windows
 			and doors!</p>
+		<p><a href="#top">-top-</a></p>
 		<h2>
 			<a id="beanBags"></a>Beanbags
 		</h2>
@@ -192,8 +198,9 @@ footer {
 			desired if your rats are shredders. However, if they do manage to
 			chew into the beanbag, some dry wheat or rice won't hurt them.
 		</p>
+		<p><a href="#top">-top-</a></p>
 		<h2>
-			<a id="tissueBoxes"></a>Tissue Boxes
+			<a id="nestBoxes"></a>Nest Boxes
 		</h2>
 		<p>
 			<a
@@ -207,7 +214,22 @@ footer {
 			useful in the winter if the room is cold. It gives the rats a place
 			to snuggle in away from chilly drafts. However, they may need to be
 			replaced frequently if your rats are shredders, and they also become
-			dirty quickly.</p>
+			dirty quickly. You may also use cereal boxes, mailing boxes, shoe
+			boxes, etc., with a door cut out. It may be a good idea to have one
+			without a floor, so it doesn't become pee-soaked too quickly, but
+			mine always overturn it anyway.</p>
+		<p>You can also use plastic cartons, like plastic juice or soda
+			bottles, which you can wash and will last longer before being chewed.
+			Rat igloos can be bought from pet stores, but can be expensive.
+			Instead, plastic salad bowls or tupperware can be bought from
+			discount stores, and holes can be cut for the door and ventilation.</p>
+		<p>If you are so inclined, wood nest boxes are another good option.
+			Just be sure to coat the inside and top with stick-on contact to
+			waterproof it.</p>
+		<p>Teraccotta pots are also a great option in the summer, as they tend
+			to remain cooler. They can be placed on the floor of the care or
+			wired to the walls or ceiling.</p>
+		<p><a href="#top">-top-</a></p>
 		<h2>
 			<a id="rope"></a>Rope Toys
 		</h2>
@@ -219,6 +241,31 @@ footer {
 		</p>
 		<p>Rats are little acrobats. I have bought several dollar store rope
 			chew toys for dogs that I use in my rat cage. They love them!</p>
+		<p><a href="#top">-top-</a></p>
+		<h2>
+			<a id="socks"></a>Socks! 
+		</h2>
+		<p>
+			<a
+				href="https://lh6.googleusercontent.com/-aBzsUP0CauU/VIoR5mfyuPI/AAAAAAAAAS8/1nIFRzAcGRg/w886-h666-no/rat-sock.jpg"><img
+				src="https://lh6.googleusercontent.com/-aBzsUP0CauU/VIoR5mfyuPI/AAAAAAAAAS8/1nIFRzAcGRg/w886-h666-no/rat-sock.jpg"
+				alt="rat sock" title="Rat in a Sock" width="500"></a>
+		</p>
+		<p>My rats LOVE socks! Several people I know are always giving me
+			socks that have holes in them or are missing a twin. Here are some
+			ideas for socks!</p>
+		<ul>
+			<li><b>Sock ropes</b>: Sew the socks end to end, and then twist or
+				plait them into a thick climbing rope for your rats. Add a few knots
+				for extra grip and then hang it in the cage.</li>
+			<li><b>Sock bedding</b>: Cut socks into strips and use it as nest box
+				bedding.</li>
+			<li><b>Digging socks</b>: Get a cardboard box or basket and fill it
+				with socks. Rats will enjoy digging in them.</li>
+			<li><b>Sock ladders</b>: Use large socks as a ladder or ramp from one
+				shelf to another.</li>
+		</ul>
+		<p><a href="#top">-top-</a></p>
 
 
 
