@@ -25,9 +25,9 @@
 			
 			/* HOUSING */
 			if (strstr($uri, "housing") != FALSE)
-				echo '<li class="active"><a href="../views/varieties.php">Housing</a></li>';
+				echo '<li class="active"><a href="../views/housing.php">Housing</a></li>';
 			else
-				echo '<li><a href="../views/varieties.php">Housing</a></li>';
+				echo '<li><a href="../views/housing.php">Housing</a></li>';
 			
 			/* FOOD */
 			if (strstr($uri, "food") != FALSE)
@@ -37,9 +37,9 @@
 			
 			/* TOYS */
 			if (strstr($uri, "toys") != FALSE)
-				echo '<li class="active"><a href="">Toys</a></li>';
+				echo '<li class="active"><a href="../views/toys.php">Toys</a></li>';
 			else
-				echo '<li><a href="">Toys</a></li>';
+				echo '<li><a href="../views/toys.php">Toys</a></li>';
 			
 			/* LINKS */
 			if (strstr($uri, "links") != FALSE)

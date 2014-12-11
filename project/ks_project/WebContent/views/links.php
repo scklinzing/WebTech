@@ -24,8 +24,9 @@
 		<li><a href="http://www.afrma.org/">American Fancy Rat and Mouse Association</a></li>
 		<li><a href="http://www.dapper.com.au/">Dapper Rat, The</a></li>
 		<li><a href="http://www.nfrs.org/">National Fancy Rat Society</a></li>
-		<li><a href="http://www.rattycorner.com/">Ratty Corner</a></li>
 		<li><a href="http://www.ratforum.com/">Rat Forum</a></li>
+		<li><a href="http://www.ratropolis.com/">Ratropolis</a></li>
+		<li><a href="http://www.rattycorner.com/">Ratty Corner</a></li>
 	</ul>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

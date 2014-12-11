@@ -6,7 +6,7 @@
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <meta charset="UTF-8">
-<title>Housing & Bedding</title>
+<title>Housing</title>
 	<style>
 		table, th, td {
 		    border: 1px solid black;
@@ -21,7 +21,7 @@
 	<div class="container">
 		<p>&nbsp;</p>
 		<!-- Fetch and display user data -->
-		<h1>Housing and Bedding</h1>
+		<h1>Housing</h1>
 		<p>
 			There are lots of options for housing pet rats! Just keep in mind that there 
 			needs to be enough space for all the rats housed. It is also important to 

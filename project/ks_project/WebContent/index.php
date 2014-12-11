@@ -22,7 +22,7 @@
         <li> <a href="views/varieties.php">Fancy Rat Varieties</a> </li>
         <li> <a href="views/housing.php">Housing</a> </li>
         <li> <a href="">Food</a> </li>
-        <li> <a href="">Toys</a> </li> 
+        <li> <a href="views/toys.php">Toys</a> </li> 
         <li> <a href="views/links.php">Links</a> </li>
         <?php 
 			if (isset($_SESSION['userLoginStatus']) && $_SESSION['userLoginStatus'] == 1) { 
