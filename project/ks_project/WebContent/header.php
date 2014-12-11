@@ -31,9 +31,9 @@
 			
 			/* FOOD */
 			if (strstr($uri, "food") != FALSE)
-				echo '<li class="active"><a href="">Food</a></li>';
+				echo '<li class="active"><a href="../views/food.php">Food</a></li>';
 			else
-				echo '<li><a href="">Food</a></li>';
+				echo '<li><a href="../views/food.php">Food</a></li>';
 			
 			/* TOYS */
 			if (strstr($uri, "toys") != FALSE)

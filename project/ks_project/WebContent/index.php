@@ -21,7 +21,7 @@
         <li class="active"><a href="index.php">Home</a> </li>
         <li> <a href="views/varieties.php">Fancy Rat Varieties</a> </li>
         <li> <a href="views/housing.php">Housing</a> </li>
-        <li> <a href="">Food</a> </li>
+        <li> <a href="views/food.php">Food</a> </li>
         <li> <a href="views/toys.php">Toys</a> </li> 
         <li> <a href="views/links.php">Links</a> </li>
         <?php 

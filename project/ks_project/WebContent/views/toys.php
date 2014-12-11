@@ -266,11 +266,6 @@ footer {
 				shelf to another.</li>
 		</ul>
 		<p><a href="#top">-top-</a></p>
-
-
-
-		<!-- <a href=""><img src="" alt="" title="" width="500"></a> -->
-
 		<br>
 	</div>
 	<script
