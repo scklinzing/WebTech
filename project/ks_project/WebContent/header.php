@@ -4,6 +4,11 @@
 	width="728" height="187">
 </header>
 </div>
+<style>
+body {
+    background-color: #b0c4de;
+} 
+</style>
 <div class="container">
 	<ul class="nav nav-pills" role="tablist">
 		<?php 

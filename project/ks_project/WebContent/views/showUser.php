@@ -29,7 +29,6 @@ function showUser($username, $url) {
 	echo "<b>Email:</b> ".$user->getEmail()."<br>";
 	echo "<b>Phone Number:</b> ".$user->getPhoneNum()."<br>";
 	echo "<b>Website:</b> ".$user->getWebsite()."<br>";
-	$fontColor = $user->getFavcolor();
 	echo '<b>Color:</b> '.$user->getFavcolor().'&nbsp; <font size="3" color="'.$user->getFavcolor().'">&hearts;&hearts;&hearts;</font><br>';
 	echo "<b>Birthday Month and Year:</b> ".$user->getBday()."<br>";
 	echo "<b>Reason on Rat Chat:</b> ";

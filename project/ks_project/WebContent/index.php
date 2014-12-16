@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<meta charset="UTF-8">
 	<title>Rat Chat</title>
-	<style>footer {text-align:center;}</style>
+	<style>
+		footer {text-align:center;}
+		body {
+		    background-color: #b0c4de;
+		} 
+	</style>
 </head>
 
 <body>
