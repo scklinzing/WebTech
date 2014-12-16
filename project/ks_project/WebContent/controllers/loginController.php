@@ -22,7 +22,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST") {
 			$_SESSION ['userName'] = $user->getUsername ();
 			$_SESSION ['userLoginStatus'] = 1;
 			/* redirect the user to their profile page */
-			header("location: ../views/userProfile.php?username=".$user->getUsername());
+			//header("location: ../views/userProfile.php?username=".$user->getUsername());
 		}
 	} else {
 		loginForm ( $user );
